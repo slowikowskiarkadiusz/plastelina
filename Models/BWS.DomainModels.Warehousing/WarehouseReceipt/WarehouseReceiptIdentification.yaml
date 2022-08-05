@@ -1,0 +1,20 @@
+components:
+  schemas:
+    BWS.DomainModels.Warehousing.WarehouseReceipt:
+      WarehouseReceiptIdentification:
+        $id: WarehouseReceiptIdentification
+        type: object
+        properties:
+          WarehouseReceiptId:
+            type: string
+          InvoiceNumber:
+            type: string
+          PurchaseOrderNumber:
+            type: string
+          CarrierProNumber:
+            type: string
+          CarrierTrackingNumber:
+            type: string
+        required:
+          - WarehouseReceiptId
+  

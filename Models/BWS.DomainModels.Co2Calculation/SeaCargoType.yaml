@@ -1,0 +1,12 @@
+components:
+  schemas:
+    BWS.DomainModels.Co2Calculation:
+      SeaCargoType:
+        $id: SeaCargoType
+        type: string
+        enum:
+          - Dry
+          - Liquid
+          - Agregated
+          - Container
+          - ContainerAgregated

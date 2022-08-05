@@ -1,0 +1,53 @@
+components:
+  schemas:
+    BWS.DomainModels.Reservation.Reservation:
+      CustomFields:
+        description: Custom Fields of each type
+        $id: CustomFields
+        type: object
+        properties:
+          CustomField_Boolean1:
+            type: boolean
+          CustomField_Boolean2:
+            type: boolean
+          CustomField_Boolean3:
+            type: boolean
+          CustomField_Boolean4:
+            type: boolean
+          CustomField_Boolean5:
+            type: boolean
+          CustomField_DateTime1:
+            format: date-time
+            type: string
+          CustomField_DateTime2:
+            format: date-time
+            type: string
+          CustomField_DateTime3:
+            format: date-time
+            type: string
+          CustomField_DateTime4:
+            format: date-time
+            type: string
+          CustomField_DateTime5:
+            format: date-time
+            type: string
+          CustomField_Numeric1:
+            type: number
+          CustomField_Numeric2:
+            type: number
+          CustomField_Numeric3:
+            type: number
+          CustomField_Numeric4:
+            type: number
+          CustomField_Numeric5:
+            type: number
+          CustomField_Text1:
+            type: string
+          CustomField_Text2:
+            type: string
+          CustomField_Text3:
+            type: string
+          CustomField_Text4:
+            type: string
+          CustomField_Text5:
+            type: string

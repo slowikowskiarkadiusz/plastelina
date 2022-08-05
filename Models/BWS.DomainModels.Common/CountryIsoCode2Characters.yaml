@@ -1,0 +1,18 @@
+components:
+  schemas:
+    BWS.DomainModels.Common:
+      CountryIsoCode2Characters:
+        description: Country IsoCode2 Characters
+        $id: CountryIsoCode2Characters
+        type: string
+        nugets:
+          - Newtonsoft.Json
+        usings:
+          - Newtonsoft.Json
+          - Newtonsoft.Json.Converters
+        attributes:
+        - name: JsonConverter
+          parameters:
+            - value: typeof(StringEnumConverter)
+        enum:
+          - DE

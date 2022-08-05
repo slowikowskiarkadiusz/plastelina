@@ -1,0 +1,14 @@
+components:
+  schemas:
+    BWS.DomainModels.Reservation.Reservation:
+      PreCodingLine:
+        description: PreCodingLine
+        $id: PreCodingLine
+        type: object
+        properties:
+          Amount:
+            type: number
+          Dimensions:
+            $ref: "#/components/schemas/BWS.DomainModels.Reservation.Reservation/Dimensions"
+          Type:
+            $ref: "#/components/schemas/BWS.DomainModels.Reservation.Reservation/PreCodingLineType"

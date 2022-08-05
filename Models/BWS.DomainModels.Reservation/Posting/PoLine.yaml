@@ -1,0 +1,14 @@
+components:
+  schemas:
+    BWS.DomainModels.Reservation.Posting:
+      PoLine:
+        $id: PoLine
+        type: object
+        properties:
+          PoLineNumber:
+            type: integer
+          ItemDescription:
+            type: string
+        required:
+          - PoLineNumber
+          - ItemDescription

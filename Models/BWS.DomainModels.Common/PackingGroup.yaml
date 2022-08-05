@@ -1,0 +1,20 @@
+components:
+  schemas:
+    BWS.DomainModels.Common:
+      PackingGroup:
+        $id: PackingGroup
+        type: string
+        nugets:
+          - Newtonsoft.Json
+        usings:
+          - Newtonsoft.Json
+          - Newtonsoft.Json.Converters
+        attributes:
+          - name: JsonConverter
+            parameters:
+              - value: typeof(StringEnumConverter)
+        enum:
+          - None
+          - I
+          - II
+          - III

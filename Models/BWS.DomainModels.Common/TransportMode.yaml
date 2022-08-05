@@ -1,0 +1,27 @@
+components:
+  schemas:
+    BWS.DomainModels.Common:
+      TransportMode:
+        $id: TransportMode
+        nugets:
+          - Newtonsoft.Json
+        usings:
+          - Newtonsoft.Json
+          - Newtonsoft.Json.Converters
+        attributes:
+          - name: JsonConverter
+            parameters:
+              - value: typeof(StringEnumConverter)
+        type: string
+        enum:
+          - None
+          - Sea
+          - Rail
+          - Road
+          - Air
+          - Courier
+          - Brokerage
+          - Logistic
+          - Other
+          - Warehouse
+          - SeaAir

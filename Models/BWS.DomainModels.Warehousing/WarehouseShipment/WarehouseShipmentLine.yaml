@@ -1,0 +1,51 @@
+components:
+  schemas:
+    BWS.DomainModels.Warehousing.WarehouseShipment:
+      WarehouseShipmentLine:
+        $id: WarehouseShipmentLine
+        nugets:
+          - Newtonsoft.Json
+        references:
+          - BWS.DomainModels.Common
+        usings:
+          - BWS.DomainModels.Common
+          - BWS.DomainModels.Warehousing.Common
+          - Newtonsoft.Json
+          - Newtonsoft.Json.Converters
+        type: object
+        properties:
+          GoodsDescription:
+            type: string
+          PurchaseOrderNumber:
+            type: string
+          WarehouseReceiptNumber:
+            type: string
+          Military:
+            $ref: '#/components/schemas/BWS.DomainModels.Warehousing.Common/MilitaryCustomFields'
+          Quantity:
+            type: integer
+          TotalNumberOfItems:
+            type: number
+            format: decimal
+          Dimensions:
+            $ref: '#/components/schemas/BWS.DomainModels.Common/Dimensions'
+          UnitGrossWeight:
+            $ref: '#/components/schemas/BWS.DomainModels.Common/Weight'
+          UnitGrossVolume:
+            $ref: '#/components/schemas/BWS.DomainModels.Common/Volume'
+          UnitType:
+            $ref: '#/components/schemas/BWS.DomainModels.Common/UnitType'
+            attributes:
+              - name: JsonConverter
+                parameters:
+                  - value: typeof(StringEnumConverter)
+          MonetaryValue:
+            $ref: '#/components/schemas/BWS.DomainModels.Common/MonetaryValue'
+          MarksAndNumbers:
+            type: string
+          Status:
+            attributes:
+              - name: JsonConverter
+                parameters:
+                  - value: typeof(StringEnumConverter)
+            $ref: '#/components/schemas/BWS.DomainModels.Warehousing.Common/OrderLineStatus'

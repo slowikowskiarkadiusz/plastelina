@@ -1,0 +1,32 @@
+components:
+  schemas:
+    BWS.DomainModels.Shipping.ShippingOrder:
+      ShippingOrderStatus:
+        $id: ShippingOrderStatus
+        type: object
+        properties:
+          TimeOfMessageGeneration:
+            type: string
+            format: System.DateTime
+          TimeOfEvent:
+            type: string
+            format: System.DateTime
+          StatusIdentification:
+            $ref: "#/components/schemas/BWS.DomainModels.Shipping.ShippingOrder/ShippingOrderStatusIdentification"
+          Location:
+            $ref: "#/components/schemas/BWS.DomainModels.Shipping.ShippingOrder/Location"
+          Status:
+            $ref: "#/components/schemas/BWS.DomainModels.Shipping.ShippingOrder/Status"
+          SourceStatus:
+            type: string
+          AdditionalMessage:
+            type: string
+          Signature:
+            type: string
+          MessageIdentification:
+            $ref: "#/components/schemas/BWS.DomainModels.Shipping.ShippingOrder/MessageIdentification"
+        required:
+          - TimeOfMessageGeneration
+          - TimeOfEvent
+          - Status
+  

@@ -1,0 +1,15 @@
+components:
+  schemas:
+    BWS.DomainModels.Shipping.ShippingStatus:
+      Status:
+        $id: Status
+        type: string
+        enum:
+          - Delivered
+          - ArrivedWarehouse
+          - DepartedWarehouse
+          - DepartedAgentWarehouse
+          - ArrivedAgentWarehouse
+          - Damaged
+          - Missing
+          - PickedUp

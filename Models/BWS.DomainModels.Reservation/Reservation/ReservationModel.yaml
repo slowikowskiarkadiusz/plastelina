@@ -1,0 +1,39 @@
+channels:
+  sbq-inbound-reservation:
+    description: The queue by which reservations are delivered to DIP
+    publish:
+      summary: Receive a reservation from the outside
+      message:
+        $ref: "#/components/messages/ReservationMessage"
+
+  sbt-outbound-reservation:
+    description: The topic by which reservations are sent out from DIP
+    subscribe:
+      summary: Send a reservation from the domain layer to a subscribing service
+      message:
+        $ref: "#/components/messages/ReservationMessage"
+
+components:
+  messages:
+    ReservationMessage:
+      name: Reservation
+      title: Reservation
+      summary: Reservation description
+      contentType: application/json
+      payload:
+        $ref: "#/components/schemas/BWS.DomainModels.Reservation.Reservation/ReservationModel"
+
+  schemas:
+    BWS.DomainModels.Reservation.Reservation:
+      ReservationModel:
+        $id: ReservationModel
+        confluencePageContentId: 623149057
+        description: The model used in exchanging information regarding purchase order reservation for both external and internal integrations
+        type: object
+        properties:
+          PurchaseOrders:
+            type: array
+            items:
+              $ref: "#/components/schemas/BWS.DomainModels.Reservation.Reservation/PurchaseOrder"
+        required:
+          - PurchaseOrders

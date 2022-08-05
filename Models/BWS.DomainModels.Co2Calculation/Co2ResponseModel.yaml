@@ -1,0 +1,150 @@
+channels:
+  outbound-co2-calculation:
+    description: The topic by which Co2Response domain models are sent out from DIP
+    subscribe:
+      summary: Send a Co2Response from the domain layer to a subscribing service
+      message:
+        $ref: "#/components/messages/Co2ResponseMessage"
+
+components:
+  messages:
+    Co2ResponseMessage:
+      name: Co2Response
+      title: Co2Response
+      summary: Co2Response description
+      contentType: application/json
+      payload:
+        $ref: "#/components/schemas/BWS.DomainModels.Co2Calculation/Co2ResponseModel"
+  schemas:
+    BWS.DomainModels.Co2Calculation:
+      Co2ResponseModel:
+        description: Model that holds information necessary to perform CO2 emission calculations
+        $id: Co2ResponseModel
+        confluencePageContentId: 611549196
+        type: object
+        properties:
+          Reference:
+            type: string
+            description: Order reference number (for CarLo it is Transport Order number) 
+          Co2Total:
+            type: number
+            format: decimal
+            description: Total CO2 emission [MegaJoule]
+          Co2EquivalentTotal:
+            type: number
+            format: decimal
+            description: Greenhouse gas emission (CO2 equivalent) [Tonne]
+          DistanceTotal:
+            type: number
+            format: decimal
+            description: Total distance [km]
+          DistancePreDelivery:
+            type: number
+            format: decimal
+            description: Pre-delivery distance [km]
+          DistanceMainHaul:
+            type: number
+            format: decimal
+            description: Main haul distance [km]
+          DistancePostDelivery:
+            type: number
+            format: decimal
+            description: Post-delivery distance [km]
+          Co2PreDelivery:
+            type: number
+            format: decimal
+            description: Pre-delivery CO2 emission [MegaJoule]
+          Co2MainHaul:
+            type: number
+            format: decimal
+            description: Main haul CO2 emission [MegaJoule]
+          Co2PostDelivery:
+            type: number
+            format: decimal
+            description: Post-delivery CO2 emission [MegaJoule]
+          Co2EquivalentPreDelivery:
+            type: number
+            format: decimal
+            description: Pre-delivery greenhouse gas emission (CO2 equivalent) [Tonne]
+          Co2EquivalentMainHaul:
+            type: number
+            format: decimal
+            description: Main haul greenhouse gas emission (CO2 equivalent) [Tonne]
+          Co2EquivalentPostDelivery:
+            type: number
+            format: decimal
+            description: Post-delivery greenhouse gas emission (CO2 equivalent) [Tonne]
+          FuelConsumptionTotal:
+            type: number
+            format: decimal
+            description: Total fuel consumption [liters]
+          FuelConsumptionPreDelivery:
+            type: number
+            format: decimal
+            description: Pre-delivery fuel consumption [liters]
+          FuelConsumptionMainHaul:
+            type: number
+            format: decimal
+            description: Main haul fuel consumption [liters]
+          FuelConsumptionPostDelivery:
+            type: number
+            format: decimal
+            description: Post-delivery fuel consumption [liters]
+          NoxTotal:
+            type: number
+            format: decimal
+            description: Nitrogen oxides emission [kg]
+          NoxPreDelivery:
+            type: number
+            format: decimal
+            description: Pre-delivery nitrogen oxides emission [kg]
+          NoxMainHaul:
+            type: number
+            format: decimal
+            description: Main haul nitrogen oxides emission [kg]
+          NoxPostDelivery:
+            type: number
+            format: decimal
+            description: Post-delivery nitrogen oxides emission [kg]
+          So2Total:
+            type: number
+            format: decimal
+            description: Total sulfur dioxides emission [kg]
+          So2PreDelivery:
+            type: number
+            format: decimal
+            description: Pre-delivery sulfur dioxides emission [kg]
+          So2MainHaul:
+            type: number
+            format: decimal
+            description: Main haul sulfur dioxides emission [kg]
+          So2PostDelivery:
+            type: number
+            format: decimal
+            description: Post-delivery sulfur dioxides emission [kg]  
+        required:
+          - Reference
+          - Co2Total
+          - Co2EquivalentTotal
+          - DistanceTotal
+          - DistancePreDelivery
+          - DistanceMainHaul
+          - DistancePostDelivery
+          - Co2PreDelivery
+          - Co2MainHaul
+          - Co2PostDelivery
+          - Co2EquivalentPreDelivery
+          - Co2EquivalentMainHaul
+          - Co2EquivalentPostDelivery
+          - FuelConsumptionTotal
+          - FuelConsumptionPreDelivery
+          - FuelConsumptionMainHaul
+          - FuelConsumptionPostDelivery
+          - NoxTotal
+          - NoxPreDelivery
+          - NoxMainHaul
+          - NoxPostDelivery
+          - So2TotalHaul
+          - So2PreDelivery
+          - So2MainHaul
+          - So2PostDelivery

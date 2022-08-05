@@ -1,0 +1,25 @@
+components:
+  schemas:
+    BWS.DomainModels.Warehousing.Common:
+      Addresses:
+        $id: Addresses
+        type: object
+        references:
+          - BWS.DomainModels.Common
+        usings:
+          - BWS.DomainModels.Common
+        properties:
+          CarrierAddress:
+            $ref: "#/components/schemas/BWS.DomainModels.Common/Address"
+          ConsignorAddress:
+            $ref: "#/components/schemas/BWS.DomainModels.Common/Address"
+          ConsigneeAddress:
+            $ref: "#/components/schemas/BWS.DomainModels.Common/Address"
+          PickupAddress:
+            $ref: "#/components/schemas/BWS.DomainModels.Common/Address"
+          DeliveryAddress:
+            $ref: "#/components/schemas/BWS.DomainModels.Common/Address"
+          SupplierAddress:
+            $ref: "#/components/schemas/BWS.DomainModels.Common/Address"
+          ShipperAddress:
+            $ref: "#/components/schemas/BWS.DomainModels.Common/Address"

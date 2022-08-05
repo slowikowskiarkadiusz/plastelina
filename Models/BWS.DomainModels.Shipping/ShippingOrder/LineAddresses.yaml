@@ -1,0 +1,12 @@
+components:
+  schemas:
+    BWS.DomainModels.Shipping.ShippingOrder:
+      LineAddresses:
+        $id: LineAddresses
+        type: object
+        properties:
+          DespatchPartyAddress:
+            $ref: "#/components/schemas/BWS.DomainModels.Shipping.ShippingOrder/Address"
+          DeliveryPartyAddress:
+            $ref: "#/components/schemas/BWS.DomainModels.Shipping.ShippingOrder/Address"
+  

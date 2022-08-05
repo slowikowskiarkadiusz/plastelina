@@ -1,0 +1,60 @@
+components:
+  schemas:
+    BWS.DomainModels.Shipping.ShippingOrder:
+      ConsignmentOrderLine:
+        $id: ConsignmentOrderLine
+        type: object
+        references:
+          - BWS.DomainModels.Common
+        usings:
+          - BWS.DomainModels.Common
+        properties:
+          LineNumber:
+            type: number
+            format: integer
+          Description:
+            type: string
+          Quantity:
+            type: number
+            format: decimal
+          UnitType:
+            $ref: "#/components/schemas/BWS.DomainModels.Common/UnitType"
+          Temperature:
+            $ref: "#/components/schemas/BWS.DomainModels.Shipping.ShippingOrder/Temperature"
+          UnitDimensions:
+            $ref: "#/components/schemas/BWS.DomainModels.Shipping.ShippingOrder/UnitDimensions"
+          TotalVolume:
+            $ref: "#/components/schemas/BWS.DomainModels.Common/Volume"
+          TotalLoadingMeters:
+            $ref: "#/components/schemas/BWS.DomainModels.Shipping.ShippingOrder/Length"
+          TotalNetWeight:
+            $ref: "#/components/schemas/BWS.DomainModels.Common/Weight"
+          TotalGrossWeight:
+            $ref: "#/components/schemas/BWS.DomainModels.Common/Weight"
+          DangerousGoods:
+            type: array
+            items:
+              $ref: "#/components/schemas/BWS.DomainModels.Shipping.ShippingOrder/DangerousGoods"
+          Addresses:
+            $ref: "#/components/schemas/BWS.DomainModels.Shipping.ShippingOrder/LineAddresses"
+          Barcodes:
+            type: array
+            items:
+              $ref: "#/components/schemas/BWS.DomainModels.Shipping.ShippingOrder/Barcode"
+          MarksAndNumbers:
+            type: array
+            items:
+              $ref: "#/components/schemas/BWS.DomainModels.Shipping.ShippingOrder/MarkAndNumber"
+          Pickup:
+            $ref: "#/components/schemas/BWS.DomainModels.Shipping.ShippingOrder/TransferDue"
+          Delivery:
+            $ref: "#/components/schemas/BWS.DomainModels.Shipping.ShippingOrder/TransferDue"
+          LineReference:
+            type: string
+          HsCode:
+            type: string
+          TotalValue:
+            $ref: "#/components/schemas/BWS.DomainModels.Shipping.ShippingOrder/MonetaryValue"
+        required:
+          - UnitType
+  

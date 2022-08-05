@@ -1,0 +1,145 @@
+channels:
+  sbt-outbound-invoicearchive-invoicearchive:
+    description: The topic by which InvoiceArchives are sent out from DIP
+    subscribe:
+      summary: Send a InvoiceArchive from the domain layer to a subscribing service
+      message:
+        $ref: '#/components/messages/InvoiceArchiveMessage'
+
+components:
+  messages:
+    InvoiceArchiveMessage:
+      name: InvoiceArchiveModel
+      title: InvoiceArchiveModel
+      summary: InvoiceArchiveModel description
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/BWS.DomainModels.InvoiceArchive/InvoiceArchiveModel'
+  schemas:
+    BWS.DomainModels.InvoiceArchive:
+      InvoiceArchiveModel:
+        $id: InvoiceArchiveModel
+        confluencePageContentId: 609910857
+        description: The models described below are models that are used in DIP to transport InvoiceArchive from TMS to subscriber systems.
+        type: object
+        nugets:
+          - Newtonsoft.Json
+        references:
+          - BWS.DomainModels.Common
+        usings:
+          - BWS.DomainModels.Common
+          - Newtonsoft.Json
+          - Newtonsoft.Json.Converters
+        properties:
+          InvoiceNumber:
+            type: string
+            description: Invoice reference number
+          InvoiceDate:
+            type: string
+            format: date-time
+            description: Invoice date
+          TmsSystem:
+            type: string
+            description: From which TMS InvoiceArchive is coming
+          TmsReferences:
+            type: array
+            items:
+              type: string
+            description: Internal TMS reference ids
+          TmsOrderNumbers:
+            type: array
+            items:
+              type: string
+            description: Tms order numbers
+          CustomerNumber:
+            type: string
+            description: Customer id number, which subscriber can assign in own system
+          CustomerName:
+            type: string
+            description: Customer name
+          CustomerAddress1:
+            type: string
+            description: Customer address
+          CustomerAddress2:
+            type: string
+            description: Customer address
+          CustomerAddress3:
+            type: string
+            description: Customer address
+          CustomerAddress4:
+            type: string
+            description: Customer address
+          InvoiceCurrency:
+            type: string
+            description: Currency used on invoice
+          TotalAmountExcludingVat:
+            type: number
+            format: decimal
+            description: Total amount exluding Vat (invoice currency)
+          TotalAmountIncludingVat:
+            type: number
+            format: decimal
+            description: Total amount including Vat (invoice currency)
+          BaseCurrency:
+            type: string
+            description: The defined base currency based on the tenant
+          TotalAmountExcludingVatBaseCurrency:
+            type: number
+            format: decimal
+            description: Total amount exluding Vat (base currency)
+          TotalAmountIncludingVatBaseCurrency:
+            type: number
+            format: decimal
+            description: Total amount including Vat (base currency)
+          CompanyID:
+            type: string
+            description: Company ID
+          InvoiceType:
+            type: string
+            description: Type of invoice
+          BusinessUnit:
+            type: number
+            format: integer
+            description: Id no of business unit
+          Department:
+            type: number
+            format: integer
+            description: Id no of department
+          Office:
+            type: number
+            format: integer
+            description: Id no of office
+          TransportMode:
+            $ref: '#/components/schemas/BWS.DomainModels.Common/TransportMode'
+            attributes:
+              - name: JsonConverter
+                parameters:
+                  - value: typeof(StringEnumConverter)
+            description: Mode of transport
+          TmsCountryCode:
+            type: string
+            description: Tms country code
+          CustomerCountryCode:
+            type: string
+            description: Customer coundtry code
+          InvoicePdfBlobStorageUrl:
+            type: string
+            description: Link to attached pdf file on blob storage
+        required:
+          - InvoiceNumber
+          - InvoiceDate
+          - TmsSystem
+          - TmsReferences
+          - TmsOrderNumbers
+          - CustomerNumber
+          - CustomerName
+          - InvoiceCurrency
+          - TotalAmountExcludingVat
+          - TotalAmountIncludingVat
+          - CompanyID
+          - InvoiceType
+          - BusinessUnit
+          - Department
+          - Office
+          - TransportMode
+          - InvoicePdfBlobStorageUrl

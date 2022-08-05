@@ -1,0 +1,17 @@
+components:
+  schemas:
+    BWS.DomainModels.BusinessPartner.Customer:
+      DirPartyContactInfoView:
+        $id: DirPartyContactInfoView
+        type: object
+        properties:
+          LocationName:
+            $ref: "#/components/schemas/BWS.DomainModels.BusinessPartner.Customer/LocationName"
+          Locator:
+            type: string
+          Roles:
+            type: array
+            items:
+              $ref: "#/components/schemas/BWS.DomainModels.BusinessPartner.Customer/Role"
+          Type:
+            $ref: "#/components/schemas/BWS.DomainModels.BusinessPartner.Customer/ContactInfoViewType"

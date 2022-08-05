@@ -1,0 +1,54 @@
+components:
+  schemas:
+    BWS.DomainModels.Reservation.Reservation:
+      PurchaseOrderLine:
+        description: PurchaseOrderLine
+        $id: PurchaseOrderLine
+        type: object
+        properties:
+          Amount:
+            type: number
+          IsActive:
+            type: boolean
+          CustomFields:
+            $ref: "#/components/schemas/BWS.DomainModels.Reservation.Reservation/CustomFields"
+          CodingLines:
+            type: array
+            items:
+              $ref: "#/components/schemas/BWS.DomainModels.Reservation.Reservation/PreCodingLine"
+          DeliveryLines:
+            type: array
+            items:
+              $ref: "#/components/schemas/BWS.DomainModels.Reservation.Reservation/DeliveryLine"
+          ItemNumber:
+            type: string
+          LineNumber:
+            type: string
+          ItemDescription:
+            type: string
+          Quantity:
+            type: integer
+          Reference:
+            type: string
+          TaxIndicator1:
+              type: string
+          TaxIndicator2:
+              type: string
+          Unit:
+            type: string
+          UnitPrice:
+            type: number
+        required:
+          - Amount
+          - IsActive
+          - CustomFields
+          - CodingLines
+          - DeliveryLines
+          - LineNumber
+          - ItemDescription
+          - Quantity
+          - Reference
+          - TaxIndicator1
+          - TaxIndicator2
+          - Unit
+          - UnitPrice

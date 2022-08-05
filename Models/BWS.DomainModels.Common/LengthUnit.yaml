@@ -1,0 +1,21 @@
+components:
+  schemas:
+    BWS.DomainModels.Common:
+      LengthUnit:
+        $id: LengthUnit
+        type: string
+        nugets:
+          - Newtonsoft.Json
+        usings:
+          - Newtonsoft.Json
+          - Newtonsoft.Json.Converters
+        attributes:
+          - name: JsonConverter
+            parameters:
+              - value: typeof(StringEnumConverter)
+        enum:
+          - None
+          - CentiMeter
+          - Inches
+          - Meter
+          - Foot

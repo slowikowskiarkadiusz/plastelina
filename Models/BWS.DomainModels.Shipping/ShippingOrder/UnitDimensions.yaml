@@ -1,0 +1,25 @@
+components:
+  schemas:
+    BWS.DomainModels.Shipping.ShippingOrder:
+      UnitDimensions:
+        $id: UnitDimensions
+        type: object
+        references:
+          - BWS.DomainModels.Common
+        usings:
+          - BWS.DomainModels.Common
+        properties:
+          Length:
+            type: number
+            format: decimal
+          Height:
+            type: number
+            format: decimal
+          Width:
+            type: number
+            format: decimal
+          Unit:
+            $ref: "#/components/schemas/BWS.DomainModels.Common/LengthUnit"
+        required:
+          - Unit
+  

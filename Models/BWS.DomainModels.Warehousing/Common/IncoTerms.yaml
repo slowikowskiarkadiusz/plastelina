@@ -1,0 +1,11 @@
+components:
+  schemas:
+    BWS.DomainModels.Warehousing.Common:
+      IncoTerms:
+        $id: IncoTerms
+        type: object
+        properties:
+          Code:
+            type: string
+          City:
+            type: string

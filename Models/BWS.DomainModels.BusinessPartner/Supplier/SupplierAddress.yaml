@@ -1,0 +1,35 @@
+components:
+  schemas:
+    BWS.DomainModels.BusinessPartner.Supplier:
+      SupplierAddress:
+        $id: SupplierAddress
+        type: object
+        nugets:
+          - Newtonsoft.Json
+        references:
+          - BWS.DomainModels.Common
+        usings:
+          - BWS.DomainModels.Common
+          - Newtonsoft.Json
+          - Newtonsoft.Json.Converters
+        properties:
+          CountryRegionId:
+            $ref: '#/components/schemas/BWS.DomainModels.Common/CountryIsoCode3Characters'
+            attributes:
+              - name: JsonConverter
+                parameters:
+                  - value: typeof(StringEnumConverter)
+          ZipCode:
+            type: string
+          Street:
+            type: string
+          City:
+            type: string
+          State:
+            type: string
+          Country:
+            $ref: '#/components/schemas/BWS.DomainModels.Common/CountryIsoCode3Characters'
+            attributes:
+              - name: JsonConverter
+                parameters:
+                  - value: typeof(StringEnumConverter)

@@ -1,0 +1,28 @@
+components:
+  schemas:
+    BWS.DomainModels.Shipping.ShippingOrder:
+      MessageIdentification:
+        $id: MessageIdentification
+        type: object
+        references:
+          - BWS.DomainModels.Common
+        usings:
+          - BWS.DomainModels.Common
+        properties:
+          ReceiverId:
+            type: string
+          SenderId:
+            type: string
+          ClientId:
+            type: string
+          OrganizationNumber:
+            type: string
+          DocumentId:
+            type: string
+          Operation:
+            $ref: "#/components/schemas/BWS.DomainModels.Common/Operation"
+          InterchangeControlReference:
+            type: string
+        required:
+          - Operation
+  

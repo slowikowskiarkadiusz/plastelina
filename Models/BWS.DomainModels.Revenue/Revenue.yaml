@@ -1,0 +1,45 @@
+components:
+  schemas:
+    BWS.DomainModels.Revenue:
+      Revenue:
+        $id: Revenue
+        namespace: BWS.DomainModels.Revenue
+        type: object
+        properties:
+          CustomerNumber:
+            type: string
+            description: Number of customer
+          InvoiceNumber:
+            type: string
+            description: Number of the associated invoice
+          DepartmentName:
+            type: string
+            description: Name of department
+          OfficeName:
+            type: string
+            description: Name of the office
+          BusinessUnit:
+            type: string
+            description: Code for the business unit
+          LoadingPointCountryCode:
+            type: string
+            description: Code of the country where the transport is loaded
+          UnloadingPointCountryCode:
+            type: string
+            description: Code of the country where the transport is loaded
+          CurrencyCode:
+            type: string
+            description: Code of the currency in which the Amount field is
+          Amount:
+            type: number
+            format: decimal
+            description: Amount of money related to this transaction
+          Date:
+            format: date-time
+            type: string
+            description: Date when the transaction was invoiced
+        required:
+          - CustomerNumber
+          - InvoiceNumber
+          - Date
+          - MessageIndex

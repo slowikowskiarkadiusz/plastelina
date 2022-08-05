@@ -1,0 +1,23 @@
+components:
+  schemas:
+    BWS.DomainModels.BusinessPartner.Supplier:
+      SupplierBlockedCode:
+        description: SupplierBlockedCode
+        $id: SupplierBlockedCode
+        type: string
+        nugets:
+          - Newtonsoft.Json
+        usings:
+          - Newtonsoft.Json
+          - Newtonsoft.Json.Converters
+        attributes:
+          - name: JsonConverter
+            parameters:
+              - value: typeof(StringEnumConverter)
+        enum:
+          - No
+          - Invoice
+          - All
+          - Payment
+          - Requisition
+          - Never

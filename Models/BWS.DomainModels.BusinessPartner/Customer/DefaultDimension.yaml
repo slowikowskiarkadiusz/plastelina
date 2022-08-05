@@ -1,0 +1,11 @@
+components:
+  schemas:
+    BWS.DomainModels.BusinessPartner.Customer:
+      DefaultDimension:
+        $id: DefaultDimension
+        type: object
+        properties:
+          Values:
+            type: array
+            items:
+              $ref: "#/components/schemas/BWS.DomainModels.BusinessPartner.Customer/Value"

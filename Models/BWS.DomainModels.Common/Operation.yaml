@@ -1,0 +1,20 @@
+components:
+  schemas:
+    BWS.DomainModels.Common:
+      Operation:
+        $id: Operation
+        type: string
+        nugets:
+          - Newtonsoft.Json
+        usings:
+          - Newtonsoft.Json
+          - Newtonsoft.Json.Converters
+        attributes:
+          - name: JsonConverter
+            parameters:
+              - value: typeof(StringEnumConverter)
+        enum:
+          - None
+          - Create
+          - Update
+          - Delete

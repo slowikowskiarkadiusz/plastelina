@@ -1,0 +1,32 @@
+components:
+  schemas:
+    BWS.DomainModels.Expence:
+      Expence:
+        $id: Expence
+        type: object
+        properties:
+          Initials:
+            type: string
+          Email:
+            type: string
+          Name:
+            type: string
+          ManagerInitials:
+            type: string
+          OfficeNumber:
+            type: string
+          DepartmentNumber:
+            type: string
+          CostCenterNumber:
+            type: string
+          BusinessUnitNumber:
+            type: string
+          BusinessUnit:
+            type: string
+          EmployeeNumber:
+            type: string
+          AXNumber:
+            type: string
+          BusinessName:
+            type: string
+  

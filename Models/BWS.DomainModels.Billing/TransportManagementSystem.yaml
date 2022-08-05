@@ -1,0 +1,19 @@
+components:
+  schemas:
+    BWS.DomainModels.Billing:
+      TransportManagementSystem:
+        $id: TransportManagementSystem
+        type: string
+        nugets:
+          - Newtonsoft.Json
+        usings:
+          - Newtonsoft.Json
+          - Newtonsoft.Json.Converters
+        attributes:
+          - name: JsonConverter
+            parameters:
+              - value: typeof(StringEnumConverter)
+        enum:
+          - CarLo
+          - IES
+          - CargoWise

@@ -1,0 +1,11 @@
+components:
+  schemas:
+    BWS.DomainModels.Shipping.ShippingOrder:
+      ShippingOrderType:
+        $id: ShippingOrderType
+        type: string
+        enum:
+          - None
+          - Delivery
+          - Pickup
+  

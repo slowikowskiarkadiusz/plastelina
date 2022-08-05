@@ -1,0 +1,11 @@
+components:
+  schemas:
+    BWS.DomainModels.Shipping.ShippingOrder:
+      PaymentMethod:
+        $id: PaymentMethod
+        type: string
+        enum:
+          - None
+          - Account
+          - NoCharge
+  

@@ -1,0 +1,38 @@
+components:
+  schemas:
+    BWS.DomainModels.Reservation.Posting:
+      VatLine:
+        $id: VatLine
+        type: object
+        properties:
+          TaxLineNumber:
+            type: integer
+          Dimension1:
+            type: string
+          Amount:
+            type: number
+          GrossAmount:
+            type: number
+          NetAmount:
+            type: number
+          Percentage:
+            type: number
+          TaxCode:
+            type: string
+          TaxIndicator1:
+            type: string
+          TaxIndicator2:
+            type: string
+          CodingLineNumber:
+            type: integer
+        required:
+          - TaxLineNumber
+          - Dimension1
+          - Amount
+          - GrossAmount
+          - NetAmount
+          - Percentage
+          - TaxCode
+          - TaxIndicator1
+          - TaxIndicator2
+          - CodingLineNumber

@@ -1,0 +1,19 @@
+components:
+  schemas:
+    BWS.DomainModels.Warehousing.Common:
+      Temperature:
+        $id: Temperature
+        references:
+          - BWS.DomainModels.Common
+        usings:
+        - BWS.DomainModels.Common
+        type: object
+        properties:
+          Value:
+            type: number
+            format:
+              decimal
+          Unit:
+            $ref: "#/components/schemas/BWS.DomainModels.Common/TemperatureUnit"
+          StorageType:
+            $ref: "#/components/schemas/BWS.DomainModels.Warehousing.Common/StorageType"

@@ -1,0 +1,78 @@
+components:
+  schemas:
+    BWS.DomainModels.Shipping.ShippingOrder:
+      Consignment:
+        $id: Consignment
+        type: object
+        nugets:
+          - Newtonsoft.Json
+        usings:
+          - Newtonsoft.Json
+          - Newtonsoft.Json.Converters
+        properties:
+          ConsignmentIdentification:
+            $ref: '#/components/schemas/BWS.DomainModels.Shipping.ShippingOrder/ConsignmentIdentification'
+          ConsignmentNumber:
+            type: number
+            format: integer
+          Lines:
+            type: array
+            items:
+              $ref: '#/components/schemas/BWS.DomainModels.Shipping.ShippingOrder/ConsignmentOrderLine'
+          DeliveryInstructions:
+            type: array
+            items:
+              $ref: '#/components/schemas/BWS.DomainModels.Shipping.ShippingOrder/DeliveryInstruction'
+          Addresses:
+            $ref: '#/components/schemas/BWS.DomainModels.Shipping.ShippingOrder/Addresses'
+          Delivery:
+            $ref: '#/components/schemas/BWS.DomainModels.Shipping.ShippingOrder/TransferDue'
+          Pickup:
+            $ref: '#/components/schemas/BWS.DomainModels.Shipping.ShippingOrder/TransferDue'
+          Incoterms:
+            $ref: '#/components/schemas/BWS.DomainModels.Shipping.ShippingOrder/Incoterms'
+          Container:
+            $ref: '#/components/schemas/BWS.DomainModels.Shipping.ShippingOrder/Container'
+          TransportDetails:
+            $ref: '#/components/schemas/BWS.DomainModels.Shipping.ShippingOrder/TransportDetails'
+          PaymentMethod:
+            $ref: '#/components/schemas/BWS.DomainModels.Shipping.ShippingOrder/PaymentMethod'
+          TotalValue:
+            $ref: '#/components/schemas/BWS.DomainModels.Shipping.ShippingOrder/MonetaryValue'
+          ServicePointId:
+            type: string
+          MrnNumbers:
+            type: string
+          Stackable:
+            type: boolean
+          SiteLoader:
+            type: boolean
+          Genset:
+            type: boolean
+          Insurance:
+            $ref: '#/components/schemas/BWS.DomainModels.Shipping.ShippingOrder/MonetaryValue'
+          TransitCode:
+            $ref: '#/components/schemas/BWS.DomainModels.Shipping.ShippingOrder/TransitCode'
+            attributes:
+              - name: JsonConverter
+                parameters:
+                  - value: typeof(StringEnumConverter)
+          Service:
+            $ref: '#/components/schemas/BWS.DomainModels.Shipping.ShippingOrder/ServiceType'
+            attributes:
+              - name: JsonConverter
+                parameters:
+                  - value: typeof(StringEnumConverter)
+          AdditionalServices:
+            type: array
+            items:
+              $ref: '#/components/schemas/BWS.DomainModels.Shipping.ShippingOrder/Service'
+          AttachedFiles:
+            type: array
+            items:
+              $ref: '#/components/schemas/BWS.DomainModels.Shipping.ShippingOrder/AttachedFile'
+          ExchangePallets:
+            $ref: '#/components/schemas/BWS.DomainModels.Shipping.ShippingOrder/ExchangePallets'
+        required:
+          - ConsignmentNumber
+          - PaymentMethod

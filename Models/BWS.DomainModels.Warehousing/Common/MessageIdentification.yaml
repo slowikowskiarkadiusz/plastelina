@@ -1,0 +1,11 @@
+components:
+  schemas:
+    BWS.DomainModels.Warehousing.Common:
+      MessageIdentification:
+        $id: MessageIdentification
+        type: object
+        properties:
+          InterchangeControlReference:
+            type: string
+          ClientId:
+            type: string

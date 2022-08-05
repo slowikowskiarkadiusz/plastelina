@@ -1,0 +1,10 @@
+components:
+  schemas:
+    BWS.DomainModels.Warehousing.WarehouseShipment:
+      WarehouseShipmentIdentification:
+        $id: WarehouseShipmentIdentification
+        type: object
+        properties:
+          ShipmentNumber:
+            type: string
+  

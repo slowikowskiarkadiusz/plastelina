@@ -1,0 +1,16 @@
+components:
+  schemas:
+    BWS.DomainModels.Warehousing.WarehouseReceipt:
+      BondDetails:
+        $id: BondDetails
+        type: object
+        properties:
+          Type:
+            $ref: "#/components/schemas/BWS.DomainModels.Warehousing.WarehouseReceipt/BondedType"
+          Entry:
+            type: string
+            format: date-time
+          EntryNumber:
+            type: string
+        required:
+          - Type

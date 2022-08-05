@@ -1,0 +1,53 @@
+components:
+  schemas:
+    BWS.DomainModels.BusinessPartner.Customer:
+      CustTable:
+        $id: CustTable
+        type: object
+        references:
+          - BWS.DomainModels.Common
+        usings:
+          - BWS.DomainModels.Common
+        properties:
+          AccountNum:
+            type: string
+          AccountStatement:
+            type: string
+          Blocked:
+            $ref: "#/components/schemas/BWS.DomainModels.Common/Blocked"
+          Currency:
+            $ref: "#/components/schemas/BWS.DomainModels.Common/Currency"
+          CustGroup:
+            $ref: "#/components/schemas/BWS.DomainModels.BusinessPartner.Customer/CustGroup"
+          DefaultDimension:
+            $ref: "#/components/schemas/BWS.DomainModels.BusinessPartner.Customer/DefaultDimension"
+          Einvoice:
+            type: boolean
+          Memo:
+            type: string
+          Party:
+            type: string
+          PaymTermId:
+            type: string
+          ScaCollectionPoolId:
+            type: string
+          ScaCollectionStrategyId:
+            type: string
+          ScaGovOrgCountry:
+            $ref: "#/components/schemas/BWS.DomainModels.Common/CountryIsoCode3Characters"
+          ScaGovOrgId:
+            type: string 
+          ScaOioublParallel:
+            type: boolean
+          ScaPONumber:
+            type: boolean
+          ScaTaxCountry:
+            $ref: "#/components/schemas/BWS.DomainModels.Common/CountryIsoCode3Characters"
+          ScaTotalCreditLimit:
+            type: number
+          ScaTotalCreditLimitCurrency:
+            $ref: "#/components/schemas/BWS.DomainModels.Common/Currency"
+          VatNum:
+            type: string
+          DirParty:
+            $ref: "#/components/schemas/BWS.DomainModels.BusinessPartner.Customer/DirParty"

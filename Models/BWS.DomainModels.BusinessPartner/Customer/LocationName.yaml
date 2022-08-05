@@ -1,0 +1,10 @@
+components:
+  schemas:
+    BWS.DomainModels.BusinessPartner.Customer:
+      LocationName:
+        description: Location name
+        $id: LocationName
+        type: string
+        enum:
+          - EmailAddress
+          - Phone

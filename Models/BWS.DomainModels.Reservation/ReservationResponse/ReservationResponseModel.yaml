@@ -1,0 +1,57 @@
+channels:
+  sbq-inbound-reservationresponse:
+    description: The queue by which reservation responses are delivered to DIP
+    publish:
+      summary: Receive a reservation response from the outside
+      message:
+        $ref: "#/components/messages/ReservationResponseMessage"
+
+  sbt-outbound-reservationresponse:
+    description: The topic by which reservation responses are sent out from DIP
+    subscribe:
+      summary: Send a reservation response from the domain layer to a subscribing service
+      message:
+        $ref: "#/components/messages/ReservationResponseMessage"
+
+components:
+  messages:
+    ReservationResponseMessage:
+      name: ReservationResponse
+      title: ReservationResponse
+      summary: Reservation response description
+      contentType: application/json
+      payload:
+        $ref: "#/components/schemas/BWS.DomainModels.Reservation.ReservationResponse/ReservationResponseModel"
+
+  schemas:
+    BWS.DomainModels.Reservation.ReservationResponse:
+      ReservationResponseModel:
+        description: Response to posting
+        $id: ReservationResponseModel
+        confluencePageContentId: 623181839
+        type: object
+        properties:
+          CompanyId:
+            type: string
+          SupplierId:
+            type: string
+          InvoiceNumber:
+            type: string
+          InvoiceDate:
+            type: string
+            format: date
+          PostingType:
+            $ref: "#/components/schemas/BWS.DomainModels.Reservation.ReservationResponse/PostingType"
+          InvoiceType:
+            type: string
+          VoucherNumber:
+            type: string
+          ErrorMessage:
+            type: string
+        required:
+          - CompanyId
+          - SupplierId
+          - InvoiceNumber
+          - InvoiceDate
+          - PostingType
+          

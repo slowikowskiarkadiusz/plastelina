@@ -1,0 +1,25 @@
+components:
+  schemas:
+    BWS.DomainModels.Shipping.ShippingOrder:
+      DocumentType:
+        $id: DocumentType
+        type: string
+        nugets:
+          - Newtonsoft.Json
+        usings:
+          - Newtonsoft.Json
+          - Newtonsoft.Json.Converters
+        attributes:
+          - name: JsonConverter
+            parameters:
+              - value: typeof(StringEnumConverter)
+        enum:
+          - None
+          - AWB
+          - BI
+          - BL
+          - EXPD
+          - PL
+          - DGR
+          - INVOI
+          - Other

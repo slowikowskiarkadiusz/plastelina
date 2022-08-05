@@ -1,0 +1,12 @@
+components:
+  schemas:
+    BWS.DomainModels.Warehousing.WarehouseReceipt:
+      Warehouse:
+        $id: Warehouse
+        type: object
+        properties:
+          Name:
+            type: string
+          Code:
+            type: string
+  

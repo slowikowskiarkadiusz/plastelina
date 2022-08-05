@@ -1,0 +1,12 @@
+components:
+  schemas:
+    BWS.DomainModels.Common:
+      Country:
+        $id: Country
+        type: object
+        properties:
+          Name:
+            type: string
+          Code:
+            type: string
+  

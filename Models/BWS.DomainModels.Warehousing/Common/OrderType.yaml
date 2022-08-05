@@ -1,0 +1,19 @@
+components:
+  schemas:
+    BWS.DomainModels.Warehousing.Common:
+      OrderType:
+        $id: OrderType
+        type: string
+        nugets:
+          - Newtonsoft.Json
+        usings:
+          - Newtonsoft.Json
+          - Newtonsoft.Json.Converters
+        attributes:
+          - name: JsonConverter
+            parameters:
+              - value: typeof(StringEnumConverter)
+        enum:
+          - None
+          - CrossDock
+          - Inventory

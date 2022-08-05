@@ -1,0 +1,77 @@
+channels:
+  inbound-warehouseshipments:
+    description: Publish description
+    publish:
+      summary: Summary Subscribe description
+      message:
+        $ref: '#/components/messages/WarehouseShipmentMessage'
+
+  outbound-warehouseshipments:
+    description: Subscribe description
+    subscribe:
+      summary: Summary Publish description
+      message:
+        $ref: '#/components/messages/WarehouseShipmentMessage'
+
+components:
+  messages:
+    WarehouseShipmentMessage:
+      name: WarehouseShipment
+      title: WarehouseShipment
+      summary: WarehouseShipment description
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/BWS.DomainModels.Warehousing.WarehouseShipment/WarehouseShipmentModel'
+  schemas:
+    BWS.DomainModels.Warehousing.WarehouseShipment:
+      WarehouseShipmentModel:
+        $id: WarehouseShipmentModel
+        confluencePageContentId: 521240581
+        description: The models described below are models that are used in DIP to transmit shipment data from Magaya to Compass.
+        type: object
+        nugets:
+          - Newtonsoft.Json
+        references:
+          - BWS.DomainModels.Common
+        usings:
+          - BWS.DomainModels.Common
+          - BWS.DomainModels.Warehousing.Common
+          - Newtonsoft.Json
+          - Newtonsoft.Json.Converters
+        properties:
+          MessageIdentification:
+            $ref: '#/components/schemas/BWS.DomainModels.Warehousing.Common/MessageIdentification'
+          WarehouseShipmentIdentification:
+            $ref: '#/components/schemas/BWS.DomainModels.Warehousing.WarehouseShipment/WarehouseShipmentIdentification'
+          Addresses:
+            $ref: '#/components/schemas/BWS.DomainModels.Warehousing.Common/Addresses'
+          ExpectedDeliveryDate:
+            format: date-time
+            type: string
+          EstimatedReadyDate:
+            format: date-time
+            type: string
+          TransportMode:
+            $ref: '#/components/schemas/BWS.DomainModels.Common/TransportMode'
+            attributes:
+              - name: JsonConverter
+                parameters:
+                  - value: typeof(StringEnumConverter)
+            description: How is the order going to be transported
+          MasterWayBillNumber:
+            type: string
+          HouseWayBillNumber:
+            type: string
+          PortOfLoading:
+            $ref: '#/components/schemas/BWS.DomainModels.Warehousing.WarehouseShipment/Port'
+          PortOfDischarge:
+            $ref: '#/components/schemas/BWS.DomainModels.Warehousing.WarehouseShipment/Port'
+          OrderLines:
+            type: array
+            items:
+              $ref: '#/components/schemas/BWS.DomainModels.Warehousing.WarehouseShipment/WarehouseShipmentLine'
+        required:
+          - MessageIdentification
+          - ShipmentNumber
+          - MasterWayBillNumber
+          - OrderLines

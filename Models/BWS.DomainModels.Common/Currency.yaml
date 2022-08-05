@@ -1,0 +1,40 @@
+components:
+  schemas:
+    BWS.DomainModels.Common:
+      Currency:
+        description: Currency code
+        $id: Currency
+        type: string
+        nugets:
+          - Newtonsoft.Json
+        usings:
+          - Newtonsoft.Json
+          - Newtonsoft.Json.Converters
+        attributes:
+          - name: JsonConverter
+            parameters:
+              - value: typeof(StringEnumConverter)
+        enum:
+          - None
+          - AED
+          - AUD
+          - BRL
+          - CAD
+          - CNY
+          - DKK
+          - EUR
+          - GBP
+          - GYD
+          - ISK
+          - KZT
+          - MYR
+          - NOK
+          - PLN
+          - QAR
+          - RUB
+          - SEK
+          - SGD
+          - SRD
+          - TTD
+          - USD
+          - VND

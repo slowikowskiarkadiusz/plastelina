@@ -1,0 +1,24 @@
+components:
+  schemas:
+    BWS.DomainModels.Co2Calculation:
+      RoadEmissionClass:
+        $id: RoadEmissionClass
+        type: string
+        enum:
+          - EuEuro1
+          - EuEuro2
+          - EuEuro3
+          - EuEuro4
+          - EuEuro5
+          - EuEuro6
+          - UsEpa1994
+          - UsEpa1998
+          - UsEpa2004
+          - UsEpa2007
+          - UsEpa2010
+          - Jp1994
+          - Jp1997
+          - Jp2003
+          - Jp2005
+          - Jp2009
+          - Jp2016

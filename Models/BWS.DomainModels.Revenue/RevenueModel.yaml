@@ -1,0 +1,45 @@
+channels:
+  sbq-inbound-finance-revenue:
+    description: The queue by which RevenueModel are delivered to DIP
+    publish:
+      summary: Receive a RevenueModel from the outside
+      message:
+        $ref: "#/components/messages/RevenueMessage"
+
+  sbt-outbound-finance-revenue:
+    description: The topic by which RevenueModel are sent out from DIP
+    subscribe:
+      summary: Send a RevenueModel from the domain layer to a subscribing service
+      message:
+        $ref: "#/components/messages/RevenueMessage"
+
+components:
+  messages:
+    RevenueMessage:
+      name: Revenue
+      title: Revenue
+      summary: Revenue description
+      contentType: application/json
+      payload:
+        $ref: "#/components/schemas/BWS.DomainModels.Revenue/RevenueModel"
+  schemas:
+    BWS.DomainModels.Revenue:
+      RevenueModel:
+        $id: RevenueModel
+        confluencePageContentId: 578519061
+        type: object
+        properties:
+          AcquiredDate:
+            format: date-time
+            type: string
+          TotalNumberOfMessages:
+            type: integer
+          Revenues:
+            type: array
+            items:
+              $ref: "#/components/schemas/BWS.DomainModels.Revenue/Revenue"
+              format: BWS.DomainModels.Revenue.Revenue
+        required:
+          - Revenues
+          - AcquiredDate
+          - TotalNumberOfMessages

@@ -1,0 +1,12 @@
+components:
+  schemas:
+    BWS.DomainModels.Common:
+      MonetaryValue:
+        $id: MonetaryValue
+        type: object
+        properties:
+          CurrencyCode:
+            type: string
+          Value:
+            type: number
+  

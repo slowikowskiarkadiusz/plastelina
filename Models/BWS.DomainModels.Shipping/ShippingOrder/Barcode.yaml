@@ -1,0 +1,10 @@
+components:
+  schemas:
+    BWS.DomainModels.Shipping.ShippingOrder:
+      Barcode:
+        $id: Barcode
+        type: object
+        properties:
+          Value:
+            type: string
+  

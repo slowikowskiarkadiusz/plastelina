@@ -1,0 +1,42 @@
+components:
+  schemas:
+    BWS.DomainModels.BusinessPartner.Supplier:
+      SupplierRevenue:
+        $id: SupplierRevenue
+        type: object
+        nugets:
+          - Newtonsoft.Json
+        references:
+          - BWS.DomainModels.Common
+        usings:
+          - BWS.DomainModels.Common
+          - Newtonsoft.Json
+          - Newtonsoft.Json.Converters
+        properties:
+          AxId:
+            type: string
+            description: Ax Id
+          Amount:
+            type: number
+            format: decimal
+          RevenueNumber:
+            type: string
+          VoucherId:
+            type: string
+          SupplierInvoiceNumber:
+            type: string
+          Date:
+            type: string
+            format: date-time
+          Currency:
+            $ref: '#/components/schemas/BWS.DomainModels.Common/Currency'
+            attributes:
+              - name: JsonConverter
+                parameters:
+                  - value: typeof(StringEnumConverter)
+          BusinessUnit:
+            type: string
+          DepartmentNumber:
+            type: string
+          DepartmentName:
+            type: string

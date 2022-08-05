@@ -1,0 +1,27 @@
+components:
+  schemas:
+    BWS.DomainModels.Shipping.ShippingOrder:
+      ShippingOrderConfirmation:
+        $id: ShippingOrderConfirmation
+        nugets:
+          - Newtonsoft.Json
+        references:
+          - BWS.Extensions
+        usings:
+          - BWS.Extensions.Converters
+          - Newtonsoft.Json
+        type: object
+        properties:
+          ShippingOrderConfirmationIdentification:
+            $ref: '#/components/schemas/BWS.DomainModels.Shipping.ShippingOrder/ShippingOrderConfirmationIdentification'
+          MessageIdentification:
+            $ref: '#/components/schemas/BWS.DomainModels.Shipping.ShippingOrder/MessageIdentification'
+          ConfirmationDate:
+            type: string
+            format: System.DateTime
+            attributes:
+              - name: JsonConverter
+                parameters:
+                  - value: typeof(DateOnlyJsonConverter)
+          TransportDetails:
+            $ref: '#/components/schemas/BWS.DomainModels.Shipping.ShippingOrder/TransportDetails'

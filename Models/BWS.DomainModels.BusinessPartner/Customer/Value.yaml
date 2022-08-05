@@ -1,0 +1,10 @@
+components:
+  schemas:
+    BWS.DomainModels.BusinessPartner.Customer:
+      Value:
+        description: Value
+        $id: Value
+        type: object
+        properties:
+          Name:
+            type: string

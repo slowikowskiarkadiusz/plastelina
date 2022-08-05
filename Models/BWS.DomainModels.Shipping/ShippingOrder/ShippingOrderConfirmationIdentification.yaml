@@ -1,0 +1,16 @@
+components:
+  schemas:
+    BWS.DomainModels.Shipping.ShippingOrder:
+      ShippingOrderConfirmationIdentification:
+        $id: ShippingOrderConfirmationIdentification
+        type: object
+        properties:
+          BookingReferenceNumber:
+            type: string
+          CustomerReferenceNumber:
+            type: string
+          ConsignorsReferenceNumber:
+            type: string
+          FreightForwardersReferenceNumber:
+            type: string
+  

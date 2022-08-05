@@ -1,0 +1,9 @@
+components:
+  schemas:
+    BWS.DomainModels.BusinessPartner.Customer:
+      Language:
+        description: Language id
+        $id: Language
+        type: string
+        enum:
+          - engb

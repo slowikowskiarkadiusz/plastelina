@@ -1,0 +1,10 @@
+components:
+  schemas:
+    BWS.DomainModels.Shipping.ShippingOrder:
+      Service:
+        $id: Service
+        type: object
+        properties:
+          Code:
+            type: string
+  

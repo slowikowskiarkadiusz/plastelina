@@ -1,0 +1,125 @@
+channels:
+  sbq-inbound-businesspartner-supplier:
+    description: The queue by which Supplier are delivered to DIP
+    publish:
+      summary: Receive a Supplier from the outside
+      message:
+        $ref: '#/components/messages/SupplierMessage'
+
+  sbt-outbound-businesspartner-supplier:
+    description: The topic by which Supplier are sent out from DIP
+    subscribe:
+      summary: Send a Supplier from the domain layer to a subscribing service
+      message:
+        $ref: '#/components/messages/SupplierMessage'
+
+components:
+  messages:
+    SupplierMessage:
+      name: Supplier
+      title: Supplier
+      summary: Supplier description
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/BWS.DomainModels.BusinessPartner.Supplier/Supplier'
+  schemas:
+    BWS.DomainModels.BusinessPartner.Supplier:
+      Supplier:
+        $id: Supplier
+        confluencePageContentId: 622985224
+        description: The models described below are models that are used in DIP to transmit Supplier file.
+        type: object
+        nugets:
+          - Newtonsoft.Json
+        references:
+          - BWS.DomainModels.Common
+        usings:
+          - BWS.DomainModels.Common
+          - Newtonsoft.Json
+          - Newtonsoft.Json.Converters
+        properties:
+          Name:
+            type: string
+            description: Vendor name
+          AxAccountNumber:
+            type: string
+            description: Ax account number
+          VendorGroup:
+            type: string
+            description: Vendor group, can contains special characters like dot
+          GovernmentOrganizationCountry:
+            $ref: '#/components/schemas/BWS.DomainModels.Common/CountryIsoCode3Characters'
+            description: Government organisation country
+            attributes:
+              - name: JsonConverter
+                parameters:
+                  - value: typeof(StringEnumConverter)
+          GovernmentOrganizationNumber:
+            type: string
+            description: Government organisation number
+          TaxCountry:
+            $ref: '#/components/schemas/BWS.DomainModels.Common/CountryIsoCode3Characters'
+            description: Tax country
+            attributes:
+              - name: JsonConverter
+                parameters:
+                  - value: typeof(StringEnumConverter)
+          TaxGroup:
+            type: string
+          TaxExemptNumber:
+            type: string
+            description: Tax exempt number
+          BwsCompany:
+            type: array
+            items:
+              $ref: '#/components/schemas/BWS.DomainModels.BusinessPartner.Supplier/BwsCompany'
+            description: BWS unit
+          Carrier:
+            type: boolean
+            description: Carrier
+          Agreement:
+            type: boolean
+            description: Agreement
+          Commitment:
+            type: boolean
+            description: Commitment
+          ExpireDate:
+            format: date-time
+            type: string
+            description: Expire date
+          TermsOfPayment:
+            type: string
+            description: Terms of payment
+          ExportToCarlo:
+            type: boolean
+            description: Export to Carlo
+          DeliveryMode:
+            type: string
+            description: Mode of delivery
+          SupplierAddress:
+            $ref: '#/components/schemas/BWS.DomainModels.BusinessPartner.Supplier/SupplierAddress'
+            description: Address information
+          SupplierContact:
+            $ref: '#/components/schemas/BWS.DomainModels.BusinessPartner.Supplier/SupplierContact'
+            description: Contact information
+          BankInformation:
+            $ref: '#/components/schemas/BWS.DomainModels.BusinessPartner.Supplier/BankInformation'
+            description: Bank information
+          SupplierRevenue:
+            $ref: '#/components/schemas/BWS.DomainModels.BusinessPartner.Supplier/SupplierRevenue'
+          BlockedReason:
+            type: string
+          BlockedCode:
+            $ref: '#/components/schemas/BWS.DomainModels.BusinessPartner.Supplier/SupplierBlockedCode'
+            description: Blocked code
+            attributes:
+              - name: JsonConverter
+                parameters:
+                  - value: typeof(StringEnumConverter)
+        required:
+          - Name
+          - VendorGroup
+          - TaxExemptNumber
+          - Commitment
+          - TermsOfPayment
+          - DeliveryMode

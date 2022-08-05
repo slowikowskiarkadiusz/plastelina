@@ -1,0 +1,27 @@
+components:
+  schemas:
+    BWS.DomainModels.Warehousing.Common:
+      DangerousGoods:
+        $id: DangerousGoods
+        type: object
+        nugets:
+          - Newtonsoft.Json
+        references:
+          - BWS.DomainModels.Common
+        usings:
+          - BWS.DomainModels.Common
+          - Newtonsoft.Json
+          - Newtonsoft.Json.Converters
+        properties:
+          UnNumber:
+            type: string
+          Class:
+            type: string
+          Name:
+            type: string
+          PackingGroup:
+            $ref: '#/components/schemas/BWS.DomainModels.Common/PackingGroup'
+            attributes:
+              - name: JsonConverter
+                parameters:
+                  - value: typeof(StringEnumConverter)

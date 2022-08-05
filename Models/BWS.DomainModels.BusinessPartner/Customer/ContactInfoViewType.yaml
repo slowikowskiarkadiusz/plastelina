@@ -1,0 +1,10 @@
+components:
+  schemas:
+    BWS.DomainModels.BusinessPartner.Customer:
+      ContactInfoViewType:
+        description: ContactInfoViewType
+        $id: ContactInfoViewType
+        type: string
+        enum:
+          - Email
+          - Phone

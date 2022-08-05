@@ -1,0 +1,42 @@
+components:
+  schemas:
+    BWS.DomainModels.Reservation.Posting:
+      CodingLine:
+        $id: CodingLine
+        type: object
+        properties:
+          CodingLineNumber:
+            type: integer
+          Amount:
+            type: number
+          GrossAmount:
+            type: number
+          Tag:
+            type: string
+          TaxIndicator1:
+            type: string
+          TaxIndicator2:
+            type: string
+          Dimension1:
+            type: string
+          Dimension2:
+            type: string
+          Dimension3:
+            type: string
+          Dimension4:
+            type: string
+          Dimension5:
+            type: string
+          FreeText1:
+            type: string
+          FreeText5:
+            type: string
+          PoConnectionLineNumber:
+            type: number
+        required:
+          - CodingLineNumber
+          - Amount
+          - GrossAmount
+          - TaxIndicator1
+          - TaxIndicator2
+          - PoConnectionLineNumber

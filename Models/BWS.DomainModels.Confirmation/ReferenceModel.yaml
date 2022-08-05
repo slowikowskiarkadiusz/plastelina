@@ -1,0 +1,16 @@
+components:
+  schemas:
+    BWS.DomainModels.Confirmation:
+      ReferenceModel:
+        $id: ReferenceModel
+        type: object
+        properties:
+          ReferenceNo:
+            type: string
+            description: The number/id of reference.
+          ReferenceType:
+            type: string
+            description: Reference type which can be understand by target system.
+        required:
+          - ReferenceNo
+          - ReferenceType

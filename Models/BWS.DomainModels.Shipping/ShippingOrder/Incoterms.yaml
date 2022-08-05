@@ -1,0 +1,16 @@
+components:
+  schemas:
+    BWS.DomainModels.Shipping.ShippingOrder:
+      Incoterms:
+        $id: Incoterms
+        type: object
+        properties:
+          Code:
+            $ref: "#/components/schemas/BWS.DomainModels.Shipping.ShippingOrder/IncotermsCode"
+          City:
+            type: string
+          CustomTermsOfDeliveryCode:
+            type: string
+        required:
+          - Code
+  

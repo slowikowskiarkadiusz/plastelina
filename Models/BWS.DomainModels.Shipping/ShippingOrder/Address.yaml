@@ -1,0 +1,44 @@
+components:
+  schemas:
+    BWS.DomainModels.Shipping.ShippingOrder:
+      Address:
+        $id: Address
+        type: object
+        properties:
+          Id:
+            type: string
+          Name:
+            type: string
+          Att:
+            type: string
+          AddressLine1:
+            type: string
+          AddressLine2:
+            type: string
+          AddressLine3:
+            type: string
+          AddressLine4:
+            type: string
+          ZipCode:
+            type: string
+          City:
+            type: string
+          Country:
+            type: string
+          CountryCode:
+            type: string
+          Phone:
+            type: string
+          Email:
+            type: string
+          Fax:
+            type: string
+          Zone:
+            type: string
+          State:
+            type: string
+          StateCode:
+            type: string
+          Contact:
+            type: string
+  

@@ -1,0 +1,46 @@
+components:
+  schemas:
+    BWS.DomainModels.Reservation.Reservation:
+      PurchaseOrder:
+        description: Reservation Purchase Order
+        $id: PurchaseOrder
+        type: object
+        references:
+          - BWS.DomainModels.Common
+        usings:
+          - BWS.DomainModels.Common
+        properties:
+          CompanyId:
+            type: string
+          Supplier:
+            type: string
+          OrderIdentifier:
+            type: string
+          OrderIdentifier2:
+            type: string
+          CurrencyCode:
+            $ref: "#/components/schemas/BWS.DomainModels.Common/Currency"
+          Amount:
+            type: number
+          RegisterDate:
+            type: string
+            format: date
+          IsActive:
+            type: boolean
+          Reference:
+            type: string
+          PurchaseOrderLines:
+            type: array
+            items:
+              $ref: "#/components/schemas/BWS.DomainModels.Reservation.Reservation/PurchaseOrderLine"
+        required:
+          - CompanyId
+          - Supplier
+          - OrderIdentifier
+          - OrderIdentifier2
+          - CurrencyCode
+          - Amount
+          - RegisterDate
+          - IsActive
+          - Reference
+          - PurchaseOrderLines
