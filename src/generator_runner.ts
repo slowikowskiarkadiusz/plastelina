@@ -4,7 +4,7 @@ import * as YAML from "yaml";
 import * as cp from "child_process";
 import { ClassPrinter } from "./class.printer";
 import { EnumPrinter } from "./enum.printer";
-import { codeDirectory, modelsDirectory } from "./consts";
+import { codeDirectory, modelsDirectory, solutionName, staticProjects } from "./consts";
 
 interface Reference {
     refProjPath: string;
@@ -17,8 +17,6 @@ interface NuGetPackage {
 }
 
 export class GeneratorRunner {
-    private static readonly solutionName: string = "BWS.DomainModels";
-    private static readonly staticProjects: string[] = ["BWS.Extensions"];
     private static readonly filesToRemove: { path: string, isFile: boolean }[] = [];
     private static readonly references: Reference[] = [];
     private static readonly packages: NuGetPackage[] = [];
@@ -52,11 +50,11 @@ export class GeneratorRunner {
     }
 
     private static createSolution() {
-        if (!fs.existsSync(`${codeDirectory}\\${GeneratorRunner.solutionName}.sln`)) {
-            cp.execSync(`dotnet new sln --name ${GeneratorRunner.solutionName}`, { cwd: codeDirectory });
+        if (!fs.existsSync(`${codeDirectory}\\${solutionName}.sln`)) {
+            cp.execSync(`dotnet new sln --name ${solutionName}`, { cwd: codeDirectory });
 
-            GeneratorRunner.staticProjects.forEach(x => {
-                cp.execSync(`dotnet sln .\\${GeneratorRunner.solutionName}.sln add ${x}`, { cwd: codeDirectory });
+            staticProjects.forEach(x => {
+                cp.execSync(`dotnet sln .\\${solutionName}.sln add ${x}`, { cwd: codeDirectory });
             });
         }
     }
@@ -127,7 +125,7 @@ export class GeneratorRunner {
             fs.writeFileSync(csprojName, csprojContent.replace('    <Nullable>enable</Nullable>', ''));
             fs.rmSync(`${codeDirectory}\\${name}\\Class1.cs`);
 
-            cp.execSync(`dotnet sln .\\${GeneratorRunner.solutionName}.sln add .\\${name}\\${name}.csproj`, { cwd: codeDirectory });
+            cp.execSync(`dotnet sln .\\${solutionName}.sln add .\\${name}\\${name}.csproj`, { cwd: codeDirectory });
         }
     }
 
@@ -146,7 +144,7 @@ export class GeneratorRunner {
         fs.readdirSync(root, { withFileTypes: true })
             .forEach(x => {
                 let rootName = `${root}\\${x.name}`;
-                if (!rootName.includes('\\obj') && !rootName.includes('\\bin') && !GeneratorRunner.staticProjects.some(x => rootName.includes(x))) {
+                if (!rootName.includes('\\obj') && !rootName.includes('\\bin') && !staticProjects.some(x => rootName.includes(x))) {
                     if (x.isDirectory()) {
                         GeneratorRunner.getExistingFiles(rootName);
                         GeneratorRunner.filesToRemove.push({ path: rootName, isFile: false });
