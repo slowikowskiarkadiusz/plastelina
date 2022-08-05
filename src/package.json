@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "@types/fs-extra": "^9.0.13",
+    "asyncapi-validator": "^4.0.0",
+    "glob": "^8.0.3",
+    "merge-yaml": "^1.1.0",
+    "ts-confluence-client": "^0.0.21",
+    "ts-node": "^10.9.1",
+    "yaml": "^2.1.1",
+    "yargs": "^17.5.1"
+  },
+  "devDependencies": {
+    "@types/glob": "^7.2.0"
+  }
+}
