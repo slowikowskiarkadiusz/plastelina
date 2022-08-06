@@ -1,0 +1,30 @@
+components:
+  schemas:
+    ExamplePlastelina.Common:
+      Address:
+        $id: Address
+        type: object
+        properties:
+          Name:
+            type: string
+          Att:
+            type: string
+          AddressLine1:
+            type: string
+          AddressLine2:
+            type: string
+          AddressLine3:
+            type: string
+          ZipCode:
+            type: string
+          City:
+            type: string
+          Country:
+            $ref: "#/components/schemas/ExamplePlastelina.Common/Country"
+          Phone:
+            type: string
+          Email:
+            type: string
+          Fax:
+            type: string
+  

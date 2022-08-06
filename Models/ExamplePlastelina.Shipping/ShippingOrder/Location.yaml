@@ -1,0 +1,14 @@
+components:
+  schemas:
+    ExamplePlastelina.Shipping.ShippingOrder:
+      Location:
+        $id: Location
+        type: object
+        properties:
+          Name:
+            type: string
+          Longitude:
+            type: string
+          Latitude:
+            type: string
+  

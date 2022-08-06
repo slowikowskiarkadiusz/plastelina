@@ -1,0 +1,32 @@
+components:
+  schemas:
+    ExamplePlastelina.Shipping.ShippingStatus:
+      ShippingStatusReference:
+        description: Reference provided by feeding systems
+        $id: ShippingStatusReference
+        type: object
+        properties:
+          InternalOrderId:
+            type: string
+            description: "Internal Order Identificator which is created based on number from source system: BICNumber (if created in Customer system), fLexNo (if created in fLex), CarLoNo (if created in CarLo) etc."
+          DocumentId:
+            type: string
+            description: Order number provided from CarLo
+          FreightForwardersReferenceNumber:
+            type: string
+            description: Transport Order Number
+          BarCode:
+            type: string
+            description: Value of the barcode for which status should be updated
+          CustomersReferenceNumber:
+            type: string
+            description: A Single Main Reference Number provided to CarLo service in EDI order on Shipping Order flow. This is internal ID for the Shipping Order provided from Partner Systems.
+          AgentReferenceNumber:
+            type: string
+            description: Reference given by the Partner (Agent)
+        required:
+          - InternalOrderId
+          - DocumentId
+          - CustomersReferenceNumber
+          - AgentReferenceNumber
+  

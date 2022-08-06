@@ -1,0 +1,25 @@
+components:
+  schemas:
+    ExamplePlastelina.Common:
+      Weight:
+        $id: Weight
+        type: object
+        nugets:
+          - Newtonsoft.Json
+        usings:
+          - Newtonsoft.Json
+          - Newtonsoft.Json.Converters
+        properties:
+          Value:
+            type: number
+            format: decimal
+          Unit:
+            $ref: '#/components/schemas/ExamplePlastelina.Common/WeightUnit'
+            attributes:
+              - name: JsonConverter
+                parameters:
+                  - value: typeof(StringEnumConverter)
+            description: Weight unit
+        required:
+          - Value
+          - Unit

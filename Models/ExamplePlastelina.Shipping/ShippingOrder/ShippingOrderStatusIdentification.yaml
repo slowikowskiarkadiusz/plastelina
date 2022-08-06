@@ -1,0 +1,14 @@
+components:
+  schemas:
+    ExamplePlastelina.Shipping.ShippingOrder:
+      ShippingOrderStatusIdentification:
+        $id: ShippingOrderStatusIdentification
+        type: object
+        properties:
+          FreightForwardersReferenceNumber:
+            type: string
+          CustomersReferenceNumber:
+            type: string
+          AgentReferenceNumber:
+            type: string
+  

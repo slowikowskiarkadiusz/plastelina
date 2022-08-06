@@ -1,0 +1,71 @@
+components:
+  schemas:
+    ExamplePlastelina.Billing:
+      Transaction:
+        $id: Transaction
+        type: object
+        properties:
+          Account:
+            type: string
+            description: Service provider/Customer ID
+          AccountType:
+            $ref: "#/components/schemas/ExamplePlastelina.Billing/AccountType"
+            description: Account type
+          Debit:
+            $ref: "#/components/schemas/ExamplePlastelina.Billing/FinancialOperation"
+            description: Transaction debit amount
+          Credit:
+            $ref: "#/components/schemas/ExamplePlastelina.Billing/FinancialOperation"
+            description: Transaction credit amount
+          TransactionDescription:
+            type: string
+            description: Description of the transaction
+          BusinessUnit:
+            type: string
+            description: Busines Unit
+          Department:
+            type: string
+            description: Department
+          CostCenter:
+            type: string
+            description: Cost center (Dim3)
+          BusinessArea:
+            type: string
+            description: Business Area (Dim4)
+          ModeOfTransport:
+            type: string
+            description: Type of transport (Dim5)
+          FromCountry:
+            type: string
+            description: Origin country (Dim6)
+          ToCountry:
+            type: string
+            description: Destination country (Dim7)
+          ActivityNumber:
+            type: string
+            description: Number of the activity (Dim8)
+          JobFileNo:
+            type: string
+            description: Number of job file (Dim9)
+          InterCompany:
+            type: string
+            description: (Dim10)
+          CustomerNo:
+            type: string
+            description: Customer number (Dim11)
+          DueDate:
+            type: string
+            format: date-time
+            description: Due date of the transaction - date of creation plus x days (normally 14)
+          JobDate:
+            type: string
+            format: date-time
+            description: Date when the job is scheduled
+          TaxCode:
+            $ref: "#/components/schemas/ExamplePlastelina.Billing/TaxCode"
+            description: Information about Tax
+        required:
+          - Account
+          - AccountType
+          - TaxCode
+  

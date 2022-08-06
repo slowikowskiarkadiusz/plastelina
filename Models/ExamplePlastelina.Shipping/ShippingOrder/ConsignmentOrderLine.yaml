@@ -1,0 +1,60 @@
+components:
+  schemas:
+    ExamplePlastelina.Shipping.ShippingOrder:
+      ConsignmentOrderLine:
+        $id: ConsignmentOrderLine
+        type: object
+        references:
+          - ExamplePlastelina.Common
+        usings:
+          - ExamplePlastelina.Common
+        properties:
+          LineNumber:
+            type: number
+            format: integer
+          Description:
+            type: string
+          Quantity:
+            type: number
+            format: decimal
+          UnitType:
+            $ref: "#/components/schemas/ExamplePlastelina.Common/UnitType"
+          Temperature:
+            $ref: "#/components/schemas/ExamplePlastelina.Shipping.ShippingOrder/Temperature"
+          UnitDimensions:
+            $ref: "#/components/schemas/ExamplePlastelina.Shipping.ShippingOrder/UnitDimensions"
+          TotalVolume:
+            $ref: "#/components/schemas/ExamplePlastelina.Common/Volume"
+          TotalLoadingMeters:
+            $ref: "#/components/schemas/ExamplePlastelina.Shipping.ShippingOrder/Length"
+          TotalNetWeight:
+            $ref: "#/components/schemas/ExamplePlastelina.Common/Weight"
+          TotalGrossWeight:
+            $ref: "#/components/schemas/ExamplePlastelina.Common/Weight"
+          DangerousGoods:
+            type: array
+            items:
+              $ref: "#/components/schemas/ExamplePlastelina.Shipping.ShippingOrder/DangerousGoods"
+          Addresses:
+            $ref: "#/components/schemas/ExamplePlastelina.Shipping.ShippingOrder/LineAddresses"
+          Barcodes:
+            type: array
+            items:
+              $ref: "#/components/schemas/ExamplePlastelina.Shipping.ShippingOrder/Barcode"
+          MarksAndNumbers:
+            type: array
+            items:
+              $ref: "#/components/schemas/ExamplePlastelina.Shipping.ShippingOrder/MarkAndNumber"
+          Pickup:
+            $ref: "#/components/schemas/ExamplePlastelina.Shipping.ShippingOrder/TransferDue"
+          Delivery:
+            $ref: "#/components/schemas/ExamplePlastelina.Shipping.ShippingOrder/TransferDue"
+          LineReference:
+            type: string
+          HsCode:
+            type: string
+          TotalValue:
+            $ref: "#/components/schemas/ExamplePlastelina.Shipping.ShippingOrder/MonetaryValue"
+        required:
+          - UnitType
+  

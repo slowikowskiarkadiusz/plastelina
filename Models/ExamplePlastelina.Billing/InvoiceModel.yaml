@@ -1,0 +1,64 @@
+channels:
+  inbound-billing-invoice-create:
+    description: The queue by which InvoiceModel are delivered
+    publish:
+      summary: Receive a InvoiceModel from the outside
+      message:
+        $ref: "#/components/messages/InvoiceMessage"
+
+  outbound-billing-invoice-create:
+    description: The topic by which InvoiceModel are sent out
+    subscribe:
+      summary: Send a InvoiceModel from the domain layer to a subscribing service
+      message:
+        $ref: "#/components/messages/InvoiceMessage"
+
+components:
+  messages:
+    InvoiceMessage:
+      name: Invoice
+      title: Invoice
+      summary: Invoice description
+      contentType: application/json
+      payload:
+        $ref: "#/components/schemas/ExamplePlastelina.Billing/InvoiceModel"
+  schemas:
+    ExamplePlastelina.Billing:
+      InvoiceModel:
+        $id: InvoiceModel
+        type: object
+        properties:
+          InvoiceNumber:
+            type: string
+            description: Invoice number
+          InvoiceType:
+            $ref: "#/components/schemas/ExamplePlastelina.Billing/InvoiceType"
+            description: Type of the invoice 
+          InvoiceDate:
+            type: string
+            format: date-time
+            description: Invoicing date
+          Company:
+            type: string
+            description: Branch/Division indication ID
+          VoucherNumber:
+            type: string
+            description: Voucher number - this needs to be fetched from a financial system
+          PoNumber:
+            type: string
+            description: Purchase Order Number
+          Tms:
+            $ref: "#/components/schemas/ExamplePlastelina.Billing/TransportManagementSystem"
+            description: TMS system generating the invoice
+          Transactions:
+            type: array
+            items:
+              $ref: "#/components/schemas/ExamplePlastelina.Billing/Transaction"
+            description: List of transactions contained in the invoice
+        required:
+          - InvoiceNumber
+          - InvoiceType
+          - InvoiceDate
+          - Company
+          - VoucherNumber
+          - Transactions

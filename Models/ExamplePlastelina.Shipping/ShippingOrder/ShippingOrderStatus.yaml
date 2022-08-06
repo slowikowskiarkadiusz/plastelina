@@ -1,0 +1,32 @@
+components:
+  schemas:
+    ExamplePlastelina.Shipping.ShippingOrder:
+      ShippingOrderStatus:
+        $id: ShippingOrderStatus
+        type: object
+        properties:
+          TimeOfMessageGeneration:
+            type: string
+            format: System.DateTime
+          TimeOfEvent:
+            type: string
+            format: System.DateTime
+          StatusIdentification:
+            $ref: "#/components/schemas/ExamplePlastelina.Shipping.ShippingOrder/ShippingOrderStatusIdentification"
+          Location:
+            $ref: "#/components/schemas/ExamplePlastelina.Shipping.ShippingOrder/Location"
+          Status:
+            $ref: "#/components/schemas/ExamplePlastelina.Shipping.ShippingOrder/Status"
+          SourceStatus:
+            type: string
+          AdditionalMessage:
+            type: string
+          Signature:
+            type: string
+          MessageIdentification:
+            $ref: "#/components/schemas/ExamplePlastelina.Shipping.ShippingOrder/MessageIdentification"
+        required:
+          - TimeOfMessageGeneration
+          - TimeOfEvent
+          - Status
+  

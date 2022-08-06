@@ -1,0 +1,14 @@
+components:
+  schemas:
+    ExamplePlastelina.Shipping.ShippingOrder:
+      ExchangePallets:
+        $id: ExchangePallets
+        type: object
+        properties:
+          FullPallets:
+            type: integer
+          HalfPallets:
+            type: integer
+          QuarterPallets:
+            type: integer
+  

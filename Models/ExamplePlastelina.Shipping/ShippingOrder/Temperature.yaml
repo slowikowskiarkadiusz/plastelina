@@ -1,0 +1,20 @@
+components:
+  schemas:
+    ExamplePlastelina.Shipping.ShippingOrder:
+      Temperature:
+        $id: Temperature
+        references:
+          - ExamplePlastelina.Common
+        usings:
+          - ExamplePlastelina.Common
+        type: object
+        properties:
+          Value:
+            type: number
+            format: decimal
+          Unit:
+            $ref: "#/components/schemas/ExamplePlastelina.Common/TemperatureUnit"
+        required:
+          - Value
+          - Unit
+  

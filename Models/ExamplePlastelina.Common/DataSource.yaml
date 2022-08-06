@@ -1,0 +1,11 @@
+components:
+  schemas:
+    ExamplePlastelina.Common:
+      DataSource:
+        $id: DataSource
+        type: string
+        enum:
+          - HRM
+          - AXService
+          - BusinessNamesService
+  

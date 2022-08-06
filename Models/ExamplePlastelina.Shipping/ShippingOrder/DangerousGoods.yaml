@@ -1,0 +1,44 @@
+components:
+  schemas:
+    ExamplePlastelina.Shipping.ShippingOrder:
+      DangerousGoods:
+        $id: DangerousGoods
+        references:
+          - ExamplePlastelina.Common
+        usings:
+          - ExamplePlastelina.Common
+        type: object
+        properties:
+          UnNumber:
+            type: string
+          Class:
+            type: string
+          Name:
+            type: string
+          PackingGroup:
+            $ref: "#/components/schemas/ExamplePlastelina.Common/PackingGroup"
+          TunnelCode:
+            type: string
+          NotOtherwiseSpecifiedName:
+            type: string
+          EnvironmentalHazard:
+            type: boolean
+          LimitedQuantity:
+            type: boolean
+          TotalGrossWeight:
+            $ref: "#/components/schemas/ExamplePlastelina.Common/Weight"
+          TotalNetWeight:
+            $ref: "#/components/schemas/ExamplePlastelina.Common/Weight"
+          NetExplosiveMass:
+            $ref: "#/components/schemas/ExamplePlastelina.Common/Weight"
+          Multiplicator:
+            type: number
+            format: decimal
+          NumberOfPackages:
+            type: number
+            format: decimal
+          FlashPoint:
+            $ref: "#/components/schemas/ExamplePlastelina.Shipping.ShippingOrder/Temperature"
+        required:
+          - PackingGroup
+  

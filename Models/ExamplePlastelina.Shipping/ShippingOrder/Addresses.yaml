@@ -1,0 +1,24 @@
+components:
+  schemas:
+    ExamplePlastelina.Shipping.ShippingOrder:
+      Addresses:
+        $id: Addresses
+        type: object
+        properties:
+          ConsignorAddress:
+            $ref: "#/components/schemas/ExamplePlastelina.Shipping.ShippingOrder/Address"
+          ConsigneeAddress:
+            $ref: "#/components/schemas/ExamplePlastelina.Shipping.ShippingOrder/Address"
+          DespatchPartyAddress:
+            $ref: "#/components/schemas/ExamplePlastelina.Shipping.ShippingOrder/Address"
+          DeliveryPartyAddress:
+            $ref: "#/components/schemas/ExamplePlastelina.Shipping.ShippingOrder/Address"
+          NotifyPartyAddress:
+            $ref: "#/components/schemas/ExamplePlastelina.Shipping.ShippingOrder/Address"
+          CarrierAddress:
+            $ref: "#/components/schemas/ExamplePlastelina.Shipping.ShippingOrder/Address"
+          ConnectingCarrierAddress:
+            $ref: "#/components/schemas/ExamplePlastelina.Shipping.ShippingOrder/Address"
+          FreightPayerAddress:
+            $ref: "#/components/schemas/ExamplePlastelina.Shipping.ShippingOrder/Address"
+  

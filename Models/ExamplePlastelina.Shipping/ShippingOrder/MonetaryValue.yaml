@@ -1,0 +1,24 @@
+components:
+  schemas:
+    ExamplePlastelina.Shipping.ShippingOrder:
+      MonetaryValue:
+        $id: MonetaryValue
+        type: object
+        nugets:
+          - Newtonsoft.Json
+        references:
+          - ExamplePlastelina.Common
+        usings:
+          - ExamplePlastelina.Common
+          - Newtonsoft.Json
+          - Newtonsoft.Json.Converters
+        properties:
+          Value:
+            type: number
+            format: decimal
+          Currency:
+            $ref: '#/components/schemas/ExamplePlastelina.Common/Currency'
+            attributes:
+              - name: JsonConverter
+                parameters:
+                  - value: typeof(StringEnumConverter)

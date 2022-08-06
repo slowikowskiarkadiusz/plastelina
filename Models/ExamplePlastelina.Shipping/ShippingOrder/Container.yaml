@@ -1,0 +1,20 @@
+components:
+  schemas:
+    ExamplePlastelina.Shipping.ShippingOrder:
+      Container:
+        $id: Container
+        type: object
+        properties:
+          Number:
+            type: string
+          SealNumber:
+            type: string
+          IsoContainerSizeCode:
+            type: string
+          ContainerType:
+            $ref: "#/components/schemas/ExamplePlastelina.Shipping.ShippingOrder/ContainerType"
+          Dimensions:
+            $ref: "#/components/schemas/ExamplePlastelina.Shipping.ShippingOrder/UnitDimensions"
+        required:
+          - ContainerType
+  

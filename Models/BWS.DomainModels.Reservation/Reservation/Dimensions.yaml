@@ -1,9 +1,0 @@
-components:
-  schemas:
-    BWS.DomainModels.Reservation.Reservation:
-      Dimensions:
-        $id: Dimensions
-        type: object
-        properties:
-          Dimension1:
-            type: string

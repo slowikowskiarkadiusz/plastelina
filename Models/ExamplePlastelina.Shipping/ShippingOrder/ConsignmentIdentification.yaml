@@ -1,0 +1,20 @@
+components:
+  schemas:
+    ExamplePlastelina.Shipping.ShippingOrder:
+      ConsignmentIdentification:
+        $id: ConsignmentIdentification
+        type: object
+        properties:
+          ConsignorsReferenceNumber:
+            type: string
+          ConsigneesShipmentReferenceNumber:
+            type: string
+          FreightForwardersReferenceNumber:
+            type: string
+          CustomersReferenceNumber:
+            type: string
+          AgentReferenceNumber:
+            type: string
+          Gs1ReferenceNumber:
+            type: string
+  

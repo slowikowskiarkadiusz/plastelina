@@ -1,0 +1,23 @@
+components:
+  schemas:
+    ExamplePlastelina.Common:
+      WeightUnit:
+        $id: WeightUnit
+        type: string
+        nugets:
+          - Newtonsoft.Json
+        usings:
+          - Newtonsoft.Json
+          - Newtonsoft.Json.Converters
+        attributes:
+          - name: JsonConverter
+            parameters:
+              - value: typeof(StringEnumConverter)
+        enum:
+          - None
+          - Gram
+          - Kilogram
+          - Pound
+          - Ton
+          - Ounce
+          - TroyOunce

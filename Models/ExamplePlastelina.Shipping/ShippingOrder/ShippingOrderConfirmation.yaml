@@ -1,0 +1,27 @@
+components:
+  schemas:
+    ExamplePlastelina.Shipping.ShippingOrder:
+      ShippingOrderConfirmation:
+        $id: ShippingOrderConfirmation
+        nugets:
+          - Newtonsoft.Json
+        references:
+          - ExamplePlastelina.Extensions
+        usings:
+          - ExamplePlastelina.Extensions.Converters
+          - Newtonsoft.Json
+        type: object
+        properties:
+          ShippingOrderConfirmationIdentification:
+            $ref: '#/components/schemas/ExamplePlastelina.Shipping.ShippingOrder/ShippingOrderConfirmationIdentification'
+          MessageIdentification:
+            $ref: '#/components/schemas/ExamplePlastelina.Shipping.ShippingOrder/MessageIdentification'
+          ConfirmationDate:
+            type: string
+            format: System.DateTime
+            attributes:
+              - name: JsonConverter
+                parameters:
+                  - value: typeof(DateOnlyJsonConverter)
+          TransportDetails:
+            $ref: '#/components/schemas/ExamplePlastelina.Shipping.ShippingOrder/TransportDetails'

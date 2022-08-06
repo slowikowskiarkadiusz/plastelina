@@ -1,0 +1,25 @@
+components:
+  schemas:
+    ExamplePlastelina.Shipping.ShippingOrder:
+      UnitDimensions:
+        $id: UnitDimensions
+        type: object
+        references:
+          - ExamplePlastelina.Common
+        usings:
+          - ExamplePlastelina.Common
+        properties:
+          Length:
+            type: number
+            format: decimal
+          Height:
+            type: number
+            format: decimal
+          Width:
+            type: number
+            format: decimal
+          Unit:
+            $ref: "#/components/schemas/ExamplePlastelina.Common/LengthUnit"
+        required:
+          - Unit
+  

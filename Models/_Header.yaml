@@ -1,7 +1,7 @@
 asyncapi: '2.3.0'
 info:
-  title: BlueWaterShipping Messaging Contracts
-  version: 3.3.1
+  title: Example Plastelina Contracts
+  version: 0.0.1
   description: |
     This is a specification of all of the DTOs and contracts used in communication between services!
   license:

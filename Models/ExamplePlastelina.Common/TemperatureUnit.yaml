@@ -1,0 +1,20 @@
+components:
+  schemas:
+    ExamplePlastelina.Common:
+      TemperatureUnit:
+        $id: TemperatureUnit
+        type: string
+        nugets:
+          - Newtonsoft.Json
+        usings:
+          - Newtonsoft.Json
+          - Newtonsoft.Json.Converters
+        attributes:
+          - name: JsonConverter
+            parameters:
+              - value: typeof(StringEnumConverter)
+        enum:
+          - None
+          - Celsius
+          - Fahrenheit
+          - Reaumur

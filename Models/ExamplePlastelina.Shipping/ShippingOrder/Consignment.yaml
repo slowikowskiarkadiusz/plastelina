@@ -1,0 +1,78 @@
+components:
+  schemas:
+    ExamplePlastelina.Shipping.ShippingOrder:
+      Consignment:
+        $id: Consignment
+        type: object
+        nugets:
+          - Newtonsoft.Json
+        usings:
+          - Newtonsoft.Json
+          - Newtonsoft.Json.Converters
+        properties:
+          ConsignmentIdentification:
+            $ref: '#/components/schemas/ExamplePlastelina.Shipping.ShippingOrder/ConsignmentIdentification'
+          ConsignmentNumber:
+            type: number
+            format: integer
+          Lines:
+            type: array
+            items:
+              $ref: '#/components/schemas/ExamplePlastelina.Shipping.ShippingOrder/ConsignmentOrderLine'
+          DeliveryInstructions:
+            type: array
+            items:
+              $ref: '#/components/schemas/ExamplePlastelina.Shipping.ShippingOrder/DeliveryInstruction'
+          Addresses:
+            $ref: '#/components/schemas/ExamplePlastelina.Shipping.ShippingOrder/Addresses'
+          Delivery:
+            $ref: '#/components/schemas/ExamplePlastelina.Shipping.ShippingOrder/TransferDue'
+          Pickup:
+            $ref: '#/components/schemas/ExamplePlastelina.Shipping.ShippingOrder/TransferDue'
+          Incoterms:
+            $ref: '#/components/schemas/ExamplePlastelina.Shipping.ShippingOrder/Incoterms'
+          Container:
+            $ref: '#/components/schemas/ExamplePlastelina.Shipping.ShippingOrder/Container'
+          TransportDetails:
+            $ref: '#/components/schemas/ExamplePlastelina.Shipping.ShippingOrder/TransportDetails'
+          PaymentMethod:
+            $ref: '#/components/schemas/ExamplePlastelina.Shipping.ShippingOrder/PaymentMethod'
+          TotalValue:
+            $ref: '#/components/schemas/ExamplePlastelina.Shipping.ShippingOrder/MonetaryValue'
+          ServicePointId:
+            type: string
+          MrnNumbers:
+            type: string
+          Stackable:
+            type: boolean
+          SiteLoader:
+            type: boolean
+          Genset:
+            type: boolean
+          Insurance:
+            $ref: '#/components/schemas/ExamplePlastelina.Shipping.ShippingOrder/MonetaryValue'
+          TransitCode:
+            $ref: '#/components/schemas/ExamplePlastelina.Shipping.ShippingOrder/TransitCode'
+            attributes:
+              - name: JsonConverter
+                parameters:
+                  - value: typeof(StringEnumConverter)
+          Service:
+            $ref: '#/components/schemas/ExamplePlastelina.Shipping.ShippingOrder/ServiceType'
+            attributes:
+              - name: JsonConverter
+                parameters:
+                  - value: typeof(StringEnumConverter)
+          AdditionalServices:
+            type: array
+            items:
+              $ref: '#/components/schemas/ExamplePlastelina.Shipping.ShippingOrder/Service'
+          AttachedFiles:
+            type: array
+            items:
+              $ref: '#/components/schemas/ExamplePlastelina.Shipping.ShippingOrder/AttachedFile'
+          ExchangePallets:
+            $ref: '#/components/schemas/ExamplePlastelina.Shipping.ShippingOrder/ExchangePallets'
+        required:
+          - ConsignmentNumber
+          - PaymentMethod

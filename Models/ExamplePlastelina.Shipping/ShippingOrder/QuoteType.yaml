@@ -1,0 +1,19 @@
+components:
+  schemas:
+    ExamplePlastelina.Shipping.ShippingOrder:
+      QuoteType:
+        $id: QuoteType
+        type: string
+        nugets:
+          - Newtonsoft.Json
+        usings:
+          - Newtonsoft.Json
+          - Newtonsoft.Json.Converters
+        attributes:
+          - name: JsonConverter
+            parameters:
+              - value: typeof(StringEnumConverter)
+        enum:
+          - None
+          - Import
+          - Export

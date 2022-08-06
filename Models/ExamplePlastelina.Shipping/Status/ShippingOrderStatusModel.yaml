@@ -1,0 +1,73 @@
+channels:
+  inbound-shipping-order-status:
+    description: The queue by which ShippingOrderStatus are delivered
+    publish:
+      summary: Receive a ShippingStatus from the outside
+      message:
+        $ref: '#/components/messages/ShippingOrderStatusMessage'
+
+  outbound-shipping-order-status:
+    description: The topic by which ShippingOrderStatus are sent out
+    subscribe:
+      summary: Send a ShippingOrderStatus from the domain layer to a subscribing service
+      message:
+        $ref: '#/components/messages/ShippingOrderStatusMessage'
+
+components:
+  messages:
+    ShippingOrderStatusMessage:
+      name: ShippingOrderStatus
+      title: ShippingOrderStatus
+      summary: ShippingOrderStatus description
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/ExamplePlastelina.Shipping.ShippingStatus/ShippingOrderStatusModel'
+  schemas:
+    ExamplePlastelina.Shipping.ShippingStatus:
+      ShippingOrderStatusModel:
+        description: Interface holding all relevant information about Order status
+        $id: ShippingOrderStatusModel
+        type: object
+        nugets:
+          - Newtonsoft.Json
+        usings:
+          - Newtonsoft.Json
+          - Newtonsoft.Json.Converters
+        properties:
+          TimeOfMessageGeneration:
+            format: date-time
+            type: string
+            description: Date time when status has been generated. Timestamp is in UTC and +hh:mm is the time zone.
+          TimeOfEvent:
+            format: date-time
+            type: string
+            description: Date time when event was. Timestamp is in UTC and +hh:mm is the time zone.
+          Reference:
+            $ref: '#/components/schemas/ExamplePlastelina.Shipping.ShippingStatus/ShippingStatusReference'
+            description: Reference class with information of order identification values
+          Location:
+            $ref: '#/components/schemas/ExamplePlastelina.Shipping.ShippingStatus/ShippingStatusLocation'
+            description: Location class of current order status
+          Status:
+            $ref: '#/components/schemas/ExamplePlastelina.Shipping.ShippingStatus/Status'
+            description: Enum type which represents status
+            attributes:
+              - name: JsonConverter
+                parameters:
+                  - value: typeof(StringEnumConverter)
+          SourceStatus:
+            type: string
+            description: Status message from source system
+          AdditionalMessage:
+            type: string
+            description: Message attached to status information
+          ClientId:
+            type: string
+            description: Identifier of Parter, which should consume the status.
+          SignatureText:
+            type: string
+            description: Name or ID of the person signing a delivery
+        required:
+          - TimeOfMessageGeneration
+          - TimeOfEvent
+          - Status

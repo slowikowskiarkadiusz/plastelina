@@ -1,0 +1,28 @@
+components:
+  schemas:
+    ExamplePlastelina.Shipping.ShippingOrder:
+      MessageIdentification:
+        $id: MessageIdentification
+        type: object
+        references:
+          - ExamplePlastelina.Common
+        usings:
+          - ExamplePlastelina.Common
+        properties:
+          ReceiverId:
+            type: string
+          SenderId:
+            type: string
+          ClientId:
+            type: string
+          OrganizationNumber:
+            type: string
+          DocumentId:
+            type: string
+          Operation:
+            $ref: "#/components/schemas/ExamplePlastelina.Common/Operation"
+          InterchangeControlReference:
+            type: string
+        required:
+          - Operation
+  

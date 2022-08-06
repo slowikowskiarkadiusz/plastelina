@@ -1,0 +1,22 @@
+components:
+  schemas:
+    ExamplePlastelina.Shipping.ShippingOrder:
+      AttachedFile:
+        $id: AttachedFile
+        type: object
+        nugets:
+          - Newtonsoft.Json
+        usings:
+          - Newtonsoft.Json
+          - Newtonsoft.Json.Converters
+        properties:
+          FileName:
+            type: string
+          DocumentType:
+            $ref: '#/components/schemas/ExamplePlastelina.Shipping.ShippingOrder/DocumentType'
+            attributes:
+              - name: JsonConverter
+                parameters:
+                  - value: typeof(StringEnumConverter)
+          Data:
+            type: string

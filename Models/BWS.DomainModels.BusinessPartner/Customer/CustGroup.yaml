@@ -1,9 +1,0 @@
-components:
-  schemas:
-    BWS.DomainModels.BusinessPartner.Customer:
-      CustGroup:
-        description: CustGroup code
-        $id: CustGroup
-        type: string
-        enum:
-          - STD

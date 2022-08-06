@@ -1,0 +1,64 @@
+components:
+  schemas:
+    ExamplePlastelina.Shipping.ShippingOrder:
+      TransportDetails:
+        $id: TransportDetails
+        type: object
+        references:
+          - ExamplePlastelina.Common
+        usings:
+          - ExamplePlastelina.Common
+        properties:
+          Mode:
+            $ref: "#/components/schemas/ExamplePlastelina.Common/TransportMode"
+          TruckRegistrationNumber:
+            type: string
+            description: Used for Road transport
+          TrailerRegistrationNumber:
+            type: string
+            description: Used for Road transport
+          VesselName:
+            type: string
+            description: Used for Sea transport
+          PortOfLoading:
+            type: string
+            description: Used for Air and Sea transport
+          PortOfLoadingCode:
+            type: string
+            description: Used for Sea transport
+          PortOfDischarge:
+            type: string
+            description: Used for Air and Sea transport
+          PortOfDischargeCode:
+            type: string
+            description: Used for Sea transport
+          WaybillNumber:
+            type: string
+            description: Used for Air and Sea transport
+          HouseWaybillNumber:
+            type: string
+            description: Used for Air and Sea transport
+          VoyageNumber:
+            type: string
+            description: Used for Air and Sea transport
+          VGMClosingDateTime:
+            type: string
+            format: System.DateTime
+            description: Used for Sea transport
+          CargoCutOffDateTime:
+            type: string
+            format: System.DateTime
+            description: Used for Sea transport
+          EstimatedDepartureDate:
+            type: string
+            format: System.DateTime
+            description: Used for Sea transport
+          EstimatedArrivalDate:
+            type: string
+            format: System.DateTime
+            description: Used for Sea transport
+          QuoteType:
+            $ref: "#/components/schemas/ExamplePlastelina.Shipping.ShippingOrder/QuoteType"
+        required:
+          - Mode
+  

@@ -1,0 +1,12 @@
+components:
+  schemas:
+    ExamplePlastelina.Common:
+      Country:
+        $id: Country
+        type: object
+        properties:
+          Name:
+            type: string
+          Code:
+            type: string
+  

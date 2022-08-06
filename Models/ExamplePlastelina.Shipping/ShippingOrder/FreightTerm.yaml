@@ -1,0 +1,13 @@
+components:
+  schemas:
+    ExamplePlastelina.Shipping.ShippingOrder:
+      FreightTerm:
+        $id: FreightTerm
+        type: string
+        enum:
+          - None
+          - CC
+          - PP
+          - FC
+          - FP
+  

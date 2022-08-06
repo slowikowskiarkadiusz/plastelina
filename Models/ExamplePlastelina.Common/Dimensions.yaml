@@ -1,0 +1,25 @@
+components:
+  schemas:
+    ExamplePlastelina.Common:
+      Dimensions:
+        $id: Dimensions
+        type: object
+        nugets:
+          - Newtonsoft.Json
+        usings:
+          - Newtonsoft.Json
+          - Newtonsoft.Json.Converters
+        properties:
+          Length:
+            type: number
+          Height:
+            type: number
+          Width:
+            type: number
+          Unit:
+            $ref: '#/components/schemas/ExamplePlastelina.Common/LengthUnit'
+            attributes:
+              - name: JsonConverter
+                parameters:
+                  - value: typeof(StringEnumConverter)
+            description: Length unit

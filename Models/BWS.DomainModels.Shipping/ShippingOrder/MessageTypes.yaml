@@ -1,7 +1,0 @@
-components:
-  schemas:
-    BWS.DomainModels.Shipping.ShippingOrder:
-      MessageTypes:
-        $id: MessageTypes
-        type: object
-  

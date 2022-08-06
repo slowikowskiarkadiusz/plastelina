@@ -1,0 +1,11 @@
+components:
+  schemas:
+    ExamplePlastelina.Shipping.ShippingOrder:
+      PaymentMethod:
+        $id: PaymentMethod
+        type: string
+        enum:
+          - None
+          - Account
+          - NoCharge
+  
