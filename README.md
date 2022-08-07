@@ -40,6 +40,9 @@ As you can see, there're also projects and a solution in the Code directory. Pro
 
 # Making a model
 It might be useful to get familiar with [asyncapi's docs](https://www.asyncapi.com/docs/tutorials/getting-started/hello-world). A model's structe is simple:
+
+## Making a class
+
 ```
 components:
     schema:
@@ -60,3 +63,18 @@ components:
                     description: <<Field's description. Used in HTML docs, confluence docs and C#'s summary.>>
                     items:
                         <<If the prop is of type 'array' then you put here exactly the same structure as you put in 'properties' field.>>
+```
+
+## Making an enum
+
+Enums look very similarly to classes. The main difference is 'type' set to 'string' instead of 'object' and an 'enum' field.
+```
+components:
+    schema:
+        <<namespace>>:
+            <<enum name>>:
+                description: <<**[Optional]** A description of the enum used for HTML docs, confluence docs and for summaries in C# code>> 
+                type: string
+                enum:
+                    - <<Name of a member.>>
+```
