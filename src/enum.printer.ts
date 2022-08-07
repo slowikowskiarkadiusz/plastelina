@@ -7,16 +7,13 @@ export class EnumPrinter extends Printer {
 
         var enum_ = this.generateEnum(model, modelKey);
 
-        var enumContent = this.indent(enum_);
+        if (namespace)
+            result.push(`namespace ${namespace};`, '');
 
-        if (namespace) {
-            result.push(`namespace ${namespace};`);
-            result.push('');
-            result.push(...enum_);
-            result.push('');
-        }
-        else
-            result.push(...enumContent);
+        if (model.description)
+            result.push(...this.summary(model.description));
+
+        result.push(...enum_);
 
         return result;
     }

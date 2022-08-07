@@ -47,7 +47,7 @@ interface EnumInfo {
 
 export class Confluencer {
     public static run(argv: any): void {
-        const sourceFile = `${generatedDirectory}\\merged.yaml`;
+        const sourceFile = `${generatedDirectory}/merged.yaml`;
 
         if (argv.username && argv.apiToken) {
             let data = fs.readFileSync(sourceFile);

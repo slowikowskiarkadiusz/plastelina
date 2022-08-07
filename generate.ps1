@@ -1,1 +1,0 @@
-ts-node .\src\run_local.ts

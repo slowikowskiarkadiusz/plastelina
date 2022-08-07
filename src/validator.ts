@@ -19,11 +19,11 @@ export class Validator {
     }
 
     private static processDirectory(subPath: string = ''): void {
-        if (fs.existsSync(`${modelsDirectory}\\${subPath}`)) {
-            fs.readdirSync(`${modelsDirectory}\\${subPath}`, { withFileTypes: true })
+        if (fs.existsSync(`${modelsDirectory}/${subPath}`)) {
+            fs.readdirSync(`${modelsDirectory}/${subPath}`, { withFileTypes: true })
                 .forEach(dirent => {
                     if (dirent.isDirectory()) {
-                        Validator.processDirectory(`${subPath}\\${dirent.name}`);
+                        Validator.processDirectory(`${subPath}/${dirent.name}`);
                     } else if (dirent.isFile() && (dirent.name.endsWith('.yaml') || dirent.name.endsWith('.yml'))) {
                         Validator.processFile(subPath, dirent.name);
                     }
@@ -34,7 +34,7 @@ export class Validator {
     private static processFile(subPath: string, name: string): void {
         if (name === "_Header.yaml") return;
 
-        let data = fs.readFileSync(`${modelsDirectory}\\${subPath}\\${name}`);
+        let data = fs.readFileSync(`${modelsDirectory}/${subPath}/${name}`);
         let yaml = YAML.parse(data.toString());
 
         Object.keys(yaml.components.schemas).forEach(key => Validator.checkFile(yaml.components.schemas[key], `#/components/schemas/${key}`));
@@ -54,7 +54,7 @@ export class Validator {
 }
 
 
-// let data = fs.readFileSync(`${modelsDirectory}\\${subPath}\\${name}`).toString();
+// let data = fs.readFileSync(`${modelsDirectory}/${subPath}/${name}`).toString();
 // let yaml = YAML.parse(data);
 
 // let lines = data.split('\n');
@@ -67,4 +67,4 @@ export class Validator {
 //     lines[i] = `  ${lines[i]}`;
 // }
 
-// fs.writeFileSync(`${modelsDirectory}\\${subPath}\\${name}`, lines.join('\n'));
+// fs.writeFileSync(`${modelsDirectory}/${subPath}/${name}`, lines.join('\n'));

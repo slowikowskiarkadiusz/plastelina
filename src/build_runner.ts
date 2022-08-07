@@ -3,6 +3,6 @@ import { codeDirectory } from "./consts";
 
 export class BuildRunner {
     public static run(): void {
-        cp.spawn(`dotnet`, ['build'], { stdio: "inherit", cwd: codeDirectory });
+        cp.spawnSync(`dotnet`, ['build'], { stdio: "inherit", cwd: codeDirectory });
     }
 }

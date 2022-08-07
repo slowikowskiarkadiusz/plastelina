@@ -16,20 +16,19 @@ export class ClassPrinter extends Printer {
             result.push('');
         }
 
-        if (namespace) {
-            result.push(`namespace ${namespace};`);
-            result.push('');
-            result.push(...class_);
-            result.push('');
-        }
-        else
-            result.push(...class_);
+        if (namespace)
+            result.push(`namespace ${namespace};`, '');
+
+        result.push(...class_);
 
         return result;
     }
 
     private generateClass(model: Model, key: string): string[] {
         let result: string[] = [];
+
+        if (model.description)
+            result.push(...this.summary(model.description));
 
         result.push(`public class ${model.$id ?? key}`);
         result.push("{");
@@ -55,6 +54,9 @@ export class ClassPrinter extends Printer {
             if (type == "array")
                 return this.renderProperty(property.items, propertyKey, true);
         }
+
+        if (property.description)
+            result.push(...this.summary(property.description));
 
         property.attributes?.forEach(attribute => result.push(...this.renderAttribute(attribute)));
 

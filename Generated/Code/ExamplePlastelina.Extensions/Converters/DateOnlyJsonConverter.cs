@@ -1,7 +1,7 @@
 using System.Globalization;
 using Newtonsoft.Json;
 
-namespace ExamplePlastelina.Converters;
+namespace ExamplePlastelina.Extensions.Converters;
 
 public class DateOnlyJsonConverter : JsonConverter<DateOnly>
 {

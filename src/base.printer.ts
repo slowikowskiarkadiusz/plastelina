@@ -8,4 +8,12 @@ export abstract class Printer {
         rows.forEach(row => result.push(`    ${row}`));
         return result;
     }
+
+    protected summary(content: string): string[] {
+        return [
+            '/// <summary>',
+            `/// ${content}`,
+            '/// </summary>',
+        ];
+    }
 }
