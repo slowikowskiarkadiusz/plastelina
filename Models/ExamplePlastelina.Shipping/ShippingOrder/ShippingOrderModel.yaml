@@ -22,11 +22,9 @@ components:
       contentType: application/json
       payload:
         $ref: '#/components/schemas/ExamplePlastelina.Shipping.ShippingOrder/ShippingOrderModel'
-
   schemas:
     ExamplePlastelina.Shipping.ShippingOrder:
       ShippingOrderModel:
-        $id: ShippingOrderModel
         confluencePageContentId: 545783821
         description: The main, most generic model used in exchanging information regarding Shipping Orders for both external and internal integrations
         nugets:

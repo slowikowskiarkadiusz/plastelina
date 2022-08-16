@@ -2,7 +2,6 @@ components:
   schemas:
     ExamplePlastelina.Common:
       MonetaryValue:
-        $id: MonetaryValue
         type: object
         properties:
           CurrencyCode:

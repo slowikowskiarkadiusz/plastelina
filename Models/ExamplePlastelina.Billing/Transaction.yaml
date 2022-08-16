@@ -2,7 +2,6 @@ components:
   schemas:
     ExamplePlastelina.Billing:
       Transaction:
-        $id: Transaction
         type: object
         properties:
           Account:

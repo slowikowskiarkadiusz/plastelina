@@ -2,7 +2,6 @@ components:
   schemas:
     ExamplePlastelina.Shipping.ShippingOrder:
       QuoteType:
-        $id: QuoteType
         type: string
         nugets:
           - Newtonsoft.Json

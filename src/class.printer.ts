@@ -28,12 +28,12 @@ export class ClassPrinter extends Printer {
         let result: string[] = [];
 
         if (model.description)
-            result.push(...this.summary(model.description));
+            result.push(...Printer.summary(model.description));
 
-        result.push(`public class ${model.$id ?? key}`);
+        result.push(`public class ${key}`);
         result.push("{");
         if (model.properties)
-            Object.keys(model.properties).forEach(key => result.push(...this.indent(this.renderProperty(model.properties[key], key, false, model.required?.includes(key)))));
+            Object.keys(model.properties).forEach(key => result.push(...Printer.indent(this.renderProperty(model.properties[key], key, false, model.required?.includes(key)))));
         result.push("}");
 
         return result;
@@ -56,7 +56,7 @@ export class ClassPrinter extends Printer {
         }
 
         if (property.description)
-            result.push(...this.summary(property.description));
+            result.push(...Printer.summary(property.description));
 
         property.attributes?.forEach(attribute => result.push(...this.renderAttribute(attribute)));
 

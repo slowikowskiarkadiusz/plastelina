@@ -3,7 +3,6 @@ components:
     ExamplePlastelina.Billing:
       TaxCode:
         description: Information about Tax
-        $id: TaxCode
         type: string
         nugets:
           - Newtonsoft.Json

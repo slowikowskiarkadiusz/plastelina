@@ -2,7 +2,6 @@ components:
   schemas:
     ExamplePlastelina.Shipping.ShippingOrder:
       MessageIdentification:
-        $id: MessageIdentification
         type: object
         references:
           - ExamplePlastelina.Common

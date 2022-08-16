@@ -2,7 +2,6 @@ components:
   schemas:
     ExamplePlastelina.Common:
       WeightUnit:
-        $id: WeightUnit
         type: string
         nugets:
           - Newtonsoft.Json

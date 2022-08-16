@@ -2,7 +2,6 @@ components:
   schemas:
     ExamplePlastelina.Shipping.ShippingOrder:
       Consignment:
-        $id: Consignment
         type: object
         nugets:
           - Newtonsoft.Json

@@ -2,7 +2,6 @@ components:
   schemas:
     ExamplePlastelina.Shipping.ShippingOrder:
       ConsignmentIdentification:
-        $id: ConsignmentIdentification
         type: object
         properties:
           ConsignorsReferenceNumber:

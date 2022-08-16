@@ -2,7 +2,6 @@ components:
   schemas:
     ExamplePlastelina.Common:
       WarehouseLine:
-        $id: WarehouseLine
         nugets:
           - Newtonsoft.Json
         usings:

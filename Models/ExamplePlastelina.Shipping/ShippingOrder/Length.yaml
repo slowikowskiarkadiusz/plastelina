@@ -2,7 +2,6 @@ components:
   schemas:
     ExamplePlastelina.Shipping.ShippingOrder:
       Length:
-        $id: Length
         type: object
         references:
           - ExamplePlastelina.Common

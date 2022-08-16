@@ -3,7 +3,6 @@ components:
     ExamplePlastelina.Common:
       Blocked:
         description: Blocked
-        $id: Blocked
         type: string
         enum:
           - All

@@ -3,7 +3,6 @@ components:
     ExamplePlastelina.Billing:
       AccountType:
         description: Account type
-        $id: AccountType
         type: string
         nugets:
           - Newtonsoft.Json

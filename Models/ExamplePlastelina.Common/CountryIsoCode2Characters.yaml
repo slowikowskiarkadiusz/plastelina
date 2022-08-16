@@ -3,7 +3,6 @@ components:
     ExamplePlastelina.Common:
       CountryIsoCode2Characters:
         description: Country IsoCode2 Characters
-        $id: CountryIsoCode2Characters
         type: string
         nugets:
           - Newtonsoft.Json

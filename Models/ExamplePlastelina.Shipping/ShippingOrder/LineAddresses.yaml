@@ -2,7 +2,6 @@ components:
   schemas:
     ExamplePlastelina.Shipping.ShippingOrder:
       LineAddresses:
-        $id: LineAddresses
         type: object
         properties:
           DespatchPartyAddress:

@@ -2,7 +2,6 @@ components:
   schemas:
     ExamplePlastelina.Shipping.ShippingOrder:
       IncotermsCode:
-        $id: IncotermsCode
         type: string
         enum:
           - None

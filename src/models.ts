@@ -1,5 +1,4 @@
 export interface Model {
-    $id: string;
     description: string;
     namespace: string;
     usings: string[];

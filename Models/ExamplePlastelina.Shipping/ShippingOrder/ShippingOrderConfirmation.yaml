@@ -2,7 +2,6 @@ components:
   schemas:
     ExamplePlastelina.Shipping.ShippingOrder:
       ShippingOrderConfirmation:
-        $id: ShippingOrderConfirmation
         nugets:
           - Newtonsoft.Json
         references:

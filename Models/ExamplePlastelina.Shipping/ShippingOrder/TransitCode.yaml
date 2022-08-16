@@ -2,7 +2,6 @@ components:
   schemas:
     ExamplePlastelina.Shipping.ShippingOrder:
       TransitCode:
-        $id: TransitCode
         type: string
         nugets:
           - Newtonsoft.Json

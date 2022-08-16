@@ -2,7 +2,6 @@ components:
   schemas:
     ExamplePlastelina.Shipping.ShippingOrder:
       TransportDetails:
-        $id: TransportDetails
         type: object
         references:
           - ExamplePlastelina.Common

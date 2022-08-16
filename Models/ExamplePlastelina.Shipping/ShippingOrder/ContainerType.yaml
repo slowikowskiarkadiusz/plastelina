@@ -2,7 +2,6 @@ components:
   schemas:
     ExamplePlastelina.Shipping.ShippingOrder:
       ContainerType:
-        $id: ContainerType
         type: string
         enum:
           - None

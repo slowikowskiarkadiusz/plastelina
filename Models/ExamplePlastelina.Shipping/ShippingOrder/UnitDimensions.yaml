@@ -2,7 +2,6 @@ components:
   schemas:
     ExamplePlastelina.Shipping.ShippingOrder:
       UnitDimensions:
-        $id: UnitDimensions
         type: object
         references:
           - ExamplePlastelina.Common

@@ -3,7 +3,6 @@ components:
     ExamplePlastelina.Billing:
       InvoiceType:
         description: Type of the invoice
-        $id: InvoiceType
         type: string
         enum:
           - AccountPayable

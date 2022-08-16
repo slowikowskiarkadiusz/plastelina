@@ -2,7 +2,6 @@ components:
   schemas:
     ExamplePlastelina.Common:
       LengthUnit:
-        $id: LengthUnit
         type: string
         nugets:
           - Newtonsoft.Json

@@ -2,7 +2,6 @@ components:
   schemas:
     ExamplePlastelina.Shipping.ShippingOrder:
       AttachedFile:
-        $id: AttachedFile
         type: object
         nugets:
           - Newtonsoft.Json

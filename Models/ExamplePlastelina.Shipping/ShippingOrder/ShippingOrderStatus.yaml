@@ -2,7 +2,6 @@ components:
   schemas:
     ExamplePlastelina.Shipping.ShippingOrder:
       ShippingOrderStatus:
-        $id: ShippingOrderStatus
         type: object
         properties:
           TimeOfMessageGeneration:

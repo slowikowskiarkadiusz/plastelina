@@ -2,7 +2,7 @@ import { GeneratorRunner } from "./generator_runner";
 import { Merger } from "./merger";
 import { Validator } from "./validator";
 import { VersionReaderWriter } from "./version-reader-writer"
-import { HtmlGenerator } from "./html_generator"
+import { AsyncApiGenerator } from "./asyncapi_generator"
 import { BuildRunner } from "./build_runner"
 
 Merger.run();
@@ -15,6 +15,6 @@ VersionReaderWriter.run();
 
 BuildRunner.run();
 
-HtmlGenerator.run();
+AsyncApiGenerator.run();
 
 Merger.removeMerged();

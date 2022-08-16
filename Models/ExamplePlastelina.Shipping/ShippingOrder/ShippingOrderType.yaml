@@ -2,7 +2,6 @@ components:
   schemas:
     ExamplePlastelina.Shipping.ShippingOrder:
       ShippingOrderType:
-        $id: ShippingOrderType
         type: string
         enum:
           - None

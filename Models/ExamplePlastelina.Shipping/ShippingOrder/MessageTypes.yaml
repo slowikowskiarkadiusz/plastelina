@@ -2,6 +2,5 @@ components:
   schemas:
     ExamplePlastelina.Shipping.ShippingOrder:
       MessageTypes:
-        $id: MessageTypes
         type: object
   

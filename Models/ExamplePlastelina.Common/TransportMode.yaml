@@ -2,7 +2,6 @@ components:
   schemas:
     ExamplePlastelina.Common:
       TransportMode:
-        $id: TransportMode
         nugets:
           - Newtonsoft.Json
         usings:

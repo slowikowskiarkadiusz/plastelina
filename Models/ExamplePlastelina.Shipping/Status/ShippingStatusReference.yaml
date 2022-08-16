@@ -3,7 +3,6 @@ components:
     ExamplePlastelina.Shipping.ShippingStatus:
       ShippingStatusReference:
         description: Reference provided by feeding systems
-        $id: ShippingStatusReference
         type: object
         properties:
           InternalOrderId:

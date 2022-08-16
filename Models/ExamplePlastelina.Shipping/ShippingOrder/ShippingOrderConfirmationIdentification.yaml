@@ -2,7 +2,6 @@ components:
   schemas:
     ExamplePlastelina.Shipping.ShippingOrder:
       ShippingOrderConfirmationIdentification:
-        $id: ShippingOrderConfirmationIdentification
         type: object
         properties:
           BookingReferenceNumber:

@@ -25,7 +25,6 @@ components:
   schemas:
     ExamplePlastelina.Billing:
       InvoiceModel:
-        $id: InvoiceModel
         type: object
         properties:
           InvoiceNumber:

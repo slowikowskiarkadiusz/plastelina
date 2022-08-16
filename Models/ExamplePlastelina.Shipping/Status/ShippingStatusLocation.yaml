@@ -3,7 +3,6 @@ components:
     ExamplePlastelina.Shipping.ShippingStatus:
       ShippingStatusLocation:
         description: Holding information about the location that the status update has taken place in
-        $id: ShippingStatusLocation
         type: object
         properties:
           Longitude:

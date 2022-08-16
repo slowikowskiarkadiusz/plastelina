@@ -2,7 +2,6 @@ components:
   schemas:
     ExamplePlastelina.Shipping.ShippingOrder:
       Temperature:
-        $id: Temperature
         references:
           - ExamplePlastelina.Common
         usings:

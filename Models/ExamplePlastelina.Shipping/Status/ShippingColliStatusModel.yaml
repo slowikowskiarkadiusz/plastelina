@@ -26,7 +26,6 @@ components:
     ExamplePlastelina.Shipping.ShippingStatus:
       ShippingColliStatusModel:
         description: Interface holding all relevant information about Colli status
-        $id: ShippingColliStatusModel
         type: object
         nugets:
           - Newtonsoft.Json

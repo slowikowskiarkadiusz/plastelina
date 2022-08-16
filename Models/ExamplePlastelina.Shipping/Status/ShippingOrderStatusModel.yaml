@@ -26,7 +26,6 @@ components:
     ExamplePlastelina.Shipping.ShippingStatus:
       ShippingOrderStatusModel:
         description: Interface holding all relevant information about Order status
-        $id: ShippingOrderStatusModel
         type: object
         nugets:
           - Newtonsoft.Json

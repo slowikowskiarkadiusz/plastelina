@@ -2,7 +2,6 @@ components:
   schemas:
     ExamplePlastelina.Shipping.ShippingStatus:
       Status:
-        $id: Status
         type: string
         enum:
           - Delivered

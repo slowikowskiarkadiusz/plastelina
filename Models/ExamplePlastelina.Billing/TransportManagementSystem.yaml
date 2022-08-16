@@ -2,7 +2,6 @@ components:
   schemas:
     ExamplePlastelina.Billing:
       TransportManagementSystem:
-        $id: TransportManagementSystem
         type: string
         nugets:
           - Newtonsoft.Json

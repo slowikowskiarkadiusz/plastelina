@@ -2,7 +2,6 @@ components:
   schemas:
     ExamplePlastelina.Shipping.ShippingOrder:
       ShippingOrderStatusIdentification:
-        $id: ShippingOrderStatusIdentification
         type: object
         properties:
           FreightForwardersReferenceNumber:

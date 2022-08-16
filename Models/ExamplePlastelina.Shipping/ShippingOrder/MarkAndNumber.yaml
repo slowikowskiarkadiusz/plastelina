@@ -2,7 +2,6 @@ components:
   schemas:
     ExamplePlastelina.Shipping.ShippingOrder:
       MarkAndNumber:
-        $id: MarkAndNumber
         type: object
         properties:
           Value:

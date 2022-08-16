@@ -3,10 +3,9 @@ import * as YAML from "yaml";
 import { Confluence } from 'ts-confluence-client';
 import { ContentFormat } from 'ts-confluence-client/dist/resources/types';
 import { UpdatePageProperties } from 'ts-confluence-client/dist/resources/contentApi';
-import { generatedDirectory } from './consts';
+import { generatedDirectory, mergedPath } from './consts';
 
 interface Schema {
-    $id: string;
     namespace: string;
     description: string;
     dependecies: string[];
@@ -47,7 +46,7 @@ interface EnumInfo {
 
 export class Confluencer {
     public static run(argv: any): void {
-        const sourceFile = `${generatedDirectory}/merged.yaml`;
+        const sourceFile = mergedPath;
 
         if (argv.username && argv.apiToken) {
             let data = fs.readFileSync(sourceFile);

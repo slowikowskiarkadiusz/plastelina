@@ -11,7 +11,7 @@ export class EnumPrinter extends Printer {
             result.push(`namespace ${namespace};`, '');
 
         if (model.description)
-            result.push(...this.summary(model.description));
+            result.push(...Printer.summary(model.description));
 
         result.push(...enum_);
 
@@ -21,9 +21,9 @@ export class EnumPrinter extends Printer {
     private generateEnum(model: Model, key: string): string[] {
         let result: string[] = [];
 
-        result.push(`public enum ${model.$id ?? key}`);
+        result.push(`public enum ${key}`);
         result.push("{");
-        model.enum.forEach(x => result.push(...this.indent([`${x},`])));
+        model.enum.forEach(x => result.push(...Printer.indent([`${x},`])));
 
         result.push("}");
 

@@ -2,7 +2,6 @@ components:
   schemas:
     ExamplePlastelina.Common:
       Operation:
-        $id: Operation
         type: string
         nugets:
           - Newtonsoft.Json

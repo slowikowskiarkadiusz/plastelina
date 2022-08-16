@@ -2,7 +2,6 @@ components:
   schemas:
     ExamplePlastelina.Shipping.ShippingOrder:
       MonetaryValue:
-        $id: MonetaryValue
         type: object
         nugets:
           - Newtonsoft.Json

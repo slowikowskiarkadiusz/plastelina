@@ -2,7 +2,6 @@ components:
   schemas:
     ExamplePlastelina.Shipping.ShippingOrder:
       Addresses:
-        $id: Addresses
         type: object
         properties:
           ConsignorAddress:
