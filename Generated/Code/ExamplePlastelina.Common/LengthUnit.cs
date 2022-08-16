@@ -1,12 +1,13 @@
 // This file was generated automatically. Do not modify it by hand.
 
-namespace ExamplePlastelina.Common;
-
-public enum LengthUnit
+namespace ExamplePlastelina.Common
 {
-    None,
-    CentiMeter,
-    Inches,
-    Meter,
-    Foot,
+    public enum LengthUnit
+    {
+        None,
+        CentiMeter,
+        Inches,
+        Meter,
+        Foot,
+    }
 }

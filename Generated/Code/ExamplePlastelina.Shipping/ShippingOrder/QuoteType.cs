@@ -1,10 +1,11 @@
 // This file was generated automatically. Do not modify it by hand.
 
-namespace ExamplePlastelina.Shipping.ShippingOrder;
-
-public enum QuoteType
+namespace ExamplePlastelina.Shipping.ShippingOrder
 {
-    None,
-    Import,
-    Export,
+    public enum QuoteType
+    {
+        None,
+        Import,
+        Export,
+    }
 }

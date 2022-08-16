@@ -1,14 +1,15 @@
 // This file was generated automatically. Do not modify it by hand.
 
-namespace ExamplePlastelina.Common;
-
-public enum VolumeUnit
+namespace ExamplePlastelina.Common
 {
-    None,
-    CubicMeter,
-    CubicInch,
-    CubicFoot,
-    CubicCentiMeter,
-    CubicDeciMeter,
-    Liter,
+    public enum VolumeUnit
+    {
+        None,
+        CubicMeter,
+        CubicInch,
+        CubicFoot,
+        CubicCentiMeter,
+        CubicDeciMeter,
+        Liter,
+    }
 }

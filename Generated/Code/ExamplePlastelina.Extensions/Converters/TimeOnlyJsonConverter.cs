@@ -1,19 +1,21 @@
+using System;
 using System.Globalization;
 using Newtonsoft.Json;
 
-namespace ExamplePlastelina.Extensions.Converters;
-
-public class TimeOnlyJsonConverter : JsonConverter<TimeOnly>
+namespace ExamplePlastelina.Extensions.Converters
 {
-    private const string TimeFormat = "HH:mm:ss.FFFFFFF";
-
-    public override TimeOnly ReadJson(JsonReader reader, Type objectType, TimeOnly existingValue, bool hasExistingValue, JsonSerializer serializer)
+    public class TimeOnlyJsonConverter : JsonConverter<DateTime>
     {
-        return TimeOnly.ParseExact((string)reader.Value, TimeFormat, CultureInfo.InvariantCulture);
-    }
+        private const string TimeFormat = "HH:mm:ss.FFFFFFF";
 
-    public override void WriteJson(JsonWriter writer, TimeOnly value, JsonSerializer serializer)
-    {
-        writer.WriteValue(value.ToString(TimeFormat, CultureInfo.InvariantCulture));
+        public override DateTime ReadJson(JsonReader reader, Type objectType, DateTime existingValue, bool hasExistingValue, JsonSerializer serializer)
+        {
+            return DateTime.ParseExact((string)reader.Value, TimeFormat, CultureInfo.InvariantCulture);
+        }
+
+        public override void WriteJson(JsonWriter writer, DateTime value, JsonSerializer serializer)
+        {
+            writer.WriteValue(value.ToString(TimeFormat, CultureInfo.InvariantCulture));
+        }
     }
 }

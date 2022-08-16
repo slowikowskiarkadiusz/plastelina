@@ -1,12 +1,26 @@
 // This file was generated automatically. Do not modify it by hand.
 
-namespace ExamplePlastelina.Shipping.ShippingOrder;
+using Newtonsoft.Json;
 
-public class Container
+namespace ExamplePlastelina.Shipping.ShippingOrder
 {
-    public string Number { get; set; }
-    public string SealNumber { get; set; }
-    public string IsoContainerSizeCode { get; set; }
-    public ContainerType ContainerType { get; set; }
-    public UnitDimensions Dimensions { get; set; }
+    public class Container
+    {
+        public string Number { get; set; }
+
+        public string SealNumber { get; set; }
+
+        public string IsoContainerSizeCode { get; set; }
+
+        [JsonProperty(Required = Required.Always)]
+        public ContainerType ContainerType { get; set; }
+
+        public UnitDimensions Dimensions { get; set; }
+
+        public Container(
+            ContainerType containerType)
+        {
+            ContainerType = containerType;
+        }
+    }
 }

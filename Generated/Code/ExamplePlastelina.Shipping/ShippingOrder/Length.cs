@@ -1,11 +1,24 @@
 // This file was generated automatically. Do not modify it by hand.
 
 using ExamplePlastelina.Common;
+using Newtonsoft.Json;
 
-namespace ExamplePlastelina.Shipping.ShippingOrder;
-
-public class Length
+namespace ExamplePlastelina.Shipping.ShippingOrder
 {
-    public decimal Value { get; set; }
-    public LengthUnit Unit { get; set; }
+    public class Length
+    {
+        [JsonProperty(Required = Required.Always)]
+        public decimal Value { get; set; }
+
+        [JsonProperty(Required = Required.Always)]
+        public LengthUnit Unit { get; set; }
+
+        public Length(
+            decimal value,
+            LengthUnit unit)
+        {
+            Value = value;
+            Unit = unit;
+        }
+    }
 }

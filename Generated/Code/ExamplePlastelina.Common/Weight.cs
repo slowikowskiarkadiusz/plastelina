@@ -3,14 +3,26 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace ExamplePlastelina.Common;
-
-public class Weight
+namespace ExamplePlastelina.Common
 {
-    public decimal Value { get; set; }
-    /// <summary>
-    /// Weight unit
-    /// </summary>
-    [JsonConverter(typeof(StringEnumConverter))]
-    public WeightUnit Unit { get; set; }
+    public class Weight
+    {
+        [JsonProperty(Required = Required.Always)]
+        public decimal Value { get; set; }
+
+        /// <summary>
+        /// Weight unit
+        /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        [JsonProperty(Required = Required.Always)]
+        public WeightUnit Unit { get; set; }
+
+        public Weight(
+            decimal value,
+            WeightUnit unit)
+        {
+            Value = value;
+            Unit = unit;
+        }
+    }
 }

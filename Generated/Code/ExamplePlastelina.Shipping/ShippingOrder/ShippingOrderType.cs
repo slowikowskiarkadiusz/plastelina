@@ -1,10 +1,11 @@
 // This file was generated automatically. Do not modify it by hand.
 
-namespace ExamplePlastelina.Shipping.ShippingOrder;
-
-public enum ShippingOrderType
+namespace ExamplePlastelina.Shipping.ShippingOrder
 {
-    None,
-    Delivery,
-    Pickup,
+    public enum ShippingOrderType
+    {
+        None,
+        Delivery,
+        Pickup,
+    }
 }

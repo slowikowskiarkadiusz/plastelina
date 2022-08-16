@@ -1,7 +1,8 @@
 import { Printer } from "./base.printer";
-import { Attribute, Model, Property } from "./models";
+import { Attribute, Model, Properties, Property } from "./models";
 
 export class ClassPrinter extends Printer {
+    public nugets: string[] = [];
     private usings: string[] = [];
 
     public generate(model: Model, modelKey: string, namespace: string): string[] {
@@ -17,9 +18,14 @@ export class ClassPrinter extends Printer {
         }
 
         if (namespace)
-            result.push(`namespace ${namespace};`, '');
+            result.push(`namespace ${namespace}`, '{');
 
-        result.push(...class_);
+        result.push(...Printer.indent(...class_));
+
+        if (namespace)
+            result.push('}');
+
+        result = result.map(x => x === Printer.indent('')[0] ? '' : x);
 
         return result;
     }
@@ -32,9 +38,37 @@ export class ClassPrinter extends Printer {
 
         result.push(`public class ${key}`);
         result.push("{");
-        if (model.properties)
-            Object.keys(model.properties).forEach(key => result.push(...Printer.indent(this.renderProperty(model.properties[key], key, false, model.required?.includes(key)))));
+        if (model.properties) {
+            Object.keys(model.properties).forEach((key, i, c) => {
+                result.push(...Printer.indent(...this.renderProperty(model.properties[key], key, false, model.required?.includes(key))))
+
+                if (i !== c.length - 1) result.push('');
+            });
+
+            if (model.required?.length > 0) {
+                let obj: Properties = {};
+                model.required.forEach(x => obj[x] = model.properties[x]);
+                result.push('', ...Printer.indent(...this.renderConstructor(obj, key)));
+            }
+        }
         result.push("}");
+
+        return result;
+    }
+
+    private renderConstructor(properties: Properties, key: string): string[] {
+        let result: string[] = [];
+
+        result.push(`public ${key}(`);
+        Object.keys(properties).forEach((key, i, c) => result.push(...Printer.indent(`${this.renderType(properties[key], true)} ${this.decapitalize(key)}${i === c.length - 1 ? '' : ','}`)));
+        result[result.length - 1] += ')';
+        result.push('{');
+        Object.keys(properties).forEach(key => {
+            let rightSide = this.decapitalize(key);
+            let leftSide = this.capitalize(key);
+            result.push(...Printer.indent(`${leftSide === rightSide ? 'this.' : ''}${leftSide} = ${rightSide};`));
+        });
+        result.push('}');
 
         return result;
     }
@@ -42,27 +76,29 @@ export class ClassPrinter extends Printer {
     private renderProperty(property: Property, propertyKey: string, isArray?: boolean, isRequired?: boolean): string[] {
         let result: string[] = [];
 
-        let type = '';
-
-        if (property.$ref) {
-            let split = property.$ref.split('/');
-            type = property.format ?? split[split.length - 1];
-        }
-        else {
-            type = property.format ?? property.type;
-
-            if (type == "array")
-                return this.renderProperty(property.items, propertyKey, true);
-        }
-
         if (property.description)
             result.push(...Printer.summary(property.description));
 
         property.attributes?.forEach(attribute => result.push(...this.renderAttribute(attribute)));
 
-        result.push(`public ${this.renderType(type, isArray, isRequired)} ${this.capitalize(propertyKey)} { get; set; }`);
+        if (isRequired)
+            result.push(...this.reunderJsonRequiredAttribute());
+
+        result.push(`public ${this.renderType(property, isRequired)} ${this.capitalize(propertyKey)} { get; set; }`);
 
         return result;
+    }
+
+    private reunderJsonRequiredAttribute(): string[] {
+        const newtonsoftJson = 'Newtonsoft.Json';
+
+        if (!this.nugets.includes(newtonsoftJson))
+            this.nugets.push(newtonsoftJson);
+
+        if (!this.usings.includes(newtonsoftJson))
+            this.usings.push(newtonsoftJson);
+
+        return this.renderAttribute({ name: 'JsonProperty', parameters: [{ name: 'Required', value: 'Required.Always' }] });
     }
 
     private renderAttribute(attribute: Attribute): string[] {
@@ -76,7 +112,20 @@ export class ClassPrinter extends Printer {
         return [`[${attribute.name}(${parameters.join(', ')})]`];
     }
 
-    private renderType(type: string, isArray: boolean, isRequired: boolean): string {
+    private renderType(property: Property, isRequired: boolean, isArray?: boolean): string {
+        let type = '';
+
+        if (property.$ref) {
+            let split = property.$ref.split('/');
+            type = property.format ?? split[split.length - 1];
+        }
+        else {
+            type = property.format ?? property.type;
+
+            if (type == "array")
+                return this.renderType(property.items, true, true);
+        }
+
         var renderedType = '';
 
         switch (type) {
@@ -125,6 +174,15 @@ export class ClassPrinter extends Printer {
     }
 
     private capitalize(value: string): string {
-        return value[0].toUpperCase().concat(value.substring(1));
-    };
+        return this.handleReservedWord(value[0].toUpperCase().concat(value.substring(1)));
+    }
+
+    private decapitalize(value: string): string {
+        return this.handleReservedWord(value[0].toLowerCase().concat(value.substring(1)));
+    }
+
+    private handleReservedWord(word: string): string {
+        const reservedWords = ['abstract', 'as', 'base', 'bool', 'break', 'byte', 'case', 'catch', 'char', 'checked', 'class', 'const', 'continue', 'decimal', 'default', 'delegate', 'do', 'double', 'else', 'enum', 'event', 'explicit', 'extern', 'false', 'finally', 'fixed', 'float', 'for', 'foreach', 'goto', 'if', 'implicit', 'in', 'int', 'interface', 'internal', 'is', 'lock', 'long', 'namespace', 'new', 'null', 'object', 'operator', 'out', 'override', 'params', 'private', 'protected', 'public', 'readonly', 'ref', 'return', 'sbyte', 'sealed', 'short', 'sizeof', 'stackalloc', 'static', 'string', 'struct', 'switch', 'this', 'throw', 'true', 'try', 'typeof', 'uint', 'ulong', 'unchecked', 'unsafe', 'ushort', 'using', 'virtual', 'void', 'volatile', 'while'];
+        return reservedWords.includes(word) ? `@${word}` : word;
+    }
 }

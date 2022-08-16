@@ -3,12 +3,15 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace ExamplePlastelina.Shipping.ShippingOrder;
-
-public class AttachedFile
+namespace ExamplePlastelina.Shipping.ShippingOrder
 {
-    public string FileName { get; set; }
-    [JsonConverter(typeof(StringEnumConverter))]
-    public DocumentType DocumentType { get; set; }
-    public string Data { get; set; }
+    public class AttachedFile
+    {
+        public string FileName { get; set; }
+
+        [JsonConverter(typeof(StringEnumConverter))]
+        public DocumentType DocumentType { get; set; }
+
+        public string Data { get; set; }
+    }
 }

@@ -1,11 +1,12 @@
 // This file was generated automatically. Do not modify it by hand.
 
-namespace ExamplePlastelina.Common;
-
-public enum Operation
+namespace ExamplePlastelina.Common
 {
-    None,
-    Create,
-    Update,
-    Delete,
+    public enum Operation
+    {
+        None,
+        Create,
+        Update,
+        Delete,
+    }
 }

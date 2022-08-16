@@ -1,4 +1,4 @@
-import { GeneratorRunner } from "./generator_runner";
+import { GeneratorRunner } from "./printer_runner";
 import { Merger } from "./merger";
 import { Validator } from "./validator";
 import { VersionReaderWriter } from "./version-reader-writer"

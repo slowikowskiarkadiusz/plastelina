@@ -4,11 +4,13 @@ using ExamplePlastelina.Common;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace ExamplePlastelina.Shipping.ShippingOrder;
-
-public class MonetaryValue
+namespace ExamplePlastelina.Shipping.ShippingOrder
 {
-    public decimal? Value { get; set; }
-    [JsonConverter(typeof(StringEnumConverter))]
-    public Currency Currency { get; set; }
+    public class MonetaryValue
+    {
+        public decimal? Value { get; set; }
+
+        [JsonConverter(typeof(StringEnumConverter))]
+        public Currency Currency { get; set; }
+    }
 }

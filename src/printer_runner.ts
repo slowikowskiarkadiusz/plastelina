@@ -99,7 +99,9 @@ export class GeneratorRunner {
         model.references?.forEach(reference => GeneratorRunner.addReference(reference, subPath.split('/')[1]));
 
         if (model.type == "object") {
-            result.push(new ClassPrinter().generate(model, modelKey, prevKey));
+            let classPrinter = new ClassPrinter();
+            result.push(classPrinter.generate(model, modelKey, prevKey));
+            classPrinter.nugets?.forEach(n => GeneratorRunner.addNuget(n, subPath.split('/')[1]));
         }
         else if (model.enum) {
             result.push(new EnumPrinter().generate(model, modelKey, prevKey));
@@ -119,7 +121,7 @@ export class GeneratorRunner {
         let csprojName: string = `${codeDirectory}/${name}/${name}.csproj`;
 
         if (!fs.existsSync(csprojName)) {
-            cp.execSync(`dotnet new classlib --name ${name} --framework net6.0`, { cwd: codeDirectory });
+            cp.execSync(`dotnet new classlib --name ${name} --framework netstandard2.0`, { cwd: codeDirectory });
 
             let csprojContent = fs.readFileSync(csprojName).toString();
             fs.writeFileSync(csprojName, csprojContent.replace('    <Nullable>enable</Nullable>', ''));
