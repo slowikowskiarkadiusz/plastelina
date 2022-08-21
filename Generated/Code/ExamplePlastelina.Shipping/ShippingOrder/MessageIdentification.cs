@@ -22,10 +22,24 @@ namespace ExamplePlastelina.Shipping.ShippingOrder
 
         public string InterchangeControlReference { get; set; }
 
+        public MessageIdentification() { }
+
         public MessageIdentification(
-            Operation operation)
+            string receiverId,
+            string senderId,
+            string clientId,
+            string organizationNumber,
+            string documentId,
+            Operation operation,
+            string interchangeControlReference)
         {
+            ReceiverId = receiverId;
+            SenderId = senderId;
+            ClientId = clientId;
+            OrganizationNumber = organizationNumber;
+            DocumentId = documentId;
             Operation = operation;
+            InterchangeControlReference = interchangeControlReference;
         }
     }
 }

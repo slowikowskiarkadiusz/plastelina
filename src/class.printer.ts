@@ -46,9 +46,12 @@ export class ClassPrinter extends Printer {
             });
 
             if (model.required?.length > 0) {
-                let obj: Properties = {};
-                model.required.forEach(x => obj[x] = model.properties[x]);
-                result.push('', ...Printer.indent(...this.renderConstructor(obj, key)));
+                result.push('', ...Printer.indent(...this.renderConstructor({}, key)));
+                result.push('', ...Printer.indent(...this.renderConstructor(model.properties, key)));
+                let requiredProperties: Properties = {};
+                model.required.forEach(x => requiredProperties[x] = model.properties[x]);
+                if (!Object.keys(model.properties).some(x => Object.keys(requiredProperties).includes(x)))
+                    result.push('', ...Printer.indent(...this.renderConstructor(requiredProperties, key)));
             }
         }
         result.push("}");
@@ -58,17 +61,23 @@ export class ClassPrinter extends Printer {
 
     private renderConstructor(properties: Properties, key: string): string[] {
         let result: string[] = [];
+        const isEmpty: boolean = Object.keys(properties).length === 0;
 
-        result.push(`public ${key}(`);
-        Object.keys(properties).forEach((key, i, c) => result.push(...Printer.indent(`${this.renderType(properties[key], true)} ${this.decapitalize(key)}${i === c.length - 1 ? '' : ','}`)));
-        result[result.length - 1] += ')';
-        result.push('{');
-        Object.keys(properties).forEach(key => {
-            let rightSide = this.decapitalize(key);
-            let leftSide = this.capitalize(key);
-            result.push(...Printer.indent(`${leftSide === rightSide ? 'this.' : ''}${leftSide} = ${rightSide};`));
-        });
-        result.push('}');
+        if (isEmpty) {
+            result.push(`public ${key}() { }`);
+        }
+        else {
+            result.push(`public ${key}(`);
+            Object.keys(properties).forEach((key, i, c) => result.push(...Printer.indent(`${this.renderType(properties[key], true)} ${this.decapitalize(key)}${i === c.length - 1 ? '' : ','}`)));
+            result[result.length - 1] += ')';
+            result.push('{');
+            Object.keys(properties).forEach(key => {
+                let rightSide = this.decapitalize(key);
+                let leftSide = this.capitalize(key);
+                result.push(...Printer.indent(`${leftSide === rightSide ? 'this.' : ''}${leftSide} = ${rightSide};`));
+            });
+            result.push('}');
+        }
 
         return result;
     }

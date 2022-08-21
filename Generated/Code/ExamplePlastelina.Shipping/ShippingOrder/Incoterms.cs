@@ -13,10 +13,16 @@ namespace ExamplePlastelina.Shipping.ShippingOrder
 
         public string CustomTermsOfDeliveryCode { get; set; }
 
+        public Incoterms() { }
+
         public Incoterms(
-            IncotermsCode code)
+            IncotermsCode code,
+            string city,
+            string customTermsOfDeliveryCode)
         {
             Code = code;
+            City = city;
+            CustomTermsOfDeliveryCode = customTermsOfDeliveryCode;
         }
     }
 }

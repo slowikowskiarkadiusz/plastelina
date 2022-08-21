@@ -82,10 +82,42 @@ namespace ExamplePlastelina.Shipping.ShippingOrder
 
         public QuoteType QuoteType { get; set; }
 
+        public TransportDetails() { }
+
         public TransportDetails(
-            TransportMode mode)
+            TransportMode mode,
+            string truckRegistrationNumber,
+            string trailerRegistrationNumber,
+            string vesselName,
+            string portOfLoading,
+            string portOfLoadingCode,
+            string portOfDischarge,
+            string portOfDischargeCode,
+            string waybillNumber,
+            string houseWaybillNumber,
+            string voyageNumber,
+            System.DateTime vGMClosingDateTime,
+            System.DateTime cargoCutOffDateTime,
+            System.DateTime estimatedDepartureDate,
+            System.DateTime estimatedArrivalDate,
+            QuoteType quoteType)
         {
             Mode = mode;
+            TruckRegistrationNumber = truckRegistrationNumber;
+            TrailerRegistrationNumber = trailerRegistrationNumber;
+            VesselName = vesselName;
+            PortOfLoading = portOfLoading;
+            PortOfLoadingCode = portOfLoadingCode;
+            PortOfDischarge = portOfDischarge;
+            PortOfDischargeCode = portOfDischargeCode;
+            WaybillNumber = waybillNumber;
+            HouseWaybillNumber = houseWaybillNumber;
+            VoyageNumber = voyageNumber;
+            VGMClosingDateTime = vGMClosingDateTime;
+            CargoCutOffDateTime = cargoCutOffDateTime;
+            EstimatedDepartureDate = estimatedDepartureDate;
+            EstimatedArrivalDate = estimatedArrivalDate;
+            QuoteType = quoteType;
         }
     }
 }

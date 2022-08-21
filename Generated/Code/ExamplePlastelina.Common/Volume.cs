@@ -17,6 +17,8 @@ namespace ExamplePlastelina.Common
         [JsonProperty(Required = Required.Always)]
         public VolumeUnit Unit { get; set; }
 
+        public Volume() { }
+
         public Volume(
             decimal value,
             VolumeUnit unit)

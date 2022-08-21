@@ -13,6 +13,8 @@ namespace ExamplePlastelina.Shipping.ShippingOrder
         [JsonProperty(Required = Required.Always)]
         public TemperatureUnit Unit { get; set; }
 
+        public Temperature() { }
+
         public Temperature(
             decimal value,
             TemperatureUnit unit)

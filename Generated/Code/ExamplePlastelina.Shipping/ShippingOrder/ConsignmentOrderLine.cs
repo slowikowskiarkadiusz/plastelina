@@ -47,10 +47,48 @@ namespace ExamplePlastelina.Shipping.ShippingOrder
 
         public MonetaryValue TotalValue { get; set; }
 
+        public ConsignmentOrderLine() { }
+
         public ConsignmentOrderLine(
-            UnitType unitType)
+            int lineNumber,
+            string description,
+            decimal quantity,
+            UnitType unitType,
+            Temperature temperature,
+            UnitDimensions unitDimensions,
+            Volume totalVolume,
+            Length totalLoadingMeters,
+            Weight totalNetWeight,
+            Weight totalGrossWeight,
+            IEnumerable<DangerousGoods> dangerousGoods,
+            LineAddresses addresses,
+            IEnumerable<Barcode> barcodes,
+            IEnumerable<MarkAndNumber> marksAndNumbers,
+            TransferDue pickup,
+            TransferDue delivery,
+            string lineReference,
+            string hsCode,
+            MonetaryValue totalValue)
         {
+            LineNumber = lineNumber;
+            Description = description;
+            Quantity = quantity;
             UnitType = unitType;
+            Temperature = temperature;
+            UnitDimensions = unitDimensions;
+            TotalVolume = totalVolume;
+            TotalLoadingMeters = totalLoadingMeters;
+            TotalNetWeight = totalNetWeight;
+            TotalGrossWeight = totalGrossWeight;
+            DangerousGoods = dangerousGoods;
+            Addresses = addresses;
+            Barcodes = barcodes;
+            MarksAndNumbers = marksAndNumbers;
+            Pickup = pickup;
+            Delivery = delivery;
+            LineReference = lineReference;
+            HsCode = hsCode;
+            TotalValue = totalValue;
         }
     }
 }

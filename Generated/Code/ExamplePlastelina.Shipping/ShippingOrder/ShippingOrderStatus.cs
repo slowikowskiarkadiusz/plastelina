@@ -27,14 +27,28 @@ namespace ExamplePlastelina.Shipping.ShippingOrder
 
         public MessageIdentification MessageIdentification { get; set; }
 
+        public ShippingOrderStatus() { }
+
         public ShippingOrderStatus(
             System.DateTime timeOfMessageGeneration,
             System.DateTime timeOfEvent,
-            Status status)
+            ShippingOrderStatusIdentification statusIdentification,
+            Location location,
+            Status status,
+            string sourceStatus,
+            string additionalMessage,
+            string signature,
+            MessageIdentification messageIdentification)
         {
             TimeOfMessageGeneration = timeOfMessageGeneration;
             TimeOfEvent = timeOfEvent;
+            StatusIdentification = statusIdentification;
+            Location = location;
             Status = status;
+            SourceStatus = sourceStatus;
+            AdditionalMessage = additionalMessage;
+            Signature = signature;
+            MessageIdentification = messageIdentification;
         }
     }
 }

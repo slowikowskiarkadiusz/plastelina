@@ -54,12 +54,16 @@ namespace ExamplePlastelina.Billing
         [JsonProperty(Required = Required.Always)]
         public IEnumerable<Transaction> Transactions { get; set; }
 
+        public InvoiceModel() { }
+
         public InvoiceModel(
             string invoiceNumber,
             InvoiceType invoiceType,
             DateTime invoiceDate,
             string company,
             string voucherNumber,
+            string poNumber,
+            TransportManagementSystem tms,
             IEnumerable<Transaction> transactions)
         {
             InvoiceNumber = invoiceNumber;
@@ -67,6 +71,8 @@ namespace ExamplePlastelina.Billing
             InvoiceDate = invoiceDate;
             Company = company;
             VoucherNumber = voucherNumber;
+            PoNumber = poNumber;
+            Tms = tms;
             Transactions = transactions;
         }
     }

@@ -39,12 +39,22 @@ namespace ExamplePlastelina.Billing
         /// </summary>
         public DateTime? ExchangeDate { get; set; }
 
+        public FinancialOperation() { }
+
         public FinancialOperation(
             int amount,
-            string currencyCode)
+            string currencyCode,
+            int companyCurrencyAmount,
+            string companyCurrencyCode,
+            int exchangeRate,
+            DateTime exchangeDate)
         {
             Amount = amount;
             CurrencyCode = currencyCode;
+            CompanyCurrencyAmount = companyCurrencyAmount;
+            CompanyCurrencyCode = companyCurrencyCode;
+            ExchangeRate = exchangeRate;
+            ExchangeDate = exchangeDate;
         }
     }
 }

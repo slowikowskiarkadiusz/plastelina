@@ -60,14 +60,28 @@ namespace ExamplePlastelina.Shipping.ShippingStatus
         /// </summary>
         public string SignatureText { get; set; }
 
+        public ShippingOrderStatusModel() { }
+
         public ShippingOrderStatusModel(
             DateTime timeOfMessageGeneration,
             DateTime timeOfEvent,
-            Status status)
+            ShippingStatusReference reference,
+            ShippingStatusLocation location,
+            Status status,
+            string sourceStatus,
+            string additionalMessage,
+            string clientId,
+            string signatureText)
         {
             TimeOfMessageGeneration = timeOfMessageGeneration;
             TimeOfEvent = timeOfEvent;
+            Reference = reference;
+            Location = location;
             Status = status;
+            SourceStatus = sourceStatus;
+            AdditionalMessage = additionalMessage;
+            ClientId = clientId;
+            SignatureText = signatureText;
         }
     }
 }

@@ -17,6 +17,8 @@ namespace ExamplePlastelina.Common
         [JsonProperty(Required = Required.Always)]
         public WeightUnit Unit { get; set; }
 
+        public Weight() { }
+
         public Weight(
             decimal value,
             WeightUnit unit)

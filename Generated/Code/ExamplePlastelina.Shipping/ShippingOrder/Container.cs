@@ -17,10 +17,20 @@ namespace ExamplePlastelina.Shipping.ShippingOrder
 
         public UnitDimensions Dimensions { get; set; }
 
+        public Container() { }
+
         public Container(
-            ContainerType containerType)
+            string number,
+            string sealNumber,
+            string isoContainerSizeCode,
+            ContainerType containerType,
+            UnitDimensions dimensions)
         {
+            Number = number;
+            SealNumber = sealNumber;
+            IsoContainerSizeCode = isoContainerSizeCode;
             ContainerType = containerType;
+            Dimensions = dimensions;
         }
     }
 }
