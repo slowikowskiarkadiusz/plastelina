@@ -1,3 +1,4 @@
+import { ArgumentSettings } from "./argument_settings";
 import { Printer } from "./base.printer";
 import { Attribute, Model, Properties, Property } from "./models";
 
@@ -45,7 +46,7 @@ export class ClassPrinter extends Printer {
                 if (i !== c.length - 1) result.push('');
             });
 
-            if (model.required?.length > 0) {
+            if (ArgumentSettings.constructos && model.required?.length > 0) {
                 result.push('', ...Printer.indent(...this.renderConstructor({}, key)));
                 result.push('', ...Printer.indent(...this.renderConstructor(model.properties, key)));
                 let requiredProperties: Properties = {};
@@ -93,7 +94,7 @@ export class ClassPrinter extends Printer {
         if (isRequired)
             result.push(...this.reunderJsonRequiredAttribute());
 
-        result.push(`public ${this.renderType(property, isRequired)} ${this.capitalize(propertyKey)} { get; set; }`);
+        result.push(`public ${this.renderType(property, isRequired)} ${this.capitalize(propertyKey)} { get; ${ArgumentSettings.privateSetters ? 'private ' : ''}set; }`);
 
         return result;
     }

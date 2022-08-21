@@ -4,6 +4,9 @@ import { Validator } from "./validator";
 import { VersionReaderWriter } from "./version-reader-writer"
 import { AsyncApiGenerator } from "./asyncapi_generator"
 import { BuildRunner } from "./build_runner"
+import { ArgumentSettings } from "./argument_settings";
+
+ArgumentSettings.update();
 
 Merger.run();
 

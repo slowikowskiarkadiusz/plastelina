@@ -1,1 +1,1 @@
-ts-node ./src/run_local.ts
+ts-node ./src/run_local.ts --constructors
