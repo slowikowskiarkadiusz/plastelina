@@ -2,9 +2,6 @@
 
 namespace ExamplePlastelina.Common
 {
-/// <summary>
-/// Blocked
-/// </summary>
     public enum Blocked
     {
         All,

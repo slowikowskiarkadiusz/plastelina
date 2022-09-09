@@ -1,58 +1,64 @@
 import { ArgumentSettings } from "./argument_settings";
-import { Printer } from "./base.printer";
+import { Merger } from "./merger";
 import { Attribute, Model, Properties, Property } from "./models";
+import { indent, splitRef, summary } from "./utils";
 
-export class ClassPrinter extends Printer {
-    public nugets: string[] = [];
+export class ClassPrinter {
+    private nugets: string[] = [];
     private usings: string[] = [];
 
-    public generate(model: Model, modelKey: string, namespace: string): string[] {
+    public generate(model: Model, modelKey: string, namespace: string, derivedFrom: string = null): { result: string[], nugets: string[] } {
         let result: string[] = ['// This file was generated automatically. Do not modify it by hand.', ''];
 
         model.usings?.forEach(dependency => this.addUsing(dependency));
 
-        var class_ = this.generateClass(model, modelKey);
+        var class_ = this.generateClass(model, modelKey, derivedFrom);
 
         if (this.usings.length > 0) {
             this.usings.forEach(using => result.push(`using ${using};`));
             result.push('');
         }
 
-        if (namespace)
-            result.push(`namespace ${namespace}`, '{');
-
-        result.push(...Printer.indent(...class_));
-
-        if (namespace)
+        if (namespace) {
+            result.push(`namespace ${namespace}`);
+            result.push('{');
+            result.push(...indent(...class_));
             result.push('}');
+        }
+        else
+            result.push(...class_);
 
-        result = result.map(x => x === Printer.indent('')[0] ? '' : x);
-
-        return result;
+        return { result: result, nugets: this.nugets };
     }
 
-    private generateClass(model: Model, key: string): string[] {
+    private generateClass(model: Model, key: string, derivedFrom: string = null): string[] {
         let result: string[] = [];
 
         if (model.description)
-            result.push(...Printer.summary(model.description));
+            result.push(...summary(model.description));
 
-        result.push(`public class ${key}`);
-        result.push("{");
-        if (model.properties) {
+        result.push(`public class ${key}${!!derivedFrom ? ` : ${derivedFrom}` : ''}`);
+        result.push("{"); if (model.properties) {
             Object.keys(model.properties).forEach((key, i, c) => {
-                result.push(...Printer.indent(...this.renderProperty(model.properties[key], key, false, model.required?.includes(key))))
+                result.push(...indent(...this.renderProperty(model.properties[key], key, model.required?.includes(key))))
 
                 if (i !== c.length - 1) result.push('');
             });
 
-            if (ArgumentSettings.constructos && model.required?.length > 0) {
-                result.push('', ...Printer.indent(...this.renderConstructor({}, key)));
-                result.push('', ...Printer.indent(...this.renderConstructor(model.properties, key)));
-                let requiredProperties: Properties = {};
-                model.required.forEach(x => requiredProperties[x] = model.properties[x]);
-                if (!Object.keys(model.properties).some(x => Object.keys(requiredProperties).includes(x)))
-                    result.push('', ...Printer.indent(...this.renderConstructor(requiredProperties, key)));
+            if (ArgumentSettings.constructors) {
+                result.push('', ...indent(...this.renderConstructor({}, key)));
+
+                if (model.required?.length > 0) {
+                    let requiredProperties: Properties = {};
+                    model.required.forEach(x => {
+                        if (!!model.properties[x])
+                            requiredProperties[x] = model.properties[x];
+                    });
+                    if (Object.keys(model.properties).filter(x => !Object.keys(requiredProperties).includes(x)).length > 0)
+                        result.push('', ...indent(...this.renderConstructor(requiredProperties, key)));
+                }
+
+                result.push('', ...indent(...this.renderConstructor(model.properties, key)));
             }
         }
         result.push("}");
@@ -69,13 +75,13 @@ export class ClassPrinter extends Printer {
         }
         else {
             result.push(`public ${key}(`);
-            Object.keys(properties).forEach((key, i, c) => result.push(...Printer.indent(`${this.renderType(properties[key], true)} ${this.decapitalize(key)}${i === c.length - 1 ? '' : ','}`)));
+            Object.keys(properties).forEach((key, i, c) => result.push(...indent(`${this.renderType(properties[key])} ${this.decapitalize(key)}${i === c.length - 1 ? '' : ','}`)));
             result[result.length - 1] += ')';
             result.push('{');
             Object.keys(properties).forEach(key => {
                 let rightSide = this.decapitalize(key);
                 let leftSide = this.capitalize(key);
-                result.push(...Printer.indent(`${leftSide === rightSide ? 'this.' : ''}${leftSide} = ${rightSide};`));
+                result.push(...indent(`${leftSide === rightSide ? 'this.' : ''}${leftSide} = ${rightSide};`));
             });
             result.push('}');
         }
@@ -83,23 +89,96 @@ export class ClassPrinter extends Printer {
         return result;
     }
 
-    private renderProperty(property: Property, propertyKey: string, isArray?: boolean, isRequired?: boolean): string[] {
+    private getRef($ref: string): { model: Model, key: string } {
+        let split = splitRef($ref);
+        return { model: Merger.getFullSchemas()[split.namespace][split.type], key: split.type };
+    }
+
+    private isRefClass($ref: string): boolean {
+        return !this.getRef($ref).model.enum;
+    }
+
+    private renderProperty(property: Property, propertyKey: string, isRequired?: boolean): string[] {
         let result: string[] = [];
 
         if (property.description)
-            result.push(...Printer.summary(property.description));
+            result.push(...summary(property.description));
+
+        property.attributes ??= [];
+
+        if (isRequired)
+            this.addRequiredAttributeToArray(property.attributes);
 
         property.attributes?.forEach(attribute => result.push(...this.renderAttribute(attribute)));
 
-        if (isRequired)
-            result.push(...this.reunderJsonRequiredAttribute());
+        result.push(`public ${this.renderType(property, !!isRequired)} ${this.capitalize(propertyKey)} { get; ${ArgumentSettings.privatesetters ? 'private ' : ''}set; }`);
 
-        result.push(`public ${this.renderType(property, isRequired)} ${this.capitalize(propertyKey)} { get; ${ArgumentSettings.privateSetters ? 'private ' : ''}set; }`);
+        if (ArgumentSettings.defaultvalues && property.default) {
+            result[result.length - 1] += this.renderDefaultValue(property, propertyKey);
+        }
 
         return result;
     }
 
-    private reunderJsonRequiredAttribute(): string[] {
+    private renderDefaultValue(property: Property, propertyKey: string): string {
+        let result: string[] = [];
+        this.processDefaultValue(property, propertyKey, property.default, result);
+
+        if (typeof property.default === 'object' && !property.items) {
+            let split = splitRef(property.$ref);
+            return ` = new ${split.type} { ${result.join(' ')} };`;
+        }
+        else {
+            return `${result.join(' ')}`;
+        }
+    }
+
+    private processDefaultValue(property: Property, propertyKey: string, defaultValues: string, result: string[] = [], isNested: boolean = false): void {
+        if (Array.isArray(defaultValues) && !!property.items) {
+            const listType = this.renderType(property.items);
+
+            result.push((!property.default.length ? ` = Enumerable.Empty<${listType}>()` : `= new List<${listType}>() { }`) + `${isNested ? ',' : ';'}`);
+            this.addUsing('System.Linq');
+        }
+        else if (typeof defaultValues === 'object' || property.$ref) {
+            let ref = this.getRef(property.$ref);
+
+            for (let x of Object.keys(defaultValues)) {
+                if (typeof defaultValues[x] === 'object') {
+                    result.push(`${x} = new ${splitRef(ref.model.properties[x].$ref).type} {`);
+                    this.processDefaultValue(ref.model.properties[x], x, defaultValues[x], result, true);
+                    result.push('},');
+                }
+                else {
+                    if (ref?.model.properties[x].$ref) {
+                        let propRef = this.getRef(ref.model.properties[x].$ref);
+                        result.push(`${x} = ${propRef.key}.${defaultValues[x]},`);
+                    }
+                    else {
+                        this.processDefaultValue(ref.model.properties[x], x, defaultValues[x], result, true);
+                    }
+                }
+            }
+        }
+        else {
+            let render: string = `${isNested ? `${propertyKey}` : ''} = `;
+            if (property.type === 'string') {
+                if (property.format === 'date-time' || property.format === 'time' || property.format === 'date') {
+                    let date: Date = new Date(Date.parse(defaultValues));
+                    render += `new DateTime(${date.getFullYear()}, ${date.getMonth()}, ${date.getDate()}, ${date.getHours()}, ${date.getMinutes()}, ${date.getSeconds()}, ${date.getMilliseconds()})`;
+                }
+                else render += `"${defaultValues}"`;
+            }
+            else render += `${defaultValues}`;
+
+            render += `${isNested ? ',' : ';'}`;
+            result.push(render);
+        }
+    }
+
+    private addRequiredAttributeToArray(attributes: Attribute[]): void {
+        let jsonPropertyAttribute = attributes.filter(x => x.name === 'JsonProperty')[0];
+
         const newtonsoftJson = 'Newtonsoft.Json';
 
         if (!this.nugets.includes(newtonsoftJson))
@@ -108,67 +187,73 @@ export class ClassPrinter extends Printer {
         if (!this.usings.includes(newtonsoftJson))
             this.usings.push(newtonsoftJson);
 
-        return this.renderAttribute({ name: 'JsonProperty', parameters: [{ name: 'Required', value: 'Required.Always' }] });
+        if (jsonPropertyAttribute)
+            jsonPropertyAttribute.parameters.push({ name: 'Required', value: 'Required.Always' });
+        else
+            attributes.push({ name: 'JsonProperty', parameters: [{ name: 'Required', value: 'Required.Always' }] });
     }
 
     private renderAttribute(attribute: Attribute): string[] {
-        let parameters: string[] = attribute.parameters.map(parameter => {
-            if (parameter.name)
-                return `${parameter.name} = ${parameter.value}`;
-            else
-                return parameter.value;
-        });
+        let parameters = attribute
+            .parameters
+            ?.map(x => {
+                let value = x.type === 'string' ? `"${x.value}"` : x.value;
+                let left = x.name ? `${x.name} = ` : '';
+                return `${left}${value}`;
+            })
+            .join(", ");
 
-        return [`[${attribute.name}(${parameters.join(', ')})]`];
+        return [`[${attribute.name}${parameters?.length > 0 ? `(${parameters})` : ''}]`];
     }
 
-    private renderType(property: Property, isRequired: boolean, isArray?: boolean): string {
+    private renderType(property: Property, isRequired: boolean = true, isArray?: boolean): string {
         let type = '';
+        let isClass = false;
 
         if (property.$ref) {
-            let split = property.$ref.split('/');
-            type = property.format ?? split[split.length - 1];
+            isClass = this.isRefClass(property.$ref);
+            type = property.format ?? splitRef(property.$ref).type;
         }
         else {
             type = property.format ?? property.type;
 
-            if (type == "array")
+            if (type == 'array')
                 return this.renderType(property.items, true, true);
         }
 
-        var renderedType = '';
+        let renderedType: string = '';
 
         switch (type) {
-            case "string":
-                renderedType = "string";
+            case 'string':
+                renderedType = 'string';
                 break;
-            case "integer":
-            case "number":
-                renderedType = this.nullable("int", !isRequired);
+            case 'integer':
+                renderedType = this.nullable('int', !isRequired);
                 break;
-            case "decimal":
-                renderedType = this.nullable("decimal", !isRequired);
+            case 'decimal':
+                renderedType = this.nullable('decimal', !isRequired);
                 break;
-            case "boolean":
-                renderedType = this.nullable("bool", !isRequired);
+            case 'boolean':
+                renderedType = this.nullable('bool', !isRequired);
                 break;
-            case "double":
-                renderedType = this.nullable("double", !isRequired);
+            case 'double':
+            case 'number':
+                renderedType = this.nullable('double', !isRequired);
                 break;
-            case "date-time":
-            case "date":
-            case "time":
-                renderedType = this.nullable("DateTime", !isRequired);
-                this.addUsing("System");
+            case 'date-time':
+            case 'date':
+            case 'time':
+                renderedType = this.nullable('DateTime', !isRequired);
+                this.addUsing('System');
                 break;
             default:
-                renderedType = type;
+                renderedType = isClass ? type : this.nullable(type, !isRequired);
                 break;
         };
 
         if (isArray) {
             renderedType = `IEnumerable<${renderedType.replace('?', '')}>`;
-            this.addUsing("System.Collections.Generic");
+            this.addUsing('System.Collections.Generic');
         }
 
         return renderedType;
@@ -176,7 +261,7 @@ export class ClassPrinter extends Printer {
 
     private nullable(value: string, nullable: boolean): string {
         return `${value}${(nullable ? "?" : '')}`
-    };
+    }
 
     private addUsing(value: string): void {
         if (!this.usings.includes(value))
@@ -184,7 +269,7 @@ export class ClassPrinter extends Printer {
     }
 
     private capitalize(value: string): string {
-        return this.handleReservedWord(value[0].toUpperCase().concat(value.substring(1)));
+        return value[0].toUpperCase().concat(value.substring(1));
     }
 
     private decapitalize(value: string): string {

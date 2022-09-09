@@ -63,61 +63,23 @@ namespace ExamplePlastelina.Shipping.ShippingOrder
         /// <summary>
         /// Used for Sea transport
         /// </summary>
-        public System.DateTime VGMClosingDateTime { get; set; }
+        public System.DateTime? VGMClosingDateTime { get; set; }
 
         /// <summary>
         /// Used for Sea transport
         /// </summary>
-        public System.DateTime CargoCutOffDateTime { get; set; }
+        public System.DateTime? CargoCutOffDateTime { get; set; }
 
         /// <summary>
         /// Used for Sea transport
         /// </summary>
-        public System.DateTime EstimatedDepartureDate { get; set; }
+        public System.DateTime? EstimatedDepartureDate { get; set; }
 
         /// <summary>
         /// Used for Sea transport
         /// </summary>
-        public System.DateTime EstimatedArrivalDate { get; set; }
+        public System.DateTime? EstimatedArrivalDate { get; set; }
 
-        public QuoteType QuoteType { get; set; }
-
-        public TransportDetails() { }
-
-        public TransportDetails(
-            TransportMode mode,
-            string truckRegistrationNumber,
-            string trailerRegistrationNumber,
-            string vesselName,
-            string portOfLoading,
-            string portOfLoadingCode,
-            string portOfDischarge,
-            string portOfDischargeCode,
-            string waybillNumber,
-            string houseWaybillNumber,
-            string voyageNumber,
-            System.DateTime vGMClosingDateTime,
-            System.DateTime cargoCutOffDateTime,
-            System.DateTime estimatedDepartureDate,
-            System.DateTime estimatedArrivalDate,
-            QuoteType quoteType)
-        {
-            Mode = mode;
-            TruckRegistrationNumber = truckRegistrationNumber;
-            TrailerRegistrationNumber = trailerRegistrationNumber;
-            VesselName = vesselName;
-            PortOfLoading = portOfLoading;
-            PortOfLoadingCode = portOfLoadingCode;
-            PortOfDischarge = portOfDischarge;
-            PortOfDischargeCode = portOfDischargeCode;
-            WaybillNumber = waybillNumber;
-            HouseWaybillNumber = houseWaybillNumber;
-            VoyageNumber = voyageNumber;
-            VGMClosingDateTime = vGMClosingDateTime;
-            CargoCutOffDateTime = cargoCutOffDateTime;
-            EstimatedDepartureDate = estimatedDepartureDate;
-            EstimatedArrivalDate = estimatedArrivalDate;
-            QuoteType = quoteType;
-        }
+        public QuoteType? QuoteType { get; set; }
     }
 }

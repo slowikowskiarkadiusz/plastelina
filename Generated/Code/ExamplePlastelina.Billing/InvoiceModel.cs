@@ -46,34 +46,12 @@ namespace ExamplePlastelina.Billing
         /// <summary>
         /// TMS system generating the invoice
         /// </summary>
-        public TransportManagementSystem Tms { get; set; }
+        public TransportManagementSystem? Tms { get; set; }
 
         /// <summary>
         /// List of transactions contained in the invoice
         /// </summary>
         [JsonProperty(Required = Required.Always)]
         public IEnumerable<Transaction> Transactions { get; set; }
-
-        public InvoiceModel() { }
-
-        public InvoiceModel(
-            string invoiceNumber,
-            InvoiceType invoiceType,
-            DateTime invoiceDate,
-            string company,
-            string voucherNumber,
-            string poNumber,
-            TransportManagementSystem tms,
-            IEnumerable<Transaction> transactions)
-        {
-            InvoiceNumber = invoiceNumber;
-            InvoiceType = invoiceType;
-            InvoiceDate = invoiceDate;
-            Company = company;
-            VoucherNumber = voucherNumber;
-            PoNumber = poNumber;
-            Tms = tms;
-            Transactions = transactions;
-        }
     }
 }

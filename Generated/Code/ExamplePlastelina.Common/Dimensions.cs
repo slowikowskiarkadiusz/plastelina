@@ -7,16 +7,16 @@ namespace ExamplePlastelina.Common
 {
     public class Dimensions
     {
-        public int? Length { get; set; }
+        public double? Length { get; set; }
 
-        public int? Height { get; set; }
+        public double? Height { get; set; }
 
-        public int? Width { get; set; }
+        public double? Width { get; set; }
 
         /// <summary>
         /// Length unit
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
-        public LengthUnit Unit { get; set; }
+        public LengthUnit? Unit { get; set; }
     }
 }

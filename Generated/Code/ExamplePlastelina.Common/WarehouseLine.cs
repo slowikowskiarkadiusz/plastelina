@@ -39,18 +39,18 @@ namespace ExamplePlastelina.Common
 
         public Dimensions Dimensions { get; set; }
 
-        public int? WeightInKg { get; set; }
+        public double? WeightInKg { get; set; }
 
-        public int? VolumeInM3 { get; set; }
+        public double? VolumeInM3 { get; set; }
 
         [JsonConverter(typeof(StringEnumConverter))]
-        public UnitType UnitType { get; set; }
+        public UnitType? UnitType { get; set; }
 
         public MonetaryValue MonetaryValue { get; set; }
 
         public string MarksAndNumbers { get; set; }
 
         [JsonConverter(typeof(StringEnumConverter))]
-        public WarehouseLineStatus Status { get; set; }
+        public WarehouseLineStatus? Status { get; set; }
     }
 }

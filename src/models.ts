@@ -1,3 +1,9 @@
+export interface Schemas {
+    [key: string]: {
+        [key: string]: Model
+    };
+}
+
 export interface Model {
     description: string;
     namespace: string;
@@ -15,18 +21,20 @@ export interface Properties {
 }
 
 export interface Property {
-    $ref: string,
-    type: string;
-    description: string;
+    type: 'string' | 'integer' | 'decimal' | 'boolean' | 'double' | 'number' | 'date-time' | 'date' | 'time';
     format: string;
     items: Property;
+    description: string;
     attributes: Attribute[];
+    default: any;
+    $ref: string;
 }
 
 export interface Attribute {
     name: string;
     parameters: {
         name?: string;
+        type?: string;
         value: string;
     }[];
 }

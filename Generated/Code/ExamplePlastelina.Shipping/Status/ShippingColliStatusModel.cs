@@ -59,29 +59,5 @@ namespace ExamplePlastelina.Shipping.ShippingStatus
         /// Name or ID of the person signing a delivery
         /// </summary>
         public string SignatureText { get; set; }
-
-        public ShippingColliStatusModel() { }
-
-        public ShippingColliStatusModel(
-            DateTime timeOfMessageGeneration,
-            DateTime timeOfEvent,
-            ShippingStatusReference reference,
-            ShippingStatusLocation location,
-            Status status,
-            string sourceStatus,
-            string additionalMessage,
-            string clientId,
-            string signatureText)
-        {
-            TimeOfMessageGeneration = timeOfMessageGeneration;
-            TimeOfEvent = timeOfEvent;
-            Reference = reference;
-            Location = location;
-            Status = status;
-            SourceStatus = sourceStatus;
-            AdditionalMessage = additionalMessage;
-            ClientId = clientId;
-            SignatureText = signatureText;
-        }
     }
 }

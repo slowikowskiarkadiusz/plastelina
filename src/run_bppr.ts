@@ -1,8 +1,19 @@
+import { ArgumentSettings } from "./argument_settings";
 import { Merger } from "./merger";
 import { Validator } from "./validator";
+import { VersionReaderWriter } from "./version-reader-writer";
+
+ArgumentSettings.update();
 
 Merger.run(true);
 
-Validator.run(true);
+VersionReaderWriter.run();
 
-Merger.removeMerged(true);
+Validator.run(true)
+    .then(() => {
+        Merger.removeMerged(true);
+    })
+    .catch((err) => {
+        console.log(err);
+        Merger.removeMerged(true);
+    });

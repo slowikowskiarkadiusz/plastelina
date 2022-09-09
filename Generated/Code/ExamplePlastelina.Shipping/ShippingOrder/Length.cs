@@ -12,15 +12,5 @@ namespace ExamplePlastelina.Shipping.ShippingOrder
 
         [JsonProperty(Required = Required.Always)]
         public LengthUnit Unit { get; set; }
-
-        public Length() { }
-
-        public Length(
-            decimal value,
-            LengthUnit unit)
-        {
-            Value = value;
-            Unit = unit;
-        }
     }
 }

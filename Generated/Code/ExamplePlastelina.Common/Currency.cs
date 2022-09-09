@@ -2,9 +2,6 @@
 
 namespace ExamplePlastelina.Common
 {
-/// <summary>
-/// Currency code
-/// </summary>
     public enum Currency
     {
         None,

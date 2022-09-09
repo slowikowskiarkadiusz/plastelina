@@ -6,6 +6,6 @@ namespace ExamplePlastelina.Common
     {
         public string CurrencyCode { get; set; }
 
-        public int? Value { get; set; }
+        public double? Value { get; set; }
     }
 }

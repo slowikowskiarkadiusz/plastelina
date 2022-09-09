@@ -47,67 +47,15 @@ namespace ExamplePlastelina.Shipping.ShippingOrder
         public MonetaryValue Insurance { get; set; }
 
         [JsonConverter(typeof(StringEnumConverter))]
-        public TransitCode TransitCode { get; set; }
+        public TransitCode? TransitCode { get; set; }
 
         [JsonConverter(typeof(StringEnumConverter))]
-        public ServiceType Service { get; set; }
+        public ServiceType? Service { get; set; }
 
         public IEnumerable<Service> AdditionalServices { get; set; }
 
         public IEnumerable<AttachedFile> AttachedFiles { get; set; }
 
         public ExchangePallets ExchangePallets { get; set; }
-
-        public Consignment() { }
-
-        public Consignment(
-            ConsignmentIdentification consignmentIdentification,
-            int consignmentNumber,
-            IEnumerable<ConsignmentOrderLine> lines,
-            IEnumerable<DeliveryInstruction> deliveryInstructions,
-            Addresses addresses,
-            TransferDue delivery,
-            TransferDue pickup,
-            Incoterms incoterms,
-            Container container,
-            TransportDetails transportDetails,
-            PaymentMethod paymentMethod,
-            MonetaryValue totalValue,
-            string servicePointId,
-            string mrnNumbers,
-            bool stackable,
-            bool siteLoader,
-            bool genset,
-            MonetaryValue insurance,
-            TransitCode transitCode,
-            ServiceType service,
-            IEnumerable<Service> additionalServices,
-            IEnumerable<AttachedFile> attachedFiles,
-            ExchangePallets exchangePallets)
-        {
-            ConsignmentIdentification = consignmentIdentification;
-            ConsignmentNumber = consignmentNumber;
-            Lines = lines;
-            DeliveryInstructions = deliveryInstructions;
-            Addresses = addresses;
-            Delivery = delivery;
-            Pickup = pickup;
-            Incoterms = incoterms;
-            Container = container;
-            TransportDetails = transportDetails;
-            PaymentMethod = paymentMethod;
-            TotalValue = totalValue;
-            ServicePointId = servicePointId;
-            MrnNumbers = mrnNumbers;
-            Stackable = stackable;
-            SiteLoader = siteLoader;
-            Genset = genset;
-            Insurance = insurance;
-            TransitCode = transitCode;
-            Service = service;
-            AdditionalServices = additionalServices;
-            AttachedFiles = attachedFiles;
-            ExchangePallets = exchangePallets;
-        }
     }
 }

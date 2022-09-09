@@ -2,9 +2,6 @@
 
 namespace ExamplePlastelina.Billing
 {
-/// <summary>
-/// Information about Tax
-/// </summary>
     public enum TaxCode
     {
         VATIn,

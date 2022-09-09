@@ -16,21 +16,5 @@ namespace ExamplePlastelina.Shipping.ShippingOrder
         public ContainerType ContainerType { get; set; }
 
         public UnitDimensions Dimensions { get; set; }
-
-        public Container() { }
-
-        public Container(
-            string number,
-            string sealNumber,
-            string isoContainerSizeCode,
-            ContainerType containerType,
-            UnitDimensions dimensions)
-        {
-            Number = number;
-            SealNumber = sealNumber;
-            IsoContainerSizeCode = isoContainerSizeCode;
-            ContainerType = containerType;
-            Dimensions = dimensions;
-        }
     }
 }

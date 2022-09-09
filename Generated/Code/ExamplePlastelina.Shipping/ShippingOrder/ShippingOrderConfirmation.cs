@@ -12,7 +12,7 @@ namespace ExamplePlastelina.Shipping.ShippingOrder
         public MessageIdentification MessageIdentification { get; set; }
 
         [JsonConverter(typeof(DateOnlyJsonConverter))]
-        public System.DateTime ConfirmationDate { get; set; }
+        public System.DateTime? ConfirmationDate { get; set; }
 
         public TransportDetails TransportDetails { get; set; }
     }

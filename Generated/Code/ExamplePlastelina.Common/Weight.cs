@@ -16,15 +16,5 @@ namespace ExamplePlastelina.Common
         [JsonConverter(typeof(StringEnumConverter))]
         [JsonProperty(Required = Required.Always)]
         public WeightUnit Unit { get; set; }
-
-        public Weight() { }
-
-        public Weight(
-            decimal value,
-            WeightUnit unit)
-        {
-            Value = value;
-            Unit = unit;
-        }
     }
 }

@@ -104,49 +104,5 @@ namespace ExamplePlastelina.Billing
         /// </summary>
         [JsonProperty(Required = Required.Always)]
         public TaxCode TaxCode { get; set; }
-
-        public Transaction() { }
-
-        public Transaction(
-            string account,
-            AccountType accountType,
-            FinancialOperation debit,
-            FinancialOperation credit,
-            string transactionDescription,
-            string businessUnit,
-            string department,
-            string costCenter,
-            string businessArea,
-            string modeOfTransport,
-            string fromCountry,
-            string toCountry,
-            string activityNumber,
-            string jobFileNo,
-            string interCompany,
-            string customerNo,
-            DateTime dueDate,
-            DateTime jobDate,
-            TaxCode taxCode)
-        {
-            Account = account;
-            AccountType = accountType;
-            Debit = debit;
-            Credit = credit;
-            TransactionDescription = transactionDescription;
-            BusinessUnit = businessUnit;
-            Department = department;
-            CostCenter = costCenter;
-            BusinessArea = businessArea;
-            ModeOfTransport = modeOfTransport;
-            FromCountry = fromCountry;
-            ToCountry = toCountry;
-            ActivityNumber = activityNumber;
-            JobFileNo = jobFileNo;
-            InterCompany = interCompany;
-            CustomerNo = customerNo;
-            DueDate = dueDate;
-            JobDate = jobDate;
-            TaxCode = taxCode;
-        }
     }
 }

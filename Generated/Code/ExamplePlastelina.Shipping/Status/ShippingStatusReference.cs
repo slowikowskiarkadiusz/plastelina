@@ -42,23 +42,5 @@ namespace ExamplePlastelina.Shipping.ShippingStatus
         /// </summary>
         [JsonProperty(Required = Required.Always)]
         public string AgentReferenceNumber { get; set; }
-
-        public ShippingStatusReference() { }
-
-        public ShippingStatusReference(
-            string internalOrderId,
-            string documentId,
-            string freightForwardersReferenceNumber,
-            string barCode,
-            string customersReferenceNumber,
-            string agentReferenceNumber)
-        {
-            InternalOrderId = internalOrderId;
-            DocumentId = documentId;
-            FreightForwardersReferenceNumber = freightForwardersReferenceNumber;
-            BarCode = barCode;
-            CustomersReferenceNumber = customersReferenceNumber;
-            AgentReferenceNumber = agentReferenceNumber;
-        }
     }
 }

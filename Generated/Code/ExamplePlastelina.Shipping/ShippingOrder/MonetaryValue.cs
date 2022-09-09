@@ -11,6 +11,6 @@ namespace ExamplePlastelina.Shipping.ShippingOrder
         public decimal? Value { get; set; }
 
         [JsonConverter(typeof(StringEnumConverter))]
-        public Currency Currency { get; set; }
+        public Currency? Currency { get; set; }
     }
 }

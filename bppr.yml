@@ -1,0 +1,55 @@
+pool:
+  vmImage: "windows-latest"
+
+variables:
+  solution: "**/*.sln"
+  buildPlatform: "Any CPU"
+  buildConfiguration: "Release"
+
+jobs:
+  - job: ProcessModels
+    steps:
+      - checkout: self
+
+      - task: Npm@1
+        displayName: Install ts-node globally
+        inputs:
+          command: custom
+          customCommand: "install ts-node -g"
+
+      - task: Npm@1
+        displayName: Install npm packages for TypeScript scripts
+        inputs:
+          workingDir: '.\src'
+          command: "install"
+
+      - task: PowerShell@2
+        displayName: Validate
+        env:
+          system_accesstoken: $(System.AccessToken)
+        inputs:
+          targetType: inline
+          script: |
+            $out = & ts-node .\src\run_bppr.ts
+            if ($out) {
+              Write-Host $out
+              throw "Validation Failed";
+            }
+
+      - task: NuGetToolInstaller@1
+        displayName: Use NuGet 6.1
+        inputs:
+          versionSpec: 6.1
+
+      - task: NuGetCommand@2
+        displayName: NuGet restore
+        inputs:
+          solution: '.\Generated\Code\*.sln'
+
+      - task: VSBuild@1
+        displayName: Build solution
+        inputs:
+          solution: '.\Generated\Code\*.sln'
+          msbuildArgs: /t:Restore /p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactstagingdirectory)\\"
+          platform: $(BuildPlatform)
+          configuration: $(BuildConfiguration)

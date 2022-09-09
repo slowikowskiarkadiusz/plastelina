@@ -10,7 +10,7 @@ namespace ExamplePlastelina.Shipping.ShippingOrder
         public string FileName { get; set; }
 
         [JsonConverter(typeof(StringEnumConverter))]
-        public DocumentType DocumentType { get; set; }
+        public DocumentType? DocumentType { get; set; }
 
         public string Data { get; set; }
     }

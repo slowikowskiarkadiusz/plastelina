@@ -16,15 +16,5 @@ namespace ExamplePlastelina.Common
         [JsonConverter(typeof(StringEnumConverter))]
         [JsonProperty(Required = Required.Always)]
         public VolumeUnit Unit { get; set; }
-
-        public Volume() { }
-
-        public Volume(
-            decimal value,
-            VolumeUnit unit)
-        {
-            Value = value;
-            Unit = unit;
-        }
     }
 }

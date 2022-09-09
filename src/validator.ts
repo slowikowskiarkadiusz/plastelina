@@ -8,14 +8,14 @@ export class Validator {
 
     constructor() { }
 
-    public static run(preventLogging?: boolean): void {
+    public static run(preventLogging?: boolean): Promise<void> {
         if (!preventLogging) console.log(`Looking for duplicate keys in yamls...`);
         Validator.processDirectory();
 
         if (!preventLogging) console.log(`Validating ${mergedPath} using asyncapi-validator...`);
-        asyncapiValidator.fromSource(mergedPath, { msgIdentifier: 'name' })
-            .then(() => { })
-            .catch((err: any) => { throw err; });
+        return asyncapiValidator.fromSource(mergedPath, { msgIdentifier: 'name' })
+            .then(() => { if (!preventLogging) console.log("%cValidation succeeded!", 'color: green;'); })
+            .catch((err: any) => { if (!preventLogging) console.error("Validation failed!"); throw err; });
     }
 
     private static processDirectory(subPath: string = ''): void {
@@ -32,7 +32,7 @@ export class Validator {
     }
 
     private static processFile(subPath: string, name: string): void {
-        if (name === "_Header.yaml") return;
+        if (name === "_Header.yaml" || name === "_meta.yaml") return;
 
         let data = fs.readFileSync(`${modelsDirectory}/${subPath}/${name}`);
         let yaml = YAML.parse(data.toString());
@@ -41,7 +41,7 @@ export class Validator {
     }
 
     private static checkFile(model: any, keyPath: string): void {
-        if (!(model.type === "object" || model.enum)) {
+        if (!(model.type === "object" || model.enum || model.allOf)) {
             Object.keys(model).forEach(key => Validator.checkFile(model[key], `${keyPath}/${key}`));
         }
         else {
@@ -52,19 +52,3 @@ export class Validator {
         }
     }
 }
-
-
-// let data = fs.readFileSync(`${modelsDirectory}/${subPath}/${name}`).toString();
-// let yaml = YAML.parse(data);
-
-// let lines = data.split('\n');
-// let namespace = lines.filter(x => x.includes('namespace:'))[0].replace('namespace:', '').replace('\r', '').trim();
-// lines = lines.filter(x => !x.includes('namespace:'));
-// let schemaIndex = lines.findIndex(x => x.includes('schemas:'));
-// lines.splice(schemaIndex + 1, 0, `    ${namespace}:\r`);
-
-// for (let i = schemaIndex + 2; i < lines.length; i++) {
-//     lines[i] = `  ${lines[i]}`;
-// }
-
-// fs.writeFileSync(`${modelsDirectory}/${subPath}/${name}`, lines.join('\n'));

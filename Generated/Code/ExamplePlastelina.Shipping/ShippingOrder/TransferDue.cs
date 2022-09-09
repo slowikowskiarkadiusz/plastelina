@@ -12,21 +12,21 @@ namespace ExamplePlastelina.Shipping.ShippingOrder
         /// Used for TransferDueOnDate
         /// </summary>
         [JsonConverter(typeof(DateOnlyJsonConverter))]
-        public System.DateTime Date { get; set; }
+        public System.DateTime? Date { get; set; }
 
         /// <summary>
         /// Used for TransferDueOnDateTime
         /// </summary>
-        public System.DateTime DateTime { get; set; }
+        public System.DateTime? DateTime { get; set; }
 
         /// <summary>
         /// Used for TransferDueWithinDateTimeInterval
         /// </summary>
-        public System.DateTime FromDateTime { get; set; }
+        public System.DateTime? FromDateTime { get; set; }
 
         /// <summary>
         /// Used for TransferDueWithinDateTimeInterval
         /// </summary>
-        public System.DateTime ToDateTime { get; set; }
+        public System.DateTime? ToDateTime { get; set; }
     }
 }

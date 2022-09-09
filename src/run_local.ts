@@ -1,8 +1,7 @@
-import { GeneratorRunner } from "./printer_runner";
+import { PrinterRunner as PrinterRunner } from "./printer_runner";
 import { Merger } from "./merger";
 import { Validator } from "./validator";
 import { VersionReaderWriter } from "./version-reader-writer"
-import { AsyncApiGenerator } from "./asyncapi_generator"
 import { BuildRunner } from "./build_runner"
 import { ArgumentSettings } from "./argument_settings";
 
@@ -10,14 +9,15 @@ ArgumentSettings.update();
 
 Merger.run();
 
-Validator.run();
-
-GeneratorRunner.run();
-
 VersionReaderWriter.run();
 
-BuildRunner.run();
-
-AsyncApiGenerator.run();
-
-Merger.removeMerged();
+Validator.run()
+    .then(() => {
+        PrinterRunner.run();
+        BuildRunner.run();
+        Merger.removeMerged();
+    })
+    .catch((err) => {
+        console.log(err);
+        Merger.removeMerged();
+    });

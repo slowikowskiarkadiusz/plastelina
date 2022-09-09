@@ -11,7 +11,7 @@ namespace ExamplePlastelina.Billing
         /// Transaction amount
         /// </summary>
         [JsonProperty(Required = Required.Always)]
-        public int Amount { get; set; }
+        public double Amount { get; set; }
 
         /// <summary>
         /// Transaction currency code
@@ -22,7 +22,7 @@ namespace ExamplePlastelina.Billing
         /// <summary>
         /// Transaction amount in company currency (base amount)
         /// </summary>
-        public int? CompanyCurrencyAmount { get; set; }
+        public double? CompanyCurrencyAmount { get; set; }
 
         /// <summary>
         /// Transaction company currency code
@@ -32,29 +32,11 @@ namespace ExamplePlastelina.Billing
         /// <summary>
         /// Exchange rate for the transaction
         /// </summary>
-        public int? ExchangeRate { get; set; }
+        public double? ExchangeRate { get; set; }
 
         /// <summary>
         /// Exchange rate date
         /// </summary>
         public DateTime? ExchangeDate { get; set; }
-
-        public FinancialOperation() { }
-
-        public FinancialOperation(
-            int amount,
-            string currencyCode,
-            int companyCurrencyAmount,
-            string companyCurrencyCode,
-            int exchangeRate,
-            DateTime exchangeDate)
-        {
-            Amount = amount;
-            CurrencyCode = currencyCode;
-            CompanyCurrencyAmount = companyCurrencyAmount;
-            CompanyCurrencyCode = companyCurrencyCode;
-            ExchangeRate = exchangeRate;
-            ExchangeDate = exchangeDate;
-        }
     }
 }

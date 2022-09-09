@@ -2,9 +2,6 @@
 
 namespace ExamplePlastelina.Billing
 {
-/// <summary>
-/// Account type
-/// </summary>
     public enum AccountType
     {
         Ledger,

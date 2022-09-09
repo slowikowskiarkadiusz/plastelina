@@ -1,0 +1,168 @@
+parameters:
+  - name: subscriptionId
+    displayName: SubscriptionId
+    type: string
+    default: 'cbe3ecc4-0ee8-4cd7-83c4-e31d51a8f74d'
+  - name: storageAccountName
+    displayName: Storage Account Name
+    type: string
+    default: 'asyncapihtmlweb'
+  - name: azureSubscription
+    displayName: Azure Service Connection Name
+    type: string
+    default: 'cbe3ecc4-0ee8-4cd7-83c4-e31d51a8f74d'
+  - name: ConfluenceHost
+    displayName: ConfluenceHost
+    type: string
+    default: https://ExamplePlastelinait.atlassian.net/wiki
+  - name: ConfluenceTemplateId
+    displayName: ConfluenceTemplateId
+    type: string
+    default: '12345123451234'
+  - name: ConfluenceUsername
+    displayName: ConfluenceUsername
+    type: string
+    default: ''
+  - name: ConfluenceApiToken
+    displayName: ConfluenceApiToken
+    type: string
+    default: ''
+
+pool:
+  vmImage: 'windows-latest'
+
+name: $(date:yyyyMMdd)$(rev:.r)
+jobs:
+  - job: PublishNuget
+    displayName: Publish NuGet
+    pool:
+      vmImage: windows-latest
+    steps:
+      - checkout: self
+
+      - task: NuGetToolInstaller@1
+        displayName: Use NuGet 6.1
+        inputs:
+          versionSpec: 6.1
+
+      - task: NuGetCommand@2
+        displayName: NuGet restore
+        inputs:
+          solution: '.\Generated\Code\*.sln'
+
+      - task: VSBuild@1
+        displayName: Build solution
+        inputs:
+          solution: '.\Generated\Code\*.sln'
+          msbuildArgs: /p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactstagingdirectory)\\"
+          platform: $(BuildPlatform)
+          configuration: $(BuildConfiguration)
+
+      - task: PublishSymbols@2
+        displayName: Publish symbols path
+        inputs:
+          PublishSymbols: false
+          
+      - task: PowerShell@2
+        displayName: dotnet pack
+        inputs:
+          targetType: inline
+          script: dotnet pack ./Generated/Code/ExamplePlastelina.DomainModels.sln
+            # | dotnet nuget push ./Generated/Code/ExamplePlastelina.DomainModels.sln -s ExamplePlastelina.NuGetPackages --skip-duplicate
+
+      - task: NuGetCommand@2
+        displayName: NuGet push
+        inputs:
+          command: push
+          publishVstsFeed: 'ExamplePlastelina.NuGetPackages'
+          allowPackageConflicts: true
+          packagesToPush: 'Generated/Code/**/*.nupkg;!Generated/Code/**/*.symbols.nupkg'
+
+  - job: PublishConfluence
+    displayName: Publish Confluence Pages & HTML Docs
+    variables:
+      - name: subscription
+        value: ${{parameters.subscriptionId}}
+      - name: accountName
+        value: ${{parameters.storageAccountName}}
+      - name: confluence_host
+        value: ${{parameters.ConfluenceHost}}
+      - name: confluence_templateId
+        value: ${{parameters.ConfluenceTemplateId}}
+      - name: confluence_username
+        value: ${{parameters.ConfluenceUsername}}
+      - name: confluence_apiToken
+        value: ${{parameters.ConfluenceApiToken}}
+    pool:
+      vmImage: windows-latest
+    steps:
+      - checkout: self
+
+      - task: UseDotNet@2
+        displayName: 'Use .NET Core sdk'
+        inputs:
+          packageType: sdk
+          version: 6.0.x
+          installationPath: $(Agent.ToolsDirectory)/dotnet
+
+      - task: Npm@1
+        displayName: Install ts-node globally
+        inputs:
+          command: custom
+          customCommand: 'install ts-node -g'
+
+      - task: Npm@1
+        displayName: Install @asyncapi/generator globally
+        inputs:
+          command: custom
+          customCommand: 'install @asyncapi/generator -g'
+
+      - task: Npm@1
+        displayName: Install npm packages for TypeScript scripts
+        inputs:
+          workingDir: '.\src'
+          command: 'install'
+
+      - task: PowerShell@2
+        displayName: Publish Confluence pages
+        inputs:
+          targetType: inline
+          script: |
+            ts-node .\src\run_publish.ts --template-content-id ${{ variables.confluence_templateId }} --host ${{ variables.confluence_host }} --username ${{ variables.confluence_username }} --api-token ${{ variables.confluence_apiToken }}
+
+      - task: AzureCLI@2
+        displayName: Publising AsyncAPI HTML Documentation
+        inputs:
+          azureSubscription: ${{ parameters.azureSubscription }}
+          scriptType: ps
+          scriptLocation: inlineScript
+          inlineScript: |
+            $destinationFilePath = ".\Generated\html"
+            $connectionString = ":)"
+
+            az account set --subscription ${{ variables.subscription }}
+
+            Write-Output "Activating the static website"
+            az storage blob service-properties update --account-name ${{ variables.accountName }} --static-website --index-document "index.html" --404-document "error.html" --auth-mode login
+
+            Write-Output "Checking if web container exists"
+            $webExists = "Web container exists"
+            if( -not($webExists)){
+                az storage container create -n $web
+                $webExists = "Web container created"
+            }
+            Write-Output $webExists
+
+            Write-Output "Gathering files"
+            $css = Get-ChildItem -Path "$($destinationFilePath)\css" -File
+            $js = Get-ChildItem -Path "$($destinationFilePath)\js" -File
+            $index_error = Get-ChildItem -Path $destinationFilePath -File
+
+            Write-Output "Uploading index and error html"
+            $index_error | ForEach-Object $_ { az storage blob upload -f "$($_.FullName)" -c '$web' --account-name ${{ variables.accountName }} --name "$($_.Name)" --content-type 'text/html; charset=utf-8' --overwrite  --connection-string $connectionString} 
+
+            Write-Output "Uploading css"
+            $css | ForEach-Object $_ { az storage blob upload -f "$($_.FullName)" -c '$web' --account-name ${{ variables.accountName }} --name "css/$($_.Name)" --content-type 'text/css; charset=utf-8' --overwrite  --connection-string $connectionString} 
+            Write-Output "Uploading js"
+            $js | ForEach-Object $_ { az storage blob upload -f "$($_.FullName)" -c '$web' --account-name ${{ variables.accountName }} --name "js/$($_.Name)" --content-type 'appication/javascript; charset=utf-8'  --overwrite  --connection-string $connectionString}
+

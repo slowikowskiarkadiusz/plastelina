@@ -2,9 +2,6 @@
 
 namespace ExamplePlastelina.Common
 {
-/// <summary>
-/// Country IsoCode3 Characters
-/// </summary>
     public enum CountryIsoCode3Characters
     {
         CHN,

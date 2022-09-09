@@ -35,39 +35,5 @@ namespace ExamplePlastelina.Shipping.ShippingOrder
         public decimal? NumberOfPackages { get; set; }
 
         public Temperature FlashPoint { get; set; }
-
-        public DangerousGoods() { }
-
-        public DangerousGoods(
-            string unNumber,
-            string @class,
-            string name,
-            PackingGroup packingGroup,
-            string tunnelCode,
-            string notOtherwiseSpecifiedName,
-            bool environmentalHazard,
-            bool limitedQuantity,
-            Weight totalGrossWeight,
-            Weight totalNetWeight,
-            Weight netExplosiveMass,
-            decimal multiplicator,
-            decimal numberOfPackages,
-            Temperature flashPoint)
-        {
-            UnNumber = unNumber;
-            Class = @class;
-            Name = name;
-            PackingGroup = packingGroup;
-            TunnelCode = tunnelCode;
-            NotOtherwiseSpecifiedName = notOtherwiseSpecifiedName;
-            EnvironmentalHazard = environmentalHazard;
-            LimitedQuantity = limitedQuantity;
-            TotalGrossWeight = totalGrossWeight;
-            TotalNetWeight = totalNetWeight;
-            NetExplosiveMass = netExplosiveMass;
-            Multiplicator = multiplicator;
-            NumberOfPackages = numberOfPackages;
-            FlashPoint = flashPoint;
-        }
     }
 }

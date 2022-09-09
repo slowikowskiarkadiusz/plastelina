@@ -15,16 +15,16 @@ namespace ExamplePlastelina.Shipping.ShippingOrder
 
         public ShippingOrderIdentification ShippingOrderIdentification { get; set; }
 
-        public ShippingOrderType ShippingOrderType { get; set; }
+        public ShippingOrderType? ShippingOrderType { get; set; }
 
         public string ReceiverId { get; set; }
 
         public string SenderId { get; set; }
 
-        public System.DateTime OrderReceived { get; set; }
+        public System.DateTime? OrderReceived { get; set; }
 
         [JsonConverter(typeof(DateOnlyJsonConverter))]
-        public System.DateTime OrderDate { get; set; }
+        public System.DateTime? OrderDate { get; set; }
 
         public Address FreightPayerAddress { get; set; }
 
@@ -34,8 +34,8 @@ namespace ExamplePlastelina.Shipping.ShippingOrder
 
         public TransportDetails TransportDetails { get; set; }
 
-        public System.DateTime EstimatedDeparture { get; set; }
+        public System.DateTime? EstimatedDeparture { get; set; }
 
-        public System.DateTime EstimatedArrival { get; set; }
+        public System.DateTime? EstimatedArrival { get; set; }
     }
 }
